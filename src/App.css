@@ -36,15 +36,16 @@ body {
 
 .KeyPad {
     height: 80%;
+    background-color: hsl(0, 0%, 15%);
     display: grid;
     grid-template-areas:
-            "sev eig nin clr del"
+            "sev eig nin del clr"
             "fou fiv six sub div"
             "one two thr add mul"
             "zer zer dec equ equ";
     grid-template-columns: repeat(5, 1fr);
-    grid-auto-rows: 25%;
-    gap: 0;
+    grid-auto-rows: 24.2%;
+    gap: 1%;
 }
 
 @media (orientation: portrait) {
@@ -56,12 +57,88 @@ body {
                 "one two thr equ"
                 "zer zer dec equ";
         grid-template-columns: repeat(4, 1fr);
-        grid-auto-rows: 20%;
+        grid-auto-rows: 19.2%;
     }
 }
 
 .Key {
-    font-size: 6vh;
+    border: none;
+    border-radius: 10vh;
+    font-size: 5vh;
+}
+
+.Key:focus {
+    outline: none;
+}
+
+.clear {
+    background-color: hsl(15, 100%, 40%);
+    color: hsl(0, 0%, 90%);
+    }
+
+.clear:hover {
+    background-color: hsl(15, 100%, 70%);
+    color: black;
+}
+
+.clear:active {
+    background-color: hsl(15, 100%, 55%);
+}
+
+.delete {
+    background-color: hsl(182, 25%, 50%);
+    color: black;
+}
+
+.delete:hover {
+    background-color: hsl(182, 25%, 30%);
+    color: hsl(0, 0%, 90%);
+}
+
+.delete:active {
+    background-color: hsl(182, 25%, 45%);
+}
+
+.digit {
+    background-color: hsl(0, 0%, 40%);
+    color: hsl(0, 0%, 90%);
+}
+
+.digit:hover {
+    background-color: hsl(0, 0%, 70%);
+    color: black;
+}
+
+.digit:active {
+    background-color: hsl(0, 0%, 55%);
+}
+
+.equals {
+    background-color: hsl(36, 100%, 40%);
+    color: hsl(0, 0%, 90%);
+}
+
+.equals:hover {
+    background-color: hsl(36, 100%, 70%);
+    color: black;
+}
+
+.equals:active {
+    background-color: hsl(36, 100%, 55%);
+}
+
+.operator {
+    background-color: hsl(0, 0%, 70%);
+    color: black;
+}
+
+.operator:hover {
+    background-color: hsl(0, 0%, 40%);
+    color: hsl(0, 0%, 90%);
+}
+
+.operator:active {
+    background-color: hsl(0, 0%, 55%);
 }
 
 #clear {
