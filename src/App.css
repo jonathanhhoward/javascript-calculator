@@ -36,7 +36,7 @@ body {
 
 .KeyPad {
     height: 80%;
-    background-color: hsl(0, 0%, 15%);
+    background-color: hsl(0, 0%, 10%);
     display: grid;
     grid-template-areas:
             "sev eig nin del clr"
@@ -65,48 +65,47 @@ body {
     border: none;
     border-radius: 10vh;
     font-size: 5vh;
+    color: white;
 }
 
 .Key:focus {
     outline: none;
 }
 
+.Key:hover {
+    color: black;
+}
+
 .clear {
-    background-color: hsl(15, 100%, 40%);
-    color: hsl(0, 0%, 90%);
-    }
+    background-color: hsl(10, 100%, 40%);
+}
 
 .clear:hover {
-    background-color: hsl(15, 100%, 70%);
-    color: black;
+    background-color: hsl(10, 100%, 70%);
 }
 
 .clear:active {
-    background-color: hsl(15, 100%, 55%);
+    background-color: hsl(10, 100%, 55%);
 }
 
 .delete {
-    background-color: hsl(36, 100%, 40%);
-    color: hsl(0, 0%, 90%);
+    background-color: hsl(30, 100%, 40%);
 }
 
 .delete:hover {
-    background-color: hsl(36, 100%, 70%);
-    color: black;
+    background-color: hsl(30, 100%, 70%);
 }
 
 .delete:active {
-    background-color: hsl(36, 100%, 55%);
+    background-color: hsl(30, 100%, 55%);
 }
 
 .digit {
     background-color: hsl(0, 0%, 40%);
-    color: hsl(0, 0%, 90%);
 }
 
 .digit:hover {
     background-color: hsl(0, 0%, 70%);
-    color: black;
 }
 
 .digit:active {
@@ -114,31 +113,27 @@ body {
 }
 
 .equals {
-    background-color: hsl(182, 25%, 50%);
-    color: black;
+    background-color: hsl(200, 100%, 40%);
 }
 
 .equals:hover {
-    background-color: hsl(182, 25%, 30%);
-    color: hsl(0, 0%, 90%);
+    background-color: hsl(200, 100%, 70%);
 }
 
 .equals:active {
-    background-color: hsl(182, 25%, 45%);
+    background-color: hsl(200, 100%, 55%);
 }
 
 .operator {
-    background-color: hsl(0, 0%, 70%);
-    color: black;
+    background-color: hsl(150, 50%, 40%);
 }
 
 .operator:hover {
-    background-color: hsl(0, 0%, 40%);
-    color: hsl(0, 0%, 90%);
+    background-color: hsl(150, 50%, 70%);
 }
 
 .operator:active {
-    background-color: hsl(0, 0%, 55%);
+    background-color: hsl(150, 50%, 55%);
 }
 
 #clear {
