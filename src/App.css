@@ -86,17 +86,17 @@ body {
 }
 
 .delete {
-    background-color: hsl(182, 25%, 50%);
-    color: black;
-}
-
-.delete:hover {
-    background-color: hsl(182, 25%, 30%);
+    background-color: hsl(36, 100%, 40%);
     color: hsl(0, 0%, 90%);
 }
 
+.delete:hover {
+    background-color: hsl(36, 100%, 70%);
+    color: black;
+}
+
 .delete:active {
-    background-color: hsl(182, 25%, 45%);
+    background-color: hsl(36, 100%, 55%);
 }
 
 .digit {
@@ -114,17 +114,17 @@ body {
 }
 
 .equals {
-    background-color: hsl(36, 100%, 40%);
-    color: hsl(0, 0%, 90%);
-}
-
-.equals:hover {
-    background-color: hsl(36, 100%, 70%);
+    background-color: hsl(182, 25%, 50%);
     color: black;
 }
 
+.equals:hover {
+    background-color: hsl(182, 25%, 30%);
+    color: hsl(0, 0%, 90%);
+}
+
 .equals:active {
-    background-color: hsl(36, 100%, 55%);
+    background-color: hsl(182, 25%, 45%);
 }
 
 .operator {
