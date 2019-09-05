@@ -79,6 +79,7 @@ class App extends React.Component {
         this.setState(state => ({
           expression: state.expression.slice(0, -2) + '=',
           operatorClicked: false,
+          isNegative: false,
         }))
       } else {
         this.setState(state => ({
