@@ -61,6 +61,7 @@ body {
 }
 
 .Key {
+    padding: 0;
     border: none;
     border-radius: 10vh;
     font-size: 8vh;
