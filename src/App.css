@@ -64,8 +64,13 @@ body {
 .Key {
     border: none;
     border-radius: 10vh;
-    font-size: 5vh;
-    color: white;
+    font-size: 8vh;
+}
+
+@media (orientation: portrait) {
+    .Key {
+        font-size: 5vh;
+    }
 }
 
 .Key:focus {
