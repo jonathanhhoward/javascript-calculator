@@ -1,6 +1,28 @@
+/*
+This code has been adapted with only minor changes from:
+    Bjarne Stroustrup, "Programming: Principles and Practice Using C++"
+    Second Edition (Pearson Education, Inc., 2014).
+
+The grammar for input is:
+
+Expression:
+  Term
+  Expression + Term
+  Expression - Term
+Term:
+  Primary
+  Term * Primary
+  Term / Primary
+Primary:
+  Number
+  - Primary
+Number:
+  floating-point-literal
+ */
+
 export default function calculate (expressionString) {
   let tokenArray = expressionString
-    .split(/([+\-*/=])/)
+    .split(/((?<!e)[+\-*/=])/)
     .filter(elem => elem !== '')
 
   const result = expression()
