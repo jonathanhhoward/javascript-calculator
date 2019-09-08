@@ -55,9 +55,9 @@ class App extends React.Component {
     const expression = this.state.expression
     const input = this.state.input
 
-    if ((input === '0') || input.match(/[+\-*/]/) || expression.includes('=')) {
-      return
-    }
+    if (
+      (input === '0') || input.match(/[+\-*/]/) || expression.includes('=')
+    ) return
 
     this.setState(state => ({
       expression: state.expression.slice(0, -state.input.length) + '0',
