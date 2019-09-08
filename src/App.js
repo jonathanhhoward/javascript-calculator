@@ -55,11 +55,9 @@ class App extends React.Component {
     const expression = this.state.expression
     const input = this.state.input
 
-    if (
-      (input === '0') ||
-      input.match(/[+\-*/]/) ||
-      expression.includes('=')
-    ) return
+    if ((input === '0') || input.match(/[+\-*/]/) || expression.includes('=')) {
+      return
+    }
 
     this.setState(state => ({
       expression: state.expression.slice(0, -state.input.length) + '0',
@@ -93,16 +91,21 @@ class App extends React.Component {
       }))
     }
 
-    this.setState(state => ({
-      input: (() => {
-        try {
-          return calculate(state.expression)
-        } catch (err) {
-          return err.message
-        }
-      })(),
-      equalsClicked: true,
-    }))
+    this.setState(state => {
+      const SIG_DIGITS = 10
+      let result
+
+      try {
+        result = setPrecision(calculate(state.expression), SIG_DIGITS)
+      } catch (error) {
+        result = error.message
+      }
+
+      return {
+        input: result,
+        equalsClicked: true,
+      }
+    })
   }
 
   handleOperator = (value) => {
@@ -269,6 +272,16 @@ function Key (props) {
       {obj.value}
     </button>
   )
+}
+
+function setPrecision (number, significantDigits) {
+  const precise = number.toPrecision(significantDigits)
+
+  if ((-1e10 < number) && (number < 1e10)) {
+    return Number(precise).toString()
+  } else {
+    return precise
+  }
 }
 
 export default App

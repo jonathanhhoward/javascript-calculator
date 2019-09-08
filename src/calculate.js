@@ -25,21 +25,8 @@ export default function calculate (expressionString) {
     .split(/((?<!e)[+\-*/=])/)
     .filter(elem => elem !== '')
 
-  const result = expression()
+  return expression()
 
-  return setPrecision(result, 10)
-
-  function setPrecision (number, significantDigits) {
-    const precise = number.toPrecision(significantDigits)
-
-    if ((-1e10 < number) && (number < 1e10)) {
-      return Number(precise).toString()
-    } else {
-      return precise
-    }
-  }
-
-  // deal with + and -
   function expression () {
     let left = term()
     let token = tokenArray.shift()
@@ -62,7 +49,6 @@ export default function calculate (expressionString) {
     }
   }
 
-  // deal with * and /
   function term () {
     let left = primary()
     let token = tokenArray.shift()
@@ -89,7 +75,6 @@ export default function calculate (expressionString) {
     }
   }
 
-  // deal with numbers and unary minus
   function primary () {
     let token = tokenArray.shift()
     if (token === '-') {
