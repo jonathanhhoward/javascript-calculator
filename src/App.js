@@ -93,8 +93,8 @@ class App extends React.Component {
 
     this.setState(state => {
       const SIG_DIGITS = 10
-      let result
 
+      let result
       try {
         result = setPrecision(calculate(state.expression), SIG_DIGITS)
       } catch (error) {
@@ -274,13 +274,16 @@ function Key (props) {
   )
 }
 
-function setPrecision (number, significantDigits) {
-  const precise = number.toPrecision(significantDigits)
+function setPrecision (numStr, sigDigits) {
+  const precise = Number(numStr).toPrecision(sigDigits)
+  const result = Number(precise).toString()
+  const regExp = /[-.]/g
+  const EMPTY_STR = ''
 
-  if ((-1e10 < number) && (number < 1e10)) {
-    return Number(precise).toString()
+  if (result.replace(regExp, EMPTY_STR).length > sigDigits) {
+    return Number(result).toExponential()
   } else {
-    return precise
+    return result
   }
 }
 
