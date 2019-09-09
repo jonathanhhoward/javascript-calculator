@@ -96,7 +96,7 @@ class App extends React.Component {
 
       let result
       try {
-        result = setPrecision(calculate(state.expression), SIG_DIGITS)
+        result = formatResult(calculate(state.expression), SIG_DIGITS)
       } catch (error) {
         result = error.message
       }
@@ -269,7 +269,7 @@ function Key (props) {
   )
 }
 
-function setPrecision (numStr, sigDigits) {
+function formatResult (numStr, sigDigits) {
   const precise = Number(numStr).toPrecision(sigDigits)
   const result = Number(precise).toString()
   const regExp = /[-.]/g
