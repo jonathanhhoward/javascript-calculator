@@ -56,7 +56,7 @@ class App extends React.Component {
     const input = this.state.input
 
     if (
-      (input === '0') || input.match(/[+\-*/]/) || expression.includes('=')
+      input === '0' || input.match(/[+\-*/]/) || expression.includes('=')
     ) return
 
     this.setState(state => ({
@@ -155,7 +155,7 @@ class App extends React.Component {
 
     if (input.includes('.') && !equalsClicked) return
 
-    if ((input === '0') || operatorClicked || equalsClicked) {
+    if (input === '0' || operatorClicked || equalsClicked) {
       this.handleDigit('0.')
     } else {
       this.handleDigit('.')
@@ -167,11 +167,9 @@ class App extends React.Component {
     const equalsClicked = this.state.equalsClicked
     const operatorClicked = this.state.operatorClicked
 
-    const isExtraZero = ((value === '0') && (input === '0'))
-    const isMaxDigits = (
-      ((input.length === 10) && !input.includes('.')) ||
-      ((input.length === 11) && input.includes('.'))
-    )
+    const isExtraZero = (value === '0' && input === '0')
+    const MAX_DIGITS = 10
+    const isMaxDigits = (input.replace('.', '').length === MAX_DIGITS)
     if ((isExtraZero || isMaxDigits) && !equalsClicked) return
 
     if (equalsClicked) {
@@ -201,9 +199,12 @@ class App extends React.Component {
   }
 
   render () {
+    const expression = this.state.expression
+    const input = this.state.input
+
     return (
       <div className="App">
-        <Display expression={this.state.expression} input={this.state.input}/>
+        <Display expression={expression} input={input}/>
         <KeyPad onClick={this.handleClick}/>
       </div>
     )
@@ -211,23 +212,19 @@ class App extends React.Component {
 }
 
 function Display (props) {
+  const expression = props.expression
+  const input = props.input
+
   return (
     <div className="Display">
-      <Expression expression={props.expression}/>
-      <Input input={props.input}/>
+      <div className="Expression">{expression}</div>
+      <div className="Input" id="display">{input}</div>
     </div>
   )
 }
 
-function Expression (props) {
-  return <div className="Expression">{props.expression}</div>
-}
-
-function Input (props) {
-  return <div className="Input" id="display">{props.input}</div>
-}
-
 function KeyPad (props) {
+  const onClick = props.onClick
   const keys = [
     { id: 'clear', class: 'clear', value: 'AC' },
     { id: 'delete', class: 'delete', value: 'C' },
@@ -252,7 +249,7 @@ function KeyPad (props) {
   return (
     <div className="KeyPad">
       {keys.map(obj => (
-        <Key key={obj.id} obj={obj} onClick={props.onClick}/>
+        <Key key={obj.id} obj={obj} onClick={onClick}/>
       ))}
     </div>
   )
@@ -260,13 +257,11 @@ function KeyPad (props) {
 
 function Key (props) {
   const obj = props.obj
+  const onClick = props.onClick
 
   return (
     <button
-      className={"Key " + obj.class}
-      id={obj.id}
-      onClick={props.onClick}
-      type="button"
+      className={"Key " + obj.class} id={obj.id} onClick={onClick} type="button"
       value={obj.value}
     >
       {obj.value}

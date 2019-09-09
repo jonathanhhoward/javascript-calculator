@@ -133,7 +133,7 @@
       <workItem from="1567880033004" duration="4485000" />
       <workItem from="1567967803398" duration="3787000" />
       <workItem from="1567971875421" duration="402000" />
-      <workItem from="1568054721139" duration="6740000" />
+      <workItem from="1568054721139" duration="7963000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1567483514310</created>
@@ -219,7 +219,14 @@
       <option name="project" value="LOCAL" />
       <updated>1567971620531</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Update setPrecision()">
+      <created>1568065030580</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1568065030580</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -259,6 +266,7 @@
     <MESSAGE value="Add support for e in result" />
     <MESSAGE value="Refactor setPrecision() out of calculate()" />
     <MESSAGE value="Refactor handleDelete()" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor handleDelete()" />
+    <MESSAGE value="Update setPrecision()" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update setPrecision()" />
   </component>
 </project>
