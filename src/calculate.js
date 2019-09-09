@@ -25,7 +25,7 @@ export default function calculate (expressionString) {
     .split(/((?<!e)[+\-*/=])/)
     .filter(elem => elem !== '')
 
-  return expression()
+  return expression().toString()
 
   function expression () {
     let left = term()
