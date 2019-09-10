@@ -76,6 +76,7 @@ body {
 
 .Key:focus {
     outline: none;
+    border: 4px solid hsl(0, 0%, 10%);
 }
 
 .Key:hover {

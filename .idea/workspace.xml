@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="877d736d-6574-4f0a-a6d1-3b7887ab8a56" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +133,8 @@
       <workItem from="1567880033004" duration="4485000" />
       <workItem from="1567967803398" duration="3787000" />
       <workItem from="1567971875421" duration="402000" />
-      <workItem from="1568054721139" duration="8375000" />
+      <workItem from="1568054721139" duration="8583000" />
+      <workItem from="1568076871231" duration="1310000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1567483514310</created>
@@ -232,7 +234,21 @@
       <option name="project" value="LOCAL" />
       <updated>1568066210615</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Refactor">
+      <created>1568066619271</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1568066619271</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Convert result to string">
+      <created>1568066677821</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1568066677821</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -274,6 +290,7 @@
     <MESSAGE value="Refactor handleDelete()" />
     <MESSAGE value="Update setPrecision()" />
     <MESSAGE value="Refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor" />
+    <MESSAGE value="Convert result to string" />
+    <option name="LAST_COMMIT_MESSAGE" value="Convert result to string" />
   </component>
 </project>
