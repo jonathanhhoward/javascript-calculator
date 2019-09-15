@@ -56,7 +56,7 @@ class App extends React.Component {
     const input = this.state.input
 
     if (
-      input === '0' || input.match(/[+\-*/]/) || expression.includes('=')
+      input === '0' || /[-+*/]/.test(input) || expression.includes('=')
     ) return
 
     this.setState(state => ({
@@ -91,21 +91,16 @@ class App extends React.Component {
       }))
     }
 
-    this.setState(state => {
-      const SIG_DIGITS = 10
-
-      let result
-      try {
-        result = formatResult(calculate(state.expression), SIG_DIGITS)
-      } catch (error) {
-        result = error.message
-      }
-
-      return {
-        input: result,
-        equalsClicked: true,
-      }
-    })
+    this.setState(state => ({
+      input: (() => {
+        try {
+          return calculate(state.expression)
+        } catch (error) {
+          return error.message
+        }
+      })(),
+      equalsClicked: true,
+    }))
   }
 
   handleOperator = (value) => {
@@ -261,25 +256,12 @@ function Key (props) {
 
   return (
     <button
-      className={"Key " + obj.class} id={obj.id} onClick={onClick} type="button"
+      className={'Key ' + obj.class} id={obj.id} onClick={onClick} type="button"
       value={obj.value}
     >
       {obj.value}
     </button>
   )
-}
-
-function formatResult (numStr, sigDigits) {
-  const precise = Number(numStr).toPrecision(sigDigits)
-  const result = Number(precise).toString()
-  const regExp = /[-.]/g
-  const EMPTY_STR = ''
-
-  if (result.replace(regExp, EMPTY_STR).length > sigDigits) {
-    return Number(result).toExponential()
-  } else {
-    return result
-  }
 }
 
 export default App

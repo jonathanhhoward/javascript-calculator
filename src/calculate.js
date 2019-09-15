@@ -1,31 +1,47 @@
-/*
-This code has been adapted with only minor changes from:
-    Bjarne Stroustrup, "Programming: Principles and Practice Using C++"
-    Second Edition (Pearson Education, Inc., 2014).
-
-The grammar for input is:
-
-Expression:
-  Term
-  Expression + Term
-  Expression - Term
-Term:
-  Primary
-  Term * Primary
-  Term / Primary
-Primary:
-  Number
-  - Primary
-Number:
-  floating-point-literal
- */
-
 export default function calculate (expressionString) {
   let tokenArray = expressionString
-    .split(/((?<!e)[+\-*/=])/)
+    .split(/([-+*/=])/)
     .filter(elem => elem !== '')
 
-  return expression().toString()
+  const result = expression().toString()
+  const SIG_DIGITS = 10
+
+  return formatResult(result, SIG_DIGITS)
+
+  function formatResult (numStr, sigDigits) {
+    const precise = Number(numStr).toPrecision(sigDigits)
+    const result = Number(precise).toString()
+    const regExp = /[-.]/g
+    const EMPTY_STR = ''
+
+    if (result.replace(regExp, EMPTY_STR).length > sigDigits) {
+      return Number(result).toExponential()
+    } else {
+      return result
+    }
+  }
+
+  /*
+  The following code has been adapted with only minor changes from:
+      Bjarne Stroustrup, "Programming: Principles and Practice Using C++"
+      Second Edition (Pearson Education, Inc., 2014).
+
+  The grammar for input is:
+
+  Expression:
+    Term
+    Expression + Term
+    Expression - Term
+  Term:
+    Primary
+    Term * Primary
+    Term / Primary
+  Primary:
+    Number
+    - Primary
+  Number:
+    floating-point-literal
+   */
 
   function expression () {
     let left = term()
