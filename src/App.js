@@ -256,7 +256,7 @@ function Key (props) {
 
   return (
     <button
-      className={'Key ' + obj.class} id={obj.id} onClick={onClick} type="button"
+      className={"Key " + obj.class} id={obj.id} onClick={onClick} type="button"
       value={obj.value}
     >
       {obj.value}
