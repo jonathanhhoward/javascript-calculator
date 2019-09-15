@@ -1,7 +1,6 @@
 export default function calculate (expressionString) {
-  let tokenArray = expressionString
-    .split(/([-+*/=])/)
-    .filter(elem => elem !== '')
+  const reNumberOrOperator = /(?:\d+(\.\d*)?(e[-+]\d+)?)|[-+*/=]/g
+  const tokenArray = expressionString.match(reNumberOrOperator)
 
   const result = expression().toString()
   const SIG_DIGITS = 10
