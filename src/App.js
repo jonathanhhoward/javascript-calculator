@@ -162,9 +162,12 @@ class App extends React.Component {
     const equalsClicked = this.state.equalsClicked
     const operatorClicked = this.state.operatorClicked
 
-    const isExtraZero = (value === '0' && input === '0')
     const MAX_DIGITS = 10
-    const isMaxDigits = (input.replace('.', '').length === MAX_DIGITS)
+    const reNotSigDigit = /^0|\./g
+
+    const isExtraZero = (value === '0' && input === '0')
+    const isMaxDigits = (input.replace(reNotSigDigit, '').length === MAX_DIGITS)
+
     if ((isExtraZero || isMaxDigits) && !equalsClicked) return
 
     if (equalsClicked) {

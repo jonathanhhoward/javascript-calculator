@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="877d736d-6574-4f0a-a6d1-3b7887ab8a56" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/calculate.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/calculate.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -271,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1568570929780</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Update RexExp">
+      <created>1568598631924</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1568598631924</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,6 +324,7 @@
     <MESSAGE value="Add focus to buttons for accessibility" />
     <MESSAGE value="Fix RegExp error" />
     <MESSAGE value="Refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor" />
+    <MESSAGE value="Update RexExp" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update RexExp" />
   </component>
 </project>
