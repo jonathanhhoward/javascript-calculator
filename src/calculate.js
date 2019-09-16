@@ -1,19 +1,19 @@
 export default function calculate (expressionString) {
-  const reNumberOrOperator = /(?:\d+(\.\d*)?(e[-+]\d+)?)|[-+*/=]/g
+  const reNumberOrOperator = /(?:\d+(?:\.\d*)?(?:e[-+]\d+)?)|[-+*/=]/g
   const tokenArray = expressionString.match(reNumberOrOperator)
 
   const result = expression().toString()
-  const SIG_DIGITS = 10
+  const MAX_DIGITS = 10
 
-  return formatResult(result, SIG_DIGITS)
+  return formatResult(result, MAX_DIGITS)
 
   function formatResult (numStr, sigDigits) {
     const precise = Number(numStr).toPrecision(sigDigits)
     const result = Number(precise).toString()
-    const regExp = /[-.]/g
+    const reDigitsOnly = /(^-?0)|[-.]/g
     const EMPTY_STR = ''
 
-    if (result.replace(regExp, EMPTY_STR).length > sigDigits) {
+    if (result.replace(reDigitsOnly, EMPTY_STR).length > sigDigits) {
       return Number(result).toExponential()
     } else {
       return result
