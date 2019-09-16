@@ -1,5 +1,6 @@
 import React from 'react'
-import calculate from './calculate'
+import { calculate } from './calculate'
+import { numberToString } from './numberToString'
 import './App.css'
 
 class App extends React.Component {
@@ -91,16 +92,20 @@ class App extends React.Component {
       }))
     }
 
-    this.setState(state => ({
-      input: (() => {
-        try {
-          return calculate(state.expression)
-        } catch (error) {
-          return error.message
-        }
-      })(),
-      equalsClicked: true,
-    }))
+    this.setState(state => {
+      let result = null
+
+      try {
+        result = numberToString(calculate(state.expression))
+      } catch (error) {
+        result = error.message
+      }
+
+      return {
+        input: result,
+        equalsClicked: true,
+      }
+    })
   }
 
   handleOperator = (value) => {
@@ -164,9 +169,12 @@ class App extends React.Component {
 
     const MAX_DIGITS = 10
     const reNotSigDigit = /^0|\./g
+    const EMPTY_STR = ''
 
     const isExtraZero = (value === '0' && input === '0')
-    const isMaxDigits = (input.replace(reNotSigDigit, '').length === MAX_DIGITS)
+    const isMaxDigits = (
+      input.replace(reNotSigDigit, EMPTY_STR).length === MAX_DIGITS
+    )
 
     if ((isExtraZero || isMaxDigits) && !equalsClicked) return
 
@@ -259,7 +267,10 @@ function Key (props) {
 
   return (
     <button
-      className={"Key " + obj.class} id={obj.id} onClick={onClick} type="button"
+      className={'Key ' + obj.class}
+      id={obj.id}
+      onClick={onClick}
+      type="button"
       value={obj.value}
     >
       {obj.value}

@@ -1,24 +1,8 @@
-export default function calculate (expressionString) {
+export const calculate = (expressionString) => {
   const reNumberOrOperator = /(?:\d+(?:\.\d*)?(?:e[-+]\d+)?)|[-+*/=]/g
   const tokenArray = expressionString.match(reNumberOrOperator)
 
-  const result = expression().toString()
-  const MAX_DIGITS = 10
-
-  return formatResult(result, MAX_DIGITS)
-
-  function formatResult (numStr, sigDigits) {
-    const precise = Number(numStr).toPrecision(sigDigits)
-    const result = Number(precise).toString()
-    const reNotSigDigit = /(^-?0)|[-.]/g
-    const EMPTY_STR = ''
-
-    if (result.replace(reNotSigDigit, EMPTY_STR).length > sigDigits) {
-      return Number(result).toExponential()
-    } else {
-      return result
-    }
-  }
+  return expression()
 
   /*
   The following code has been adapted with only minor changes from:
@@ -92,6 +76,7 @@ export default function calculate (expressionString) {
 
   function primary () {
     let token = tokenArray.shift()
+
     if (token === '-') {
       return -primary()
     } else if (!Number.isNaN(token)) {
