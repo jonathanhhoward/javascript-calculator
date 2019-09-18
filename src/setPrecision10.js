@@ -1,6 +1,8 @@
 export const setPrecision10 = (number) => {
   if (Number.isNaN(number)) return NaN
 
+  if (number === 0) return '0'
+
   const absNumber = Math.abs(number)
 
   if (1e-6 <= absNumber && absNumber < 1) {
