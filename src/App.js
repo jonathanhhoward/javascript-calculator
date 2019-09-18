@@ -1,6 +1,6 @@
 import React from 'react'
 import { calculate } from './calculate'
-import { numberToString } from './numberToString'
+import { setPrecision10 } from './setPrecision10'
 import './App.css'
 
 class App extends React.Component {
@@ -9,9 +9,9 @@ class App extends React.Component {
     this.state = {
       expression: '0',
       input: '0',
-      equalsClicked: false,
-      operatorClicked: false,
+      isEquals: false,
       isNegative: false,
+      isOperator: false,
     }
   }
 
@@ -46,15 +46,14 @@ class App extends React.Component {
     this.setState({
       expression: '0',
       input: '0',
-      equalsClicked: false,
-      operatorClicked: false,
+      isEquals: false,
       isNegative: false,
+      isOperator: false,
     })
   }
 
   handleDelete = () => {
-    const expression = this.state.expression
-    const input = this.state.input
+    const { expression, input } = this.state
 
     if (
       input === '0' || /[-+*/]/.test(input) || expression.includes('=')
@@ -67,23 +66,21 @@ class App extends React.Component {
   }
 
   handleEquals = () => {
-    const equalsClicked = this.state.equalsClicked
-    const operatorClicked = this.state.operatorClicked
-    const isNegative = this.state.isNegative
+    const { isEquals, isNegative, isOperator } = this.state
 
-    if (equalsClicked) return
+    if (isEquals) return
 
-    if (operatorClicked) {
+    if (isOperator) {
       if (isNegative) {
         this.setState(state => ({
           expression: state.expression.slice(0, -2) + '=',
-          operatorClicked: false,
+          isOperator: false,
           isNegative: false,
         }))
       } else {
         this.setState(state => ({
           expression: state.expression.slice(0, -1) + '=',
-          operatorClicked: false,
+          isOperator: false,
         }))
       }
     } else {
@@ -96,31 +93,29 @@ class App extends React.Component {
       let result = null
 
       try {
-        result = numberToString(calculate(state.expression))
+        result = setPrecision10(calculate(state.expression))
       } catch (error) {
         result = error.message
       }
 
       return {
         input: result,
-        equalsClicked: true,
+        isEquals: true,
       }
     })
   }
 
   handleOperator = (value) => {
-    const equalsClicked = this.state.equalsClicked
-    const operatorClicked = this.state.operatorClicked
-    const isNegative = this.state.isNegative
+    const { isEquals, isOperator, isNegative } = this.state
 
-    if (equalsClicked) {
+    if (isEquals) {
       this.setState(state => ({
         expression: state.input + value,
         input: value,
-        equalsClicked: false,
-        operatorClicked: true,
+        isEquals: false,
+        isOperator: true,
       }))
-    } else if (operatorClicked) {
+    } else if (isOperator) {
       if (isNegative) {
         this.setState(state => ({
           expression: state.expression.slice(0, -2) + value,
@@ -143,19 +138,17 @@ class App extends React.Component {
       this.setState(state => ({
         expression: state.expression + value,
         input: value,
-        operatorClicked: true,
+        isOperator: true,
       }))
     }
   }
 
   handleDecimal = () => {
-    const input = this.state.input
-    const equalsClicked = this.state.equalsClicked
-    const operatorClicked = this.state.operatorClicked
+    const { input, isEquals, isOperator } = this.state
 
-    if (input.includes('.') && !equalsClicked) return
+    if (input.includes('.') && !isEquals) return
 
-    if (input === '0' || operatorClicked || equalsClicked) {
+    if (input === '0' || isOperator || isEquals) {
       this.handleDigit('0.')
     } else {
       this.handleDigit('.')
@@ -163,32 +156,26 @@ class App extends React.Component {
   }
 
   handleDigit = (value) => {
-    const input = this.state.input
-    const equalsClicked = this.state.equalsClicked
-    const operatorClicked = this.state.operatorClicked
+    const { input, isEquals, isOperator } = this.state
 
     const MAX_DIGITS = 10
-    const reNotSigDigit = /^0|\./g
-    const EMPTY_STR = ''
 
     const isExtraZero = (value === '0' && input === '0')
-    const isMaxDigits = (
-      input.replace(reNotSigDigit, EMPTY_STR).length === MAX_DIGITS
-    )
+    const isMaxDigits = (input.replace('.', '').length === MAX_DIGITS)
 
-    if ((isExtraZero || isMaxDigits) && !equalsClicked) return
+    if ((isExtraZero || isMaxDigits) && !isEquals) return
 
-    if (equalsClicked) {
+    if (isEquals) {
       this.setState({
         expression: value,
         input: value,
-        equalsClicked: false,
+        isEquals: false,
       })
-    } else if (operatorClicked) {
+    } else if (isOperator) {
       this.setState(state => ({
         expression: state.expression + value,
         input: value,
-        operatorClicked: false,
+        isOperator: false,
         isNegative: false,
       }))
     } else if (input === '0') {
@@ -205,8 +192,7 @@ class App extends React.Component {
   }
 
   render () {
-    const expression = this.state.expression
-    const input = this.state.input
+    const { expression, input } = this.state
 
     return (
       <div className="App">
@@ -218,8 +204,7 @@ class App extends React.Component {
 }
 
 function Display (props) {
-  const expression = props.expression
-  const input = props.input
+  const { expression, input } = props
 
   return (
     <div className="Display">
@@ -262,8 +247,7 @@ function KeyPad (props) {
 }
 
 function Key (props) {
-  const obj = props.obj
-  const onClick = props.onClick
+  const { obj, onClick } = props
 
   return (
     <button
