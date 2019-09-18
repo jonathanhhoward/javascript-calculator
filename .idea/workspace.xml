@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="877d736d-6574-4f0a-a6d1-3b7887ab8a56" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -137,7 +137,7 @@
       <workItem from="1568080395462" duration="556000" />
       <workItem from="1568124058006" duration="10919000" />
       <workItem from="1568643037351" duration="5162000" />
-      <workItem from="1568665727422" duration="12728000" />
+      <workItem from="1568665727422" duration="12980000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1567483514310</created>
@@ -328,7 +328,21 @@
       <option name="project" value="LOCAL" />
       <updated>1568816384187</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Remove /.idea">
+      <created>1568816786916</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1568816786916</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Remove /.idea">
+      <created>1568816814596</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1568816814596</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -427,6 +441,7 @@
     <MESSAGE value="Refactor" />
     <MESSAGE value="Update .gitignore" />
     <MESSAGE value="Fix decimal display and refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix decimal display and refactor" />
+    <MESSAGE value="Remove /.idea" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove /.idea" />
   </component>
 </project>
