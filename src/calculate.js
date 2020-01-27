@@ -79,7 +79,7 @@ export default function calculate (expressionString) {
 
     if (token === '-') return -primary()
 
-    if (Number.isNaN(token)) throw new Error('primary expected')
+    if (Number.isNaN(Number(token))) throw new Error('primary expected')
 
     return Number(token)
   }
