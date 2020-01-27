@@ -59,7 +59,7 @@ export default function calculate (expressionString) {
           token = tokenArray.shift()
           break
         case '/':
-          let d = primary()
+          const d = primary()
           if (d === 0) throw new Error('divide by zero')
           left /= d
           token = tokenArray.shift()
