@@ -1,6 +1,6 @@
 import React from 'react'
-import { calculate } from './calculate'
-import { setPrecision10 } from './setPrecision10'
+import calculate from './calculate'
+import setPrecision10 from './setPrecision10'
 import './App.css'
 
 class App extends React.Component {
