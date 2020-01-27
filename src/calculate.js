@@ -58,15 +58,12 @@ export default function calculate (expressionString) {
           left *= primary()
           token = tokenArray.shift()
           break
-        case '/': {
+        case '/':
           let d = primary()
-          if (d === 0) {
-            throw new Error('divide by zero')
-          }
+          if (d === 0) throw new Error('divide by zero')
           left /= d
           token = tokenArray.shift()
           break
-        }
         default:
           tokenArray.unshift(token)
           return left
@@ -76,11 +73,9 @@ export default function calculate (expressionString) {
 
   function primary () {
     const token = tokenArray.shift()
-
     if (token === '-') return -primary()
 
     const result = Number(token)
-
     if (Number.isNaN(result)) throw new Error('primary expected')
 
     return result
