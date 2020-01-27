@@ -1,4 +1,4 @@
-export const calculate = (expressionString) => {
+export default function calculate (expressionString) {
   const reNumberOrOperator = /(?:\d+(?:\.\d*)?(?:e[-+]\d+)?)|[-+*/=]/g
   const tokenArray = expressionString.match(reNumberOrOperator)
 

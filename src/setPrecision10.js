@@ -1,4 +1,4 @@
-export const setPrecision10 = (number) => {
+export default function setPrecision10 (number) {
   if (Number.isNaN(number)) return NaN
 
   if (number === 0) return '0'
