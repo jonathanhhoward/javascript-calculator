@@ -75,7 +75,7 @@ export default function calculate (expressionString) {
   }
 
   function primary () {
-    let token = tokenArray.shift()
+    const token = tokenArray.shift()
 
     if (token === '-') {
       return -primary()
