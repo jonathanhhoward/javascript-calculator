@@ -77,12 +77,10 @@ export default function calculate (expressionString) {
   function primary () {
     const token = tokenArray.shift()
 
-    if (token === '-') {
-      return -primary()
-    } else if (!Number.isNaN(token)) {
-      return Number(token)
-    } else {
-      throw new Error('primary expected')
-    }
+    if (token === '-') return -primary()
+
+    if (!Number.isNaN(token)) return Number(token)
+
+    throw new Error('primary expected')
   }
 }
