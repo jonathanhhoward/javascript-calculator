@@ -5,7 +5,7 @@ import calculate from './calculate'
 import setPrecision10 from './setPrecision10'
 import './App.css'
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -204,5 +204,3 @@ class App extends React.Component {
     )
   }
 }
-
-export default App
