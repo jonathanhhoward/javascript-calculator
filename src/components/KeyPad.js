@@ -1,4 +1,5 @@
 import React from 'react'
+import Key from './Key'
 import './KeyPad.css'
 
 export default function KeyPad (props) {
@@ -30,21 +31,5 @@ export default function KeyPad (props) {
         <Key key={obj.id} obj={obj} onClick={onClick}/>
       ))}
     </div>
-  )
-}
-
-function Key (props) {
-  const { obj, onClick } = props
-
-  return (
-    <button
-      className={'Key ' + obj.class}
-      id={obj.id}
-      onClick={onClick}
-      type="button"
-      value={obj.value}
-    >
-      {obj.value}
-    </button>
   )
 }
