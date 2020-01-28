@@ -27,3 +27,5 @@ yarn-error.log*
 /src/App.css.map
 /src/components/Display.css
 /src/components/Display.css.map
+/src/components/KeyPad.css
+/src/components/KeyPad.css.map
