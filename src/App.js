@@ -90,7 +90,7 @@ class App extends React.Component {
     }
 
     this.setState(state => {
-      let result = null
+      let result
 
       try {
         result = setPrecision10(calculate(state.expression))
