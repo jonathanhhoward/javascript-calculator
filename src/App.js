@@ -11,7 +11,7 @@ class App extends React.Component {
       input: '0',
       isEquals: false,
       isNegative: false,
-      isOperator: false,
+      isOperator: false
     }
   }
 
@@ -48,7 +48,7 @@ class App extends React.Component {
       input: '0',
       isEquals: false,
       isNegative: false,
-      isOperator: false,
+      isOperator: false
     })
   }
 
@@ -61,7 +61,7 @@ class App extends React.Component {
 
     this.setState(state => ({
       expression: state.expression.slice(0, -state.input.length) + '0',
-      input: '0',
+      input: '0'
     }))
   }
 
@@ -75,17 +75,17 @@ class App extends React.Component {
         this.setState(state => ({
           expression: state.expression.slice(0, -2) + '=',
           isOperator: false,
-          isNegative: false,
+          isNegative: false
         }))
       } else {
         this.setState(state => ({
           expression: state.expression.slice(0, -1) + '=',
-          isOperator: false,
+          isOperator: false
         }))
       }
     } else {
       this.setState(state => ({
-        expression: state.expression + '=',
+        expression: state.expression + '='
       }))
     }
 
@@ -100,7 +100,7 @@ class App extends React.Component {
 
       return {
         input: result,
-        isEquals: true,
+        isEquals: true
       }
     })
   }
@@ -113,32 +113,32 @@ class App extends React.Component {
         expression: state.input + value,
         input: value,
         isEquals: false,
-        isOperator: true,
+        isOperator: true
       }))
     } else if (isOperator) {
       if (isNegative) {
         this.setState(state => ({
           expression: state.expression.slice(0, -2) + value,
           input: value,
-          isNegative: false,
+          isNegative: false
         }))
       } else if (value === '-') {
         this.setState(state => ({
           expression: state.expression + '-',
           input: '-',
-          isNegative: true,
+          isNegative: true
         }))
       } else {
         this.setState(state => ({
           expression: state.expression.slice(0, -1) + value,
-          input: value,
+          input: value
         }))
       }
     } else {
       this.setState(state => ({
         expression: state.expression + value,
         input: value,
-        isOperator: true,
+        isOperator: true
       }))
     }
   }
@@ -169,24 +169,24 @@ class App extends React.Component {
       this.setState({
         expression: value,
         input: value,
-        isEquals: false,
+        isEquals: false
       })
     } else if (isOperator) {
       this.setState(state => ({
         expression: state.expression + value,
         input: value,
         isOperator: false,
-        isNegative: false,
+        isNegative: false
       }))
     } else if (input === '0') {
       this.setState(state => ({
         expression: state.expression.slice(0, -1) + value,
-        input: value,
+        input: value
       }))
     } else {
       this.setState(state => ({
         expression: state.expression + value,
-        input: state.input + value,
+        input: state.input + value
       }))
     }
   }
@@ -234,7 +234,7 @@ function KeyPad (props) {
     { id: 'six', class: 'digit', value: '6' },
     { id: 'seven', class: 'digit', value: '7' },
     { id: 'eight', class: 'digit', value: '8' },
-    { id: 'nine', class: 'digit', value: '9' },
+    { id: 'nine', class: 'digit', value: '9' }
   ]
 
   return (
