@@ -1,4 +1,5 @@
 import React from 'react'
+import Display from './components/Display'
 import calculate from './calculate'
 import setPrecision10 from './setPrecision10'
 import './App.css'
@@ -201,17 +202,6 @@ class App extends React.Component {
       </div>
     )
   }
-}
-
-function Display (props) {
-  const { expression, input } = props
-
-  return (
-    <div className="Display">
-      <div className="Expression">{expression}</div>
-      <div className="Input" id="display">{input}</div>
-    </div>
-  )
 }
 
 function KeyPad (props) {
