@@ -1,8 +1,8 @@
 import React from 'react'
 import Display from './components/Display'
 import KeyPad from './components/KeyPad'
-import calculate from './calculate'
-import setPrecision10 from './setPrecision10'
+import calculate from './modules/calculate'
+import setPrecision10 from './modules/setPrecision10'
 import './App.css'
 
 export default class App extends React.Component {
