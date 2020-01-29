@@ -54,12 +54,4 @@ it('uses last operator clicked', () => {
   fireEvent.click(equalsButton)
 
   expect(input).toHaveTextContent(/^2$/)
-
-  fireEvent.click(oneButton)
-  fireEvent.click(plusButton)
-  fireEvent.click(timesButton)
-  fireEvent.click(oneButton)
-  fireEvent.click(equalsButton)
-
-  expect(input).toHaveTextContent(/^1$/)
 })
