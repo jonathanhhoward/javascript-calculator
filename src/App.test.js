@@ -15,10 +15,10 @@ it('rejects a leading zero', () => {
   const buttons = getAllByRole('button')
   const zeroButton = buttons.find(node => node.textContent === '0')
   const oneButton = buttons.find(node => node.textContent === '1')
-  const display = getByTestId('display')
+  const input = getByTestId('input')
 
   fireEvent.click(zeroButton)
   fireEvent.click(oneButton)
 
-  expect(display).toHaveTextContent(/^1$/)
+  expect(input).toHaveTextContent(/^1$/)
 })
