@@ -22,3 +22,18 @@ it('rejects leading zeros', () => {
 
   expect(input).toHaveTextContent(/^1$/)
 })
+
+it('rejects multiple decimals', () => {
+  const { getByTestId, getAllByRole } = render(<App/>)
+  const buttons = getAllByRole('button')
+  const oneButton = buttons.find(node => node.textContent === '1')
+  const decimalButton = buttons.find(node => node.textContent === '.')
+  const input = getByTestId('input')
+
+  fireEvent.click(decimalButton)
+  fireEvent.click(decimalButton)
+  fireEvent.click(oneButton)
+  fireEvent.click(decimalButton)
+
+  expect(input).toHaveTextContent(/^0\.1$/)
+})
