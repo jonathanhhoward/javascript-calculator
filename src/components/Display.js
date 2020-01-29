@@ -7,7 +7,7 @@ export default function Display (props) {
   return (
     <div className="Display">
       <div className="Expression">{expression}</div>
-      <div className="Input" id="display">{input}</div>
+      <div className="Input" id="display" data-testid="display">{input}</div>
     </div>
   )
 }
