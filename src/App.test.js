@@ -38,25 +38,25 @@ it('rejects multiple decimals', () => {
   expect(input).toHaveTextContent(/^0\.1$/)
 })
 
-it('uses last operator clicked except minus', () => {
+it('uses last operator clicked', () => {
   const { getByTestId, getAllByRole } = render(<App/>)
   const buttons = getAllByRole('button')
   const oneButton = buttons.find(node => node.textContent === '1')
   const timesButton = buttons.find(node => node.textContent === '*')
-  const minusButton = buttons.find(node => node.textContent === '-')
+  const plusButton = buttons.find(node => node.textContent === '+')
   const equalsButton = buttons.find(node => node.textContent === '=')
   const input = getByTestId('input')
 
   fireEvent.click(oneButton)
   fireEvent.click(timesButton)
-  fireEvent.click(minusButton)
+  fireEvent.click(plusButton)
   fireEvent.click(oneButton)
   fireEvent.click(equalsButton)
 
-  expect(input).toHaveTextContent(/^-1$/)
+  expect(input).toHaveTextContent(/^2$/)
 
   fireEvent.click(oneButton)
-  fireEvent.click(minusButton)
+  fireEvent.click(plusButton)
   fireEvent.click(timesButton)
   fireEvent.click(oneButton)
   fireEvent.click(equalsButton)
