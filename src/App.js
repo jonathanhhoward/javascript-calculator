@@ -161,11 +161,9 @@ export default class App extends React.Component {
     const { input, isEquals, isOperator } = this.state
 
     const MAX_DIGITS = 10
-
-    const isExtraZero = (value === '0' && input === '0')
     const isMaxDigits = (input.replace('.', '').length === MAX_DIGITS)
 
-    if ((isExtraZero || isMaxDigits) && !isEquals) return
+    if (isMaxDigits && !isEquals) return
 
     if (isEquals) {
       this.setState({
