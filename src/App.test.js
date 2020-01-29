@@ -55,3 +55,21 @@ it('uses last operator clicked', () => {
 
   expect(input).toHaveTextContent(/^2$/)
 })
+
+it('uses negative on operator followed by minus', () => {
+  const { getByTestId, getAllByRole } = render(<App/>)
+  const buttons = getAllByRole('button')
+  const oneButton = buttons.find(node => node.textContent === '1')
+  const timesButton = buttons.find(node => node.textContent === '*')
+  const minusButton = buttons.find(node => node.textContent === '-')
+  const equalsButton = buttons.find(node => node.textContent === '=')
+  const input = getByTestId('input')
+
+  fireEvent.click(oneButton)
+  fireEvent.click(timesButton)
+  fireEvent.click(minusButton)
+  fireEvent.click(oneButton)
+  fireEvent.click(equalsButton)
+
+  expect(input).toHaveTextContent(/^-1$/)
+})
