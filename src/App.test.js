@@ -73,3 +73,22 @@ it('uses negative on operator followed by minus', () => {
 
   expect(input).toHaveTextContent(/^-1$/)
 })
+
+it('uses subtraction on negative followed by minus', () => {
+  const { getByTestId, getAllByRole } = render(<App/>)
+  const buttons = getAllByRole('button')
+  const one = buttons.find(node => node.textContent === '1')
+  const times = buttons.find(node => node.textContent === '*')
+  const minus = buttons.find(node => node.textContent === '-')
+  const equals = buttons.find(node => node.textContent === '=')
+  const input = getByTestId('input')
+
+  fireEvent.click(one)
+  fireEvent.click(times)
+  fireEvent.click(minus)
+  fireEvent.click(minus)
+  fireEvent.click(one)
+  fireEvent.click(equals)
+
+  expect(input).toHaveTextContent(/^0$/)
+})
