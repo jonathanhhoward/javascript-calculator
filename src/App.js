@@ -55,11 +55,9 @@ export default class App extends React.Component {
   }
 
   handleDelete = () => {
-    const { expression, input } = this.state
+    const { input, isEquals, isOperator } = this.state
 
-    if (
-      input === '0' || /[-+*/]/.test(input) || expression.includes('=')
-    ) return
+    if (input === '0' || isOperator || isEquals) return
 
     this.setState(state => ({
       expression: state.expression.slice(0, -state.input.length) + '0',
