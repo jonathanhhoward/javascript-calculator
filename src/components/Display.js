@@ -6,8 +6,8 @@ export default function Display (props) {
 
   return (
     <div className="Display">
-      <div className="Expression">{expression}</div>
-      <div className="Input" id="display" data-testid="input">{input}</div>
+      <div className="Expression" data-testid="expression">{expression}</div>
+      <div id="display" className="Input" data-testid="input">{input}</div>
     </div>
   )
 }
