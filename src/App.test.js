@@ -134,5 +134,19 @@ describe('display on key press', () => {
       expect(display.EXPRESSION).toHaveTextContent(/^1$/)
       expect(display.INPUT).toHaveTextContent(/^1$/)
     })
+
+    test('prevents greater than 10', () => {
+      for (let i = 0; i < 11; ++i) fireEvent.click(keyPad.ONE)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^1111111111$/)
+      expect(display.INPUT).toHaveTextContent(/^1111111111$/)
+
+      fireEvent.click(keyPad.CLEAR)
+      fireEvent.click(keyPad.DECIMAL)
+      for (let i = 0; i < 10; ++i) fireEvent.click(keyPad.ONE)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0.111111111$/)
+      expect(display.INPUT).toHaveTextContent(/^0.111111111$/)
+    })
   })
 })
