@@ -25,7 +25,7 @@ test('rejects leading zeros', () => {
   expect(input).toHaveTextContent(/^1$/)
 })
 
-test('rejects multiple decimals', () => {
+test('prevents multiple decimals', () => {
   const { getByTestId, getAllByRole } = render(<App/>)
   const buttons = getAllByRole('button')
   const one = buttons.find(node => node.textContent === '1')
@@ -33,13 +33,13 @@ test('rejects multiple decimals', () => {
   const expression = getByTestId('expression')
   const input = getByTestId('input')
 
+  fireEvent.click(one)
   fireEvent.click(decimal)
   fireEvent.click(decimal)
   fireEvent.click(one)
-  fireEvent.click(decimal)
 
-  expect(expression).toHaveTextContent(/^0\.1$/)
-  expect(input).toHaveTextContent(/^0\.1$/)
+  expect(expression).toHaveTextContent(/^1\.1$/)
+  expect(input).toHaveTextContent(/^1\.1$/)
 })
 
 test('uses last operator clicked', () => {
@@ -55,8 +55,8 @@ test('uses last operator clicked', () => {
   fireEvent.click(times)
   fireEvent.click(plus)
 
-  expect(expression).toHaveTextContent(/^1+$/)
-  expect(input).toHaveTextContent(/^+$/)
+  expect(expression).toHaveTextContent(/^1\+$/)
+  expect(input).toHaveTextContent(/^\+$/)
 })
 
 test('uses negative on operator followed by minus', () => {
@@ -72,7 +72,7 @@ test('uses negative on operator followed by minus', () => {
   fireEvent.click(times)
   fireEvent.click(minus)
 
-  expect(expression).toHaveTextContent(/^1*-$/)
+  expect(expression).toHaveTextContent(/^1\*-$/)
   expect(input).toHaveTextContent(/^-$/)
 })
 
