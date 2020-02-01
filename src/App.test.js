@@ -4,6 +4,20 @@ import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import App from './App'
 
+let testObj = {}
+
+beforeEach(() => {
+  const { getByTestId, getAllByRole } = render(<App/>)
+  const EXPRESSION = getByTestId('expression')
+  const INPUT = getByTestId('input')
+  const buttons = getAllByRole('button')
+  const [CLEAR, DELETE, DIVIDE, MULTIPLY, SUBTRACT, ADD, EQUALS, DECIMAL, ZERO,
+    ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE] = buttons
+
+  testObj = {EXPRESSION, INPUT, CLEAR, DELETE, DIVIDE, MULTIPLY, SUBTRACT, ADD,
+    EQUALS, DECIMAL, ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE}
+})
+
 test('renders without crashing', () => {
   const div = document.createElement('div')
   ReactDOM.render(<App/>, div)
@@ -11,105 +25,64 @@ test('renders without crashing', () => {
 })
 
 test('prevents leading zeros', () => {
-  const { getByTestId, getAllByRole } = render(<App/>)
-  const buttons = getAllByRole('button')
-  const zero = buttons.find(node => node.textContent === '0')
-  const one = buttons.find(node => node.textContent === '1')
-  const expression = getByTestId('expression')
-  const input = getByTestId('input')
+  fireEvent.click(testObj.ZERO)
+  fireEvent.click(testObj.ONE)
 
-  fireEvent.click(zero)
-  fireEvent.click(one)
-
-  expect(expression).toHaveTextContent(/^1$/)
-  expect(input).toHaveTextContent(/^1$/)
+  expect(testObj.EXPRESSION).toHaveTextContent(/^1$/)
+  expect(testObj.INPUT).toHaveTextContent(/^1$/)
 })
 
 test('prevents multiple decimals', () => {
-  const { getByTestId, getAllByRole } = render(<App/>)
-  const buttons = getAllByRole('button')
-  const decimal = buttons.find(node => node.textContent === '.')
-  const expression = getByTestId('expression')
-  const input = getByTestId('input')
+  fireEvent.click(testObj.DECIMAL)
+  fireEvent.click(testObj.DECIMAL)
 
-  fireEvent.click(decimal)
-  fireEvent.click(decimal)
-
-  expect(expression).toHaveTextContent(/^0\.$/)
-  expect(input).toHaveTextContent(/^0\.$/)
+  expect(testObj.EXPRESSION).toHaveTextContent(/^0\.$/)
+  expect(testObj.INPUT).toHaveTextContent(/^0\.$/)
 })
 
 test('prepends decimal with zero', () => {
-  const { getByTestId, getAllByRole } = render(<App/>)
-  const buttons = getAllByRole('button')
-  const decimal = buttons.find(node => node.textContent === '.')
-  const plus = buttons.find(node => node.textContent === '+')
-  const equals = buttons.find(node => node.textContent === '=')
-  const expression = getByTestId('expression')
-  const input = getByTestId('input')
+  fireEvent.click(testObj.DECIMAL)
 
-  fireEvent.click(decimal)
-  fireEvent.click(plus)
-  fireEvent.click(decimal)
+  expect(testObj.EXPRESSION).toHaveTextContent(/^0\.$/)
+  expect(testObj.INPUT).toHaveTextContent(/^0\.$/)
 
-  expect(expression).toHaveTextContent(/^0\.\+0\.$/)
-  expect(input).toHaveTextContent(/^0\.$/)
+  fireEvent.click(testObj.ADD)
+  fireEvent.click(testObj.DECIMAL)
 
-  fireEvent.click(equals)
-  fireEvent.click(decimal)
+  expect(testObj.EXPRESSION).toHaveTextContent(/^0\.\+0\.$/)
+  expect(testObj.INPUT).toHaveTextContent(/^0\.$/)
 
-  expect(expression).toHaveTextContent(/^0\.$/)
-  expect(input).toHaveTextContent(/^0\.$/)
+  fireEvent.click(testObj.EQUALS)
+  fireEvent.click(testObj.DECIMAL)
+
+  expect(testObj.EXPRESSION).toHaveTextContent(/^0\.$/)
+  expect(testObj.INPUT).toHaveTextContent(/^0\.$/)
 })
 
 test('uses last operator clicked', () => {
-  const { getByTestId, getAllByRole } = render(<App/>)
-  const buttons = getAllByRole('button')
-  const one = buttons.find(node => node.textContent === '1')
-  const times = buttons.find(node => node.textContent === '*')
-  const plus = buttons.find(node => node.textContent === '+')
-  const expression = getByTestId('expression')
-  const input = getByTestId('input')
+  fireEvent.click(testObj.ONE)
+  fireEvent.click(testObj.MULTIPLY)
+  fireEvent.click(testObj.ADD)
 
-  fireEvent.click(one)
-  fireEvent.click(times)
-  fireEvent.click(plus)
-
-  expect(expression).toHaveTextContent(/^1\+$/)
-  expect(input).toHaveTextContent(/^\+$/)
+  expect(testObj.EXPRESSION).toHaveTextContent(/^1\+$/)
+  expect(testObj.INPUT).toHaveTextContent(/^\+$/)
 })
 
 test('uses negative on operator followed by minus', () => {
-  const { getByTestId, getAllByRole } = render(<App/>)
-  const buttons = getAllByRole('button')
-  const one = buttons.find(node => node.textContent === '1')
-  const times = buttons.find(node => node.textContent === '*')
-  const minus = buttons.find(node => node.textContent === '-')
-  const expression = getByTestId('expression')
-  const input = getByTestId('input')
+  fireEvent.click(testObj.ONE)
+  fireEvent.click(testObj.MULTIPLY)
+  fireEvent.click(testObj.SUBTRACT)
 
-  fireEvent.click(one)
-  fireEvent.click(times)
-  fireEvent.click(minus)
-
-  expect(expression).toHaveTextContent(/^1\*-$/)
-  expect(input).toHaveTextContent(/^-$/)
+  expect(testObj.EXPRESSION).toHaveTextContent(/^1\*-$/)
+  expect(testObj.INPUT).toHaveTextContent(/^-$/)
 })
 
 test('uses subtraction on negative followed by minus', () => {
-  const { getByTestId, getAllByRole } = render(<App/>)
-  const buttons = getAllByRole('button')
-  const one = buttons.find(node => node.textContent === '1')
-  const times = buttons.find(node => node.textContent === '*')
-  const minus = buttons.find(node => node.textContent === '-')
-  const expression = getByTestId('expression')
-  const input = getByTestId('input')
+  fireEvent.click(testObj.ONE)
+  fireEvent.click(testObj.MULTIPLY)
+  fireEvent.click(testObj.SUBTRACT)
+  fireEvent.click(testObj.SUBTRACT)
 
-  fireEvent.click(one)
-  fireEvent.click(times)
-  fireEvent.click(minus)
-  fireEvent.click(minus)
-
-  expect(expression).toHaveTextContent(/^1-$/)
-  expect(input).toHaveTextContent(/^-$/)
+  expect(testObj.EXPRESSION).toHaveTextContent(/^1-$/)
+  expect(testObj.INPUT).toHaveTextContent(/^-$/)
 })
