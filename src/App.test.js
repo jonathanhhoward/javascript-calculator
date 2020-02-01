@@ -4,7 +4,8 @@ import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import App from './App'
 
-let testObj = {}
+let display
+let keyPad
 
 beforeEach(() => {
   const { getByTestId, getAllByRole } = render(<App/>)
@@ -16,9 +17,10 @@ beforeEach(() => {
     ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE
   ] = buttons
 
-  testObj = {
-    EXPRESSION, INPUT, CLEAR, DELETE, DIVIDE, MULTIPLY, SUBTRACT, ADD,
-    EQUALS, DECIMAL, ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE
+  display = { EXPRESSION, INPUT }
+  keyPad = {
+    CLEAR, DELETE, DIVIDE, MULTIPLY, SUBTRACT, ADD, EQUALS, DECIMAL,
+    ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE
   }
 })
 
@@ -29,64 +31,64 @@ test('renders without crashing', () => {
 })
 
 test('prevents leading zeros', () => {
-  fireEvent.click(testObj.ZERO)
-  fireEvent.click(testObj.ONE)
+  fireEvent.click(keyPad.ZERO)
+  fireEvent.click(keyPad.ONE)
 
-  expect(testObj.EXPRESSION).toHaveTextContent(/^1$/)
-  expect(testObj.INPUT).toHaveTextContent(/^1$/)
+  expect(display.EXPRESSION).toHaveTextContent(/^1$/)
+  expect(display.INPUT).toHaveTextContent(/^1$/)
 })
 
 test('prevents multiple decimals', () => {
-  fireEvent.click(testObj.DECIMAL)
-  fireEvent.click(testObj.DECIMAL)
+  fireEvent.click(keyPad.DECIMAL)
+  fireEvent.click(keyPad.DECIMAL)
 
-  expect(testObj.EXPRESSION).toHaveTextContent(/^0\.$/)
-  expect(testObj.INPUT).toHaveTextContent(/^0\.$/)
+  expect(display.EXPRESSION).toHaveTextContent(/^0\.$/)
+  expect(display.INPUT).toHaveTextContent(/^0\.$/)
 })
 
 test('prepends decimal with zero', () => {
-  fireEvent.click(testObj.DECIMAL)
+  fireEvent.click(keyPad.DECIMAL)
 
-  expect(testObj.EXPRESSION).toHaveTextContent(/^0\.$/)
-  expect(testObj.INPUT).toHaveTextContent(/^0\.$/)
+  expect(display.EXPRESSION).toHaveTextContent(/^0\.$/)
+  expect(display.INPUT).toHaveTextContent(/^0\.$/)
 
-  fireEvent.click(testObj.ADD)
-  fireEvent.click(testObj.DECIMAL)
+  fireEvent.click(keyPad.ADD)
+  fireEvent.click(keyPad.DECIMAL)
 
-  expect(testObj.EXPRESSION).toHaveTextContent(/^0\.\+0\.$/)
-  expect(testObj.INPUT).toHaveTextContent(/^0\.$/)
+  expect(display.EXPRESSION).toHaveTextContent(/^0\.\+0\.$/)
+  expect(display.INPUT).toHaveTextContent(/^0\.$/)
 
-  fireEvent.click(testObj.EQUALS)
-  fireEvent.click(testObj.DECIMAL)
+  fireEvent.click(keyPad.EQUALS)
+  fireEvent.click(keyPad.DECIMAL)
 
-  expect(testObj.EXPRESSION).toHaveTextContent(/^0\.$/)
-  expect(testObj.INPUT).toHaveTextContent(/^0\.$/)
+  expect(display.EXPRESSION).toHaveTextContent(/^0\.$/)
+  expect(display.INPUT).toHaveTextContent(/^0\.$/)
 })
 
 test('uses last operator clicked', () => {
-  fireEvent.click(testObj.ONE)
-  fireEvent.click(testObj.MULTIPLY)
-  fireEvent.click(testObj.ADD)
+  fireEvent.click(keyPad.ONE)
+  fireEvent.click(keyPad.MULTIPLY)
+  fireEvent.click(keyPad.ADD)
 
-  expect(testObj.EXPRESSION).toHaveTextContent(/^1\+$/)
-  expect(testObj.INPUT).toHaveTextContent(/^\+$/)
+  expect(display.EXPRESSION).toHaveTextContent(/^1\+$/)
+  expect(display.INPUT).toHaveTextContent(/^\+$/)
 })
 
 test('uses negative on operator followed by minus', () => {
-  fireEvent.click(testObj.ONE)
-  fireEvent.click(testObj.MULTIPLY)
-  fireEvent.click(testObj.SUBTRACT)
+  fireEvent.click(keyPad.ONE)
+  fireEvent.click(keyPad.MULTIPLY)
+  fireEvent.click(keyPad.SUBTRACT)
 
-  expect(testObj.EXPRESSION).toHaveTextContent(/^1\*-$/)
-  expect(testObj.INPUT).toHaveTextContent(/^-$/)
+  expect(display.EXPRESSION).toHaveTextContent(/^1\*-$/)
+  expect(display.INPUT).toHaveTextContent(/^-$/)
 })
 
 test('uses subtraction on negative followed by minus', () => {
-  fireEvent.click(testObj.ONE)
-  fireEvent.click(testObj.MULTIPLY)
-  fireEvent.click(testObj.SUBTRACT)
-  fireEvent.click(testObj.SUBTRACT)
+  fireEvent.click(keyPad.ONE)
+  fireEvent.click(keyPad.MULTIPLY)
+  fireEvent.click(keyPad.SUBTRACT)
+  fireEvent.click(keyPad.SUBTRACT)
 
-  expect(testObj.EXPRESSION).toHaveTextContent(/^1-$/)
-  expect(testObj.INPUT).toHaveTextContent(/^-$/)
+  expect(display.EXPRESSION).toHaveTextContent(/^1-$/)
+  expect(display.INPUT).toHaveTextContent(/^-$/)
 })
