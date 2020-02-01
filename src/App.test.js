@@ -20,8 +20,8 @@ describe('display on key press', () => {
     const INPUT = getByTestId('input')
     const buttons = getAllByRole('button')
     const [
-      CLEAR, DELETE, DIVIDE, MULTIPLY, SUBTRACT, ADD, EQUALS, DECIMAL, ZERO,
-      ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE
+      CLEAR, DELETE, DIVIDE, MULTIPLY, SUBTRACT, ADD, EQUALS, DECIMAL,
+      ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE
     ] = buttons
 
     display = { EXPRESSION, INPUT }
