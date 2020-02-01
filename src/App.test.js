@@ -34,38 +34,53 @@ describe('display on key press', () => {
   describe('operators', () => {
     test('carry over last result', () => {
       fireEvent.click(keyPad.ONE)
+      fireEvent.click(keyPad.ADD)
+      fireEvent.click(keyPad.ONE)
       fireEvent.click(keyPad.EQUALS)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^1\+1=$/)
+      expect(display.INPUT).toHaveTextContent(/^2$/)
+
       fireEvent.click(keyPad.ADD)
 
-      expect(display.EXPRESSION).toHaveTextContent(/^1\+$/)
+      expect(display.EXPRESSION).toHaveTextContent(/^2\+$/)
       expect(display.INPUT).toHaveTextContent(/^\+$/)
     })
 
-    test('uses subtraction on negative followed by minus', () => {
-      fireEvent.click(keyPad.ONE)
+    test('cancels negative', () => {
       fireEvent.click(keyPad.MULTIPLY)
       fireEvent.click(keyPad.SUBTRACT)
-      fireEvent.click(keyPad.SUBTRACT)
 
-      expect(display.EXPRESSION).toHaveTextContent(/^1-$/)
+      expect(display.EXPRESSION).toHaveTextContent(/^0\*-$/)
       expect(display.INPUT).toHaveTextContent(/^-$/)
-    })
 
-    test('uses negative on operator followed by minus', () => {
-      fireEvent.click(keyPad.ONE)
-      fireEvent.click(keyPad.MULTIPLY)
-      fireEvent.click(keyPad.SUBTRACT)
-
-      expect(display.EXPRESSION).toHaveTextContent(/^1\*-$/)
-      expect(display.INPUT).toHaveTextContent(/^-$/)
-    })
-
-    test('uses last operator clicked', () => {
-      fireEvent.click(keyPad.ONE)
-      fireEvent.click(keyPad.MULTIPLY)
       fireEvent.click(keyPad.ADD)
 
-      expect(display.EXPRESSION).toHaveTextContent(/^1\+$/)
+      expect(display.EXPRESSION).toHaveTextContent(/^0\+$/)
+      expect(display.INPUT).toHaveTextContent(/^\+$/)
+    })
+
+    test('adds negative', () => {
+      fireEvent.click(keyPad.MULTIPLY)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0\*$/)
+      expect(display.INPUT).toHaveTextContent(/^\*$/)
+
+      fireEvent.click(keyPad.SUBTRACT)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0\*-$/)
+      expect(display.INPUT).toHaveTextContent(/^-$/)
+    })
+
+    test('uses last clicked', () => {
+      fireEvent.click(keyPad.MULTIPLY)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0\*$/)
+      expect(display.INPUT).toHaveTextContent(/^\*$/)
+
+      fireEvent.click(keyPad.ADD)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0\+$/)
       expect(display.INPUT).toHaveTextContent(/^\+$/)
     })
   })
@@ -73,6 +88,10 @@ describe('display on key press', () => {
   describe('decimal', () => {
     test('prevents multiple decimals', () => {
       fireEvent.click(keyPad.DECIMAL)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0\.$/)
+      expect(display.INPUT).toHaveTextContent(/^0\.$/)
+
       fireEvent.click(keyPad.DECIMAL)
 
       expect(display.EXPRESSION).toHaveTextContent(/^0\.$/)
@@ -86,12 +105,20 @@ describe('display on key press', () => {
       expect(display.INPUT).toHaveTextContent(/^0\.$/)
 
       fireEvent.click(keyPad.ADD)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0\.\+$/)
+      expect(display.INPUT).toHaveTextContent(/^\+$/)
+
       fireEvent.click(keyPad.DECIMAL)
 
       expect(display.EXPRESSION).toHaveTextContent(/^0\.\+0\.$/)
       expect(display.INPUT).toHaveTextContent(/^0\.$/)
 
       fireEvent.click(keyPad.EQUALS)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0\.\+0\.=$/)
+      expect(display.INPUT).toHaveTextContent(/^0$/)
+
       fireEvent.click(keyPad.DECIMAL)
 
       expect(display.EXPRESSION).toHaveTextContent(/^0\.$/)
