@@ -141,6 +141,18 @@ describe('display on key press', () => {
       expect(display.INPUT).toHaveTextContent(/^0.111111111$/)
     })
 
+    test('post equals overwrites', () => {
+      fireEvent.click(keyPad.EQUALS)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0=$/)
+      expect(display.INPUT).toHaveTextContent(/^0$/)
+
+      fireEvent.click(keyPad.ONE)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^1$/)
+      expect(display.INPUT).toHaveTextContent(/^1$/)
+    })
+
     test('prevents leading zeros', () => {
       fireEvent.click(keyPad.ZERO)
       fireEvent.click(keyPad.ONE)
