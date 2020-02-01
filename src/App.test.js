@@ -32,6 +32,15 @@ describe('display on key press', () => {
   })
 
   describe('operators', () => {
+    test('carry over last result', () => {
+      fireEvent.click(keyPad.ONE)
+      fireEvent.click(keyPad.EQUALS)
+      fireEvent.click(keyPad.ADD)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^1\+$/)
+      expect(display.INPUT).toHaveTextContent(/^\+$/)
+    })
+
     test('uses subtraction on negative followed by minus', () => {
       fireEvent.click(keyPad.ONE)
       fireEvent.click(keyPad.MULTIPLY)
