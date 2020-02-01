@@ -11,11 +11,15 @@ beforeEach(() => {
   const EXPRESSION = getByTestId('expression')
   const INPUT = getByTestId('input')
   const buttons = getAllByRole('button')
-  const [CLEAR, DELETE, DIVIDE, MULTIPLY, SUBTRACT, ADD, EQUALS, DECIMAL, ZERO,
-    ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE] = buttons
+  const [
+    CLEAR, DELETE, DIVIDE, MULTIPLY, SUBTRACT, ADD, EQUALS, DECIMAL, ZERO,
+    ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE
+  ] = buttons
 
-  testObj = {EXPRESSION, INPUT, CLEAR, DELETE, DIVIDE, MULTIPLY, SUBTRACT, ADD,
-    EQUALS, DECIMAL, ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE}
+  testObj = {
+    EXPRESSION, INPUT, CLEAR, DELETE, DIVIDE, MULTIPLY, SUBTRACT, ADD,
+    EQUALS, DECIMAL, ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE
+  }
 })
 
 test('renders without crashing', () => {
