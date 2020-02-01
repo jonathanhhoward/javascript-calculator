@@ -45,16 +45,24 @@ test('prevents multiple decimals', () => {
 test('prepends decimal with zero', () => {
   const { getByTestId, getAllByRole } = render(<App/>)
   const buttons = getAllByRole('button')
-  const one = buttons.find(node => node.textContent === '1')
   const decimal = buttons.find(node => node.textContent === '.')
+  const plus = buttons.find(node => node.textContent === '+')
+  const equals = buttons.find(node => node.textContent === '=')
   const expression = getByTestId('expression')
   const input = getByTestId('input')
 
   fireEvent.click(decimal)
-  fireEvent.click(one)
+  fireEvent.click(plus)
+  fireEvent.click(decimal)
 
-  expect(expression).toHaveTextContent(/^0\.1$/)
-  expect(input).toHaveTextContent(/^0\.1$/)
+  expect(expression).toHaveTextContent(/^0\.\+0\.$/)
+  expect(input).toHaveTextContent(/^0\.$/)
+
+  fireEvent.click(equals)
+  fireEvent.click(decimal)
+
+  expect(expression).toHaveTextContent(/^0\.$/)
+  expect(input).toHaveTextContent(/^0\.$/)
 })
 
 test('uses last operator clicked', () => {
