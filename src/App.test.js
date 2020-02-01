@@ -15,11 +15,13 @@ it('rejects leading zeros', () => {
   const buttons = getAllByRole('button')
   const zero = buttons.find(node => node.textContent === '0')
   const one = buttons.find(node => node.textContent === '1')
+  const expression = getByTestId('expression')
   const input = getByTestId('input')
 
   fireEvent.click(zero)
   fireEvent.click(one)
 
+  expect(expression).toHaveTextContent(/^1$/)
   expect(input).toHaveTextContent(/^1$/)
 })
 
@@ -28,6 +30,7 @@ it('rejects multiple decimals', () => {
   const buttons = getAllByRole('button')
   const one = buttons.find(node => node.textContent === '1')
   const decimal = buttons.find(node => node.textContent === '.')
+  const expression = getByTestId('expression')
   const input = getByTestId('input')
 
   fireEvent.click(decimal)
@@ -35,6 +38,7 @@ it('rejects multiple decimals', () => {
   fireEvent.click(one)
   fireEvent.click(decimal)
 
+  expect(expression).toHaveTextContent(/^0\.1$/)
   expect(input).toHaveTextContent(/^0\.1$/)
 })
 
@@ -44,16 +48,15 @@ it('uses last operator clicked', () => {
   const one = buttons.find(node => node.textContent === '1')
   const times = buttons.find(node => node.textContent === '*')
   const plus = buttons.find(node => node.textContent === '+')
-  const equals = buttons.find(node => node.textContent === '=')
+  const expression = getByTestId('expression')
   const input = getByTestId('input')
 
   fireEvent.click(one)
   fireEvent.click(times)
   fireEvent.click(plus)
-  fireEvent.click(one)
-  fireEvent.click(equals)
 
-  expect(input).toHaveTextContent(/^2$/)
+  expect(expression).toHaveTextContent(/^1+$/)
+  expect(input).toHaveTextContent(/^+$/)
 })
 
 it('uses negative on operator followed by minus', () => {
@@ -62,16 +65,15 @@ it('uses negative on operator followed by minus', () => {
   const one = buttons.find(node => node.textContent === '1')
   const times = buttons.find(node => node.textContent === '*')
   const minus = buttons.find(node => node.textContent === '-')
-  const equals = buttons.find(node => node.textContent === '=')
+  const expression = getByTestId('expression')
   const input = getByTestId('input')
 
   fireEvent.click(one)
   fireEvent.click(times)
   fireEvent.click(minus)
-  fireEvent.click(one)
-  fireEvent.click(equals)
 
-  expect(input).toHaveTextContent(/^-1$/)
+  expect(expression).toHaveTextContent(/^1*-$/)
+  expect(input).toHaveTextContent(/^-$/)
 })
 
 it('uses subtraction on negative followed by minus', () => {
@@ -80,15 +82,14 @@ it('uses subtraction on negative followed by minus', () => {
   const one = buttons.find(node => node.textContent === '1')
   const times = buttons.find(node => node.textContent === '*')
   const minus = buttons.find(node => node.textContent === '-')
-  const equals = buttons.find(node => node.textContent === '=')
+  const expression = getByTestId('expression')
   const input = getByTestId('input')
 
   fireEvent.click(one)
   fireEvent.click(times)
   fireEvent.click(minus)
   fireEvent.click(minus)
-  fireEvent.click(one)
-  fireEvent.click(equals)
 
-  expect(input).toHaveTextContent(/^0$/)
+  expect(expression).toHaveTextContent(/^1-$/)
+  expect(input).toHaveTextContent(/^-$/)
 })
