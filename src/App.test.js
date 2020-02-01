@@ -10,7 +10,7 @@ test('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div)
 })
 
-test('rejects leading zeros', () => {
+test('prevents leading zeros', () => {
   const { getByTestId, getAllByRole } = render(<App/>)
   const buttons = getAllByRole('button')
   const zero = buttons.find(node => node.textContent === '0')
