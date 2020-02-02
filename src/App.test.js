@@ -31,6 +31,18 @@ describe('display on key press', () => {
     }
   })
 
+  describe('equals', () => {
+    test('calls calculate() and displays result', () => {
+      fireEvent.click(keyPad.ONE)
+      fireEvent.click(keyPad.ADD)
+      fireEvent.click(keyPad.ONE)
+      fireEvent.click(keyPad.EQUALS)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^1\+1=$/)
+      expect(display.INPUT).toHaveTextContent(/^2$/)
+    })
+  })
+
   describe('operators', () => {
     test('overwrites expression and concatenates to result', () => {
       fireEvent.click(keyPad.ONE)
