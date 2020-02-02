@@ -79,6 +79,13 @@ describe('display on key press', () => {
       expect(display.EXPRESSION).toHaveTextContent(/^0\+$/)
       expect(display.INPUT).toHaveTextContent(/^\+$/)
     })
+
+    test('concatenates to digits', () => {
+      fireEvent.click(keyPad.ADD)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0\+$/)
+      expect(display.INPUT).toHaveTextContent(/^\+$/)
+    })
   })
 
   describe('decimal', () => {
