@@ -32,7 +32,7 @@ describe('display on key press', () => {
   })
 
   describe('operators', () => {
-    test('carry over last result', () => {
+    test('overwrites expression and concatenates to result', () => {
       fireEvent.click(keyPad.ONE)
       fireEvent.click(keyPad.ADD)
       fireEvent.click(keyPad.ONE)
@@ -121,7 +121,7 @@ describe('display on key press', () => {
       expect(display.INPUT).toHaveTextContent(/^0.111111111$/)
     })
 
-    test('overwrites result', () => {
+    test('overwrites expression and result', () => {
       fireEvent.click(keyPad.EQUALS)
 
       expect(display.EXPRESSION).toHaveTextContent(/^0=$/)
