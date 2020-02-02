@@ -153,6 +153,18 @@ describe('display on key press', () => {
       expect(display.INPUT).toHaveTextContent(/^1$/)
     })
 
+    test('concatenates after operator', () => {
+      fireEvent.click(keyPad.ADD)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0\+$/)
+      expect(display.INPUT).toHaveTextContent(/^\+$/)
+
+      fireEvent.click(keyPad.ONE)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0\+1$/)
+      expect(display.INPUT).toHaveTextContent(/^1$/)
+    })
+
     test('prevents leading zeros', () => {
       fireEvent.click(keyPad.ZERO)
       fireEvent.click(keyPad.ONE)
