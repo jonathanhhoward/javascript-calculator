@@ -172,5 +172,14 @@ describe('display on key press', () => {
       expect(display.EXPRESSION).toHaveTextContent(/^1$/)
       expect(display.INPUT).toHaveTextContent(/^1$/)
     })
+
+    test('concatenates all others', () => {
+      fireEvent.click(keyPad.DECIMAL)
+      fireEvent.click(keyPad.ONE)
+      fireEvent.click(keyPad.ONE)
+
+      expect(display.EXPRESSION).toHaveTextContent(/^0\.11$/)
+      expect(display.INPUT).toHaveTextContent(/^0\.11$/)
+    })
   })
 })
