@@ -68,7 +68,7 @@ describe('display on key press', () => {
       expect(display.INPUT).toHaveTextContent(/^-$/)
     })
 
-    test('uses last clicked', () => {
+    test('overwrites previous', () => {
       fireEvent.click(keyPad.MULTIPLY)
 
       expect(display.EXPRESSION).toHaveTextContent(/^0\*$/)
@@ -107,7 +107,7 @@ describe('display on key press', () => {
   })
 
   describe('digits', () => {
-    test('prevents greater than 10', () => {
+    test('has 10 digit limit', () => {
       for (let i = 0; i < 11; ++i) fireEvent.click(keyPad.ONE)
 
       expect(display.EXPRESSION).toHaveTextContent(/^1111111111$/)
@@ -121,7 +121,7 @@ describe('display on key press', () => {
       expect(display.INPUT).toHaveTextContent(/^0.111111111$/)
     })
 
-    test('post equals overwrites', () => {
+    test('overwrites result', () => {
       fireEvent.click(keyPad.EQUALS)
 
       expect(display.EXPRESSION).toHaveTextContent(/^0=$/)
@@ -133,7 +133,7 @@ describe('display on key press', () => {
       expect(display.INPUT).toHaveTextContent(/^1$/)
     })
 
-    test('concatenates after operator', () => {
+    test('concatenates to operator', () => {
       fireEvent.click(keyPad.ADD)
       fireEvent.click(keyPad.ONE)
 
@@ -149,7 +149,7 @@ describe('display on key press', () => {
       expect(display.INPUT).toHaveTextContent(/^1$/)
     })
 
-    test('concatenates all others', () => {
+    test('concatenates to digits and decimal', () => {
       fireEvent.click(keyPad.DECIMAL)
       fireEvent.click(keyPad.ONE)
       fireEvent.click(keyPad.ONE)
