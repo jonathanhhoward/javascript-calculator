@@ -6,15 +6,17 @@ import setPrecision10 from './modules/setPrecision10'
 import './App.css'
 
 export default class App extends React.Component {
+  initialState = {
+    expression: '0',
+    input: '0',
+    isEquals: false,
+    isNegative: false,
+    isOperator: false
+  }
+
   constructor (props) {
     super(props)
-    this.state = {
-      expression: '0',
-      input: '0',
-      isEquals: false,
-      isNegative: false,
-      isOperator: false
-    }
+    this.state = this.initialState
   }
 
   handleClick = (event) => {
@@ -45,13 +47,7 @@ export default class App extends React.Component {
   }
 
   handleClear = () => {
-    this.setState({
-      expression: '0',
-      input: '0',
-      isEquals: false,
-      isNegative: false,
-      isOperator: false
-    })
+    this.setState(this.initialState)
   }
 
   handleDelete = () => {
