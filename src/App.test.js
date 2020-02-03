@@ -68,6 +68,18 @@ describe('display on key press', () => {
 
       expectDisplayTextContent(/^0=$/, /^0$/)
     })
+
+    test('overwrites operator', () => {
+      const { EQUALS, ADD } = keyPad
+
+      fireClickEvents([ADD])
+
+      expectDisplayTextContent(/^0\+$/, /^\+$/)
+
+      fireClickEvents([EQUALS])
+
+      expectDisplayTextContent(/^0=$/, /^0$/)
+    })
   })
 
   describe('operators', () => {
