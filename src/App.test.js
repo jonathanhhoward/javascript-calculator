@@ -14,6 +14,15 @@ describe('display on key press', () => {
   let display
   let keyPad
 
+  function fireClickEvents (nodes) {
+    nodes.forEach(node => fireEvent.click(node))
+  }
+
+  function expectDisplayTextContent (expr, inpt) {
+    expect(display.EXPRESSION).toHaveTextContent(expr)
+    expect(display.INPUT).toHaveTextContent(inpt)
+  }
+
   beforeEach(() => {
     const { getByTestId, getAllByRole } = render(<App/>)
     const EXPRESSION = getByTestId('expression')
@@ -33,150 +42,138 @@ describe('display on key press', () => {
 
   describe('equals', () => {
     test('calls calculate() and displays result', () => {
-      fireEvent.click(keyPad.ONE)
-      fireEvent.click(keyPad.ADD)
-      fireEvent.click(keyPad.ONE)
-      fireEvent.click(keyPad.EQUALS)
+      const { EQUALS, ADD, ONE } = keyPad
 
-      expect(display.EXPRESSION).toHaveTextContent(/^1\+1=$/)
-      expect(display.INPUT).toHaveTextContent(/^2$/)
+      fireClickEvents([ONE, ADD, ONE, EQUALS])
+
+      expectDisplayTextContent(/^1\+1=$/, /^2$/)
     })
   })
 
   describe('operators', () => {
     test('overwrites expression and concatenates to result', () => {
-      fireEvent.click(keyPad.ONE)
-      fireEvent.click(keyPad.ADD)
-      fireEvent.click(keyPad.ONE)
-      fireEvent.click(keyPad.EQUALS)
+      const { EQUALS, ADD, ONE } = keyPad
 
-      expect(display.EXPRESSION).toHaveTextContent(/^1\+1=$/)
-      expect(display.INPUT).toHaveTextContent(/^2$/)
+      fireClickEvents([ONE, ADD, ONE, EQUALS])
 
-      fireEvent.click(keyPad.ADD)
+      expectDisplayTextContent(/^1\+1=$/, /^2$/)
 
-      expect(display.EXPRESSION).toHaveTextContent(/^2\+$/)
-      expect(display.INPUT).toHaveTextContent(/^\+$/)
+      fireClickEvents([ADD])
+
+      expectDisplayTextContent(/^2\+$/, /^\+$/)
     })
 
     test('cancels negative', () => {
-      fireEvent.click(keyPad.MULTIPLY)
-      fireEvent.click(keyPad.SUBTRACT)
+      const { MULTIPLY, ADD, SUBTRACT } = keyPad
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0\*-$/)
-      expect(display.INPUT).toHaveTextContent(/^-$/)
+      fireClickEvents([MULTIPLY, SUBTRACT])
 
-      fireEvent.click(keyPad.ADD)
+      expectDisplayTextContent(/^0\*-$/, /^-$/)
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0\+$/)
-      expect(display.INPUT).toHaveTextContent(/^\+$/)
+      fireClickEvents([ADD])
+
+      expectDisplayTextContent(/^0\+$/, /^\+$/)
     })
 
     test('adds negative', () => {
-      fireEvent.click(keyPad.MULTIPLY)
-      fireEvent.click(keyPad.SUBTRACT)
+      const { MULTIPLY, SUBTRACT } = keyPad
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0\*-$/)
-      expect(display.INPUT).toHaveTextContent(/^-$/)
+      fireClickEvents([MULTIPLY, SUBTRACT])
+
+      expectDisplayTextContent(/^0\*-$/, /^-$/)
     })
 
     test('overwrites previous', () => {
-      fireEvent.click(keyPad.MULTIPLY)
+      const { MULTIPLY, ADD } = keyPad
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0\*$/)
-      expect(display.INPUT).toHaveTextContent(/^\*$/)
+      fireClickEvents([MULTIPLY])
 
-      fireEvent.click(keyPad.ADD)
+      expectDisplayTextContent(/^0\*$/, /^\*$/)
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0\+$/)
-      expect(display.INPUT).toHaveTextContent(/^\+$/)
+      fireClickEvents([ADD])
+
+      expectDisplayTextContent(/^0\+$/, /^\+$/)
     })
 
     test('concatenates to digits and decimal', () => {
-      fireEvent.click(keyPad.ADD)
-      fireEvent.click(keyPad.DECIMAL)
-      fireEvent.click(keyPad.ADD)
+      const { ADD, DECIMAL } = keyPad
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0\+0\.\+$/)
-      expect(display.INPUT).toHaveTextContent(/^\+$/)
+      fireClickEvents([ADD, DECIMAL, ADD])
+
+      expectDisplayTextContent(/^0\+0\.\+$/, /^\+$/)
     })
   })
 
   describe('decimal', () => {
     test('prevents multiple decimals', () => {
-      fireEvent.click(keyPad.DECIMAL)
-      fireEvent.click(keyPad.DECIMAL)
+      const { DECIMAL } = keyPad
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0\.$/)
-      expect(display.INPUT).toHaveTextContent(/^0\.$/)
+      fireClickEvents([DECIMAL])
+
+      expectDisplayTextContent(/^0\.$/, /^0\.$/)
     })
 
     test('prepends decimal with zero', () => {
-      fireEvent.click(keyPad.DECIMAL)
-      fireEvent.click(keyPad.ADD)
-      fireEvent.click(keyPad.DECIMAL)
-      fireEvent.click(keyPad.EQUALS)
+      const { ADD, EQUALS, DECIMAL } = keyPad
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0\.\+0\.=$/)
-      expect(display.INPUT).toHaveTextContent(/^0$/)
+      fireClickEvents([DECIMAL, ADD, DECIMAL, EQUALS])
 
-      fireEvent.click(keyPad.DECIMAL)
+      expectDisplayTextContent(/^0\.\+0\.=$/, /^0$/)
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0\.$/)
-      expect(display.INPUT).toHaveTextContent(/^0\.$/)
+      fireClickEvents([DECIMAL])
+
+      expectDisplayTextContent(/^0\.$/, /^0\.$/)
     })
   })
 
   describe('digits', () => {
     test('has 10 digit limit', () => {
-      for (let i = 0; i < 11; ++i) fireEvent.click(keyPad.ONE)
+      const { CLEAR, DECIMAL, ONE } = keyPad
+      const elevenOnes = new Array(11).fill(ONE)
 
-      expect(display.EXPRESSION).toHaveTextContent(/^1111111111$/)
-      expect(display.INPUT).toHaveTextContent(/^1111111111$/)
+      fireClickEvents(elevenOnes)
 
-      fireEvent.click(keyPad.CLEAR)
-      fireEvent.click(keyPad.DECIMAL)
-      for (let i = 0; i < 10; ++i) fireEvent.click(keyPad.ONE)
+      expectDisplayTextContent(/^1111111111$/, /^1111111111$/)
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0.111111111$/)
-      expect(display.INPUT).toHaveTextContent(/^0.111111111$/)
+      fireClickEvents([CLEAR, DECIMAL, ...elevenOnes])
+
+      expectDisplayTextContent(/^0.111111111$/, /^0.111111111$/)
     })
 
     test('overwrites expression and result', () => {
-      fireEvent.click(keyPad.EQUALS)
+      const { EQUALS, ONE } = keyPad
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0=$/)
-      expect(display.INPUT).toHaveTextContent(/^0$/)
+      fireClickEvents([EQUALS])
 
-      fireEvent.click(keyPad.ONE)
+      expectDisplayTextContent(/^0=$/, /^0$/)
 
-      expect(display.EXPRESSION).toHaveTextContent(/^1$/)
-      expect(display.INPUT).toHaveTextContent(/^1$/)
+      fireClickEvents([ONE])
+
+      expectDisplayTextContent(/^1$/, /^1$/)
     })
 
     test('concatenates to operator', () => {
-      fireEvent.click(keyPad.ADD)
-      fireEvent.click(keyPad.ONE)
+      const { ADD, ONE } = keyPad
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0\+1$/)
-      expect(display.INPUT).toHaveTextContent(/^1$/)
+      fireClickEvents([ADD, ONE])
+
+      expectDisplayTextContent(/^0\+1$/, /^1$/)
     })
 
     test('prevents leading zeros', () => {
-      fireEvent.click(keyPad.ZERO)
-      fireEvent.click(keyPad.ONE)
+      const { ZERO, ONE } = keyPad
 
-      expect(display.EXPRESSION).toHaveTextContent(/^1$/)
-      expect(display.INPUT).toHaveTextContent(/^1$/)
+      fireClickEvents([ZERO, ONE])
+
+      expectDisplayTextContent(/^1$/, /^1$/)
     })
 
     test('concatenates to digits and decimal', () => {
-      fireEvent.click(keyPad.DECIMAL)
-      fireEvent.click(keyPad.ONE)
-      fireEvent.click(keyPad.ONE)
+      const { DECIMAL, ONE } = keyPad
 
-      expect(display.EXPRESSION).toHaveTextContent(/^0\.11$/)
-      expect(display.INPUT).toHaveTextContent(/^0\.11$/)
+      fireClickEvents([DECIMAL, ONE, ONE])
+
+      expectDisplayTextContent(/^0\.11$/, /^0\.11$/)
     })
   })
 })
