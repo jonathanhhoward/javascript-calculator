@@ -56,6 +56,18 @@ describe('display on key press', () => {
 
       expectDisplayTextContent(/^1\+1=$/, /^2$/)
     })
+
+    test('overwrites operator and negative', () => {
+      const { EQUALS, ADD, SUBTRACT } = keyPad
+
+      fireClickEvents([ADD, SUBTRACT])
+
+      expectDisplayTextContent(/^0\+-$/, /^-$/)
+
+      fireClickEvents([EQUALS])
+
+      expectDisplayTextContent(/^0=$/, /^0$/)
+    })
   })
 
   describe('operators', () => {
