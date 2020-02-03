@@ -48,6 +48,14 @@ describe('display on key press', () => {
 
       expectDisplayTextContent(/^1\+1=$/, /^2$/)
     })
+
+    test('ignored while result displayed', () => {
+      const { EQUALS, ADD, ONE } = keyPad
+
+      fireClickEvents([ONE, ADD, ONE, EQUALS, EQUALS])
+
+      expectDisplayTextContent(/^1\+1=$/, /^2$/)
+    })
   })
 
   describe('operators', () => {
