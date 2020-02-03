@@ -105,10 +105,10 @@ describe('display on key press', () => {
   })
 
   describe('decimal', () => {
-    test('prevents multiple decimals', () => {
+    test('only one per number', () => {
       const { DECIMAL } = keyPad
 
-      fireClickEvents([DECIMAL])
+      fireClickEvents([DECIMAL, DECIMAL])
 
       expectDisplayTextContent(/^0\.$/, /^0\.$/)
     })
