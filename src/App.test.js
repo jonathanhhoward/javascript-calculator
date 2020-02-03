@@ -10,7 +10,7 @@ test('renders without crashing', () => {
   ReactDOM.unmountComponentAtNode(div)
 })
 
-describe('display on key press', () => {
+describe('display on key click', () => {
   let display
   let keyPad
 
@@ -41,14 +41,6 @@ describe('display on key press', () => {
   })
 
   describe('equals', () => {
-    test('calls calculate() and displays result', () => {
-      const { EQUALS, ADD, ONE } = keyPad
-
-      fireClickEvents([ONE, ADD, ONE, EQUALS])
-
-      expectDisplayTextContent(/^1\+1=$/, /^2$/)
-    })
-
     test('ignored while result displayed', () => {
       const { EQUALS, ADD, ONE } = keyPad
 
@@ -80,10 +72,18 @@ describe('display on key press', () => {
 
       expectDisplayTextContent(/^0=$/, /^0$/)
     })
+
+    test('appends to expression and displays result', () => {
+      const { EQUALS, ADD, ONE } = keyPad
+
+      fireClickEvents([ONE, ADD, ONE, EQUALS])
+
+      expectDisplayTextContent(/^1\+1=$/, /^2$/)
+    })
   })
 
   describe('operators', () => {
-    test('overwrites expression and concatenates to result', () => {
+    test('overwrites expression and appends to result', () => {
       const { EQUALS, ADD, ONE } = keyPad
 
       fireClickEvents([ONE, ADD, ONE, EQUALS])
@@ -95,7 +95,7 @@ describe('display on key press', () => {
       expectDisplayTextContent(/^2\+$/, /^\+$/)
     })
 
-    test('cancels negative', () => {
+    test('overwrites operator and negative', () => {
       const { MULTIPLY, ADD, SUBTRACT } = keyPad
 
       fireClickEvents([MULTIPLY, SUBTRACT])
@@ -107,7 +107,7 @@ describe('display on key press', () => {
       expectDisplayTextContent(/^0\+$/, /^\+$/)
     })
 
-    test('adds negative', () => {
+    test('appends negative', () => {
       const { MULTIPLY, SUBTRACT } = keyPad
 
       fireClickEvents([MULTIPLY, SUBTRACT])
@@ -115,7 +115,7 @@ describe('display on key press', () => {
       expectDisplayTextContent(/^0\*-$/, /^-$/)
     })
 
-    test('overwrites previous', () => {
+    test('overwrites operator', () => {
       const { MULTIPLY, ADD } = keyPad
 
       fireClickEvents([MULTIPLY])
@@ -127,7 +127,7 @@ describe('display on key press', () => {
       expectDisplayTextContent(/^0\+$/, /^\+$/)
     })
 
-    test('concatenates to digits and decimal', () => {
+    test('appends to digits and decimal', () => {
       const { ADD, DECIMAL } = keyPad
 
       fireClickEvents([ADD, DECIMAL, ADD])
@@ -159,7 +159,7 @@ describe('display on key press', () => {
   })
 
   describe('digits', () => {
-    test('has 10 digit limit', () => {
+    test('limited to 10', () => {
       const { CLEAR, DECIMAL, ONE } = keyPad
       const elevenOnes = new Array(11).fill(ONE)
 
@@ -184,7 +184,7 @@ describe('display on key press', () => {
       expectDisplayTextContent(/^1$/, /^1$/)
     })
 
-    test('concatenates to operator', () => {
+    test('appends to operator', () => {
       const { ADD, ONE } = keyPad
 
       fireClickEvents([ADD, ONE])
@@ -192,7 +192,7 @@ describe('display on key press', () => {
       expectDisplayTextContent(/^0\+1$/, /^1$/)
     })
 
-    test('prevents leading zeros', () => {
+    test('ignores leading zeros', () => {
       const { ZERO, ONE } = keyPad
 
       fireClickEvents([ZERO, ONE])
@@ -200,7 +200,7 @@ describe('display on key press', () => {
       expectDisplayTextContent(/^1$/, /^1$/)
     })
 
-    test('concatenates to digits and decimal', () => {
+    test('appends to digits and decimal', () => {
       const { DECIMAL, ONE } = keyPad
 
       fireClickEvents([DECIMAL, ONE, ONE])
