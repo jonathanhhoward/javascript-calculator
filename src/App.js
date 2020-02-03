@@ -66,19 +66,16 @@ export default class App extends React.Component {
 
     if (isEquals) return
 
-    if (isOperator) {
-      if (isNegative) {
-        this.setState(state => ({
-          expression: state.expression.slice(0, -2) + '=',
-          isOperator: false,
-          isNegative: false
-        }))
-      } else {
-        this.setState(state => ({
-          expression: state.expression.slice(0, -1) + '=',
-          isOperator: false
-        }))
-      }
+    if (isNegative) {
+      this.setState(state => ({
+        expression: state.expression.slice(0, -2) + '=',
+        isNegative: false
+      }))
+    } else if (isOperator) {
+      this.setState(state => ({
+        expression: state.expression.slice(0, -1) + '=',
+        isOperator: false
+      }))
     } else {
       this.setState(state => ({
         expression: state.expression + '='
@@ -111,17 +108,19 @@ export default class App extends React.Component {
         isEquals: false,
         isOperator: true
       }))
+    } else if (isNegative) {
+      this.setState(state => ({
+        expression: state.expression.slice(0, -2) + value,
+        input: value,
+        isOperator: true,
+        isNegative: false
+      }))
     } else if (isOperator) {
-      if (isNegative) {
-        this.setState(state => ({
-          expression: state.expression.slice(0, -2) + value,
-          input: value,
-          isNegative: false
-        }))
-      } else if (value === '-') {
+      if (value === '-') {
         this.setState(state => ({
           expression: state.expression + '-',
           input: '-',
+          isOperator: false,
           isNegative: true
         }))
       } else {
