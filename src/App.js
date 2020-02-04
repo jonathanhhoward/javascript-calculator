@@ -164,12 +164,17 @@ export default class App extends React.Component {
         input: value,
         isEquals: false
       })
-    } else if (isNegative || isOperator) {
+    } else if (isNegative) {
+      this.setState(state => ({
+        expression: state.expression + value,
+        input: value,
+        isNegative: false
+      }))
+    } else if (isOperator) {
       this.setState(state => ({
         expression: state.expression + value,
         input: value,
         isOperator: false,
-        isNegative: false
       }))
     } else if (input === '0') {
       this.setState(state => ({
