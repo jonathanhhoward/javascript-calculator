@@ -42,7 +42,7 @@ describe('display on key click', () => {
 
   describe('delete', () => {
     test('overwrites current number input with zero', () => {
-      const { DELETE, EQUALS, ADD, ONE } = keyPad
+      const { DELETE, EQUALS, ADD, SUBTRACT, ONE } = keyPad
 
       fireClickEvents([ONE, DELETE])
       expectDisplayTextContent(/^0$/, /^0$/)
@@ -53,8 +53,14 @@ describe('display on key click', () => {
       fireClickEvents([ONE, DELETE])
       expectDisplayTextContent(/^0\+0$/, /^0$/)
 
+      fireClickEvents([ADD,SUBTRACT,DELETE])
+      expectDisplayTextContent(/^0\+0\+-$/,/^-$/)
+
+      fireClickEvents([ONE,DELETE])
+      expectDisplayTextContent(/^0\+0\+-0$/,/^0$/)
+
       fireClickEvents([ONE, EQUALS, DELETE])
-      expectDisplayTextContent(/^0\+1=$/, /^1$/)
+      expectDisplayTextContent(/^0\+0\+-1=$/, /^-1$/)
     })
   })
 
