@@ -69,12 +69,12 @@ export default class App extends React.Component {
     if (isNegative) {
       this.setState(state => ({
         expression: state.expression.slice(0, -2) + equals,
-        isNegative: false
+        isNegative: !state.isNegative
       }))
     } else if (isOperator) {
       this.setState(state => ({
         expression: state.expression.slice(0, -1) + equals,
-        isOperator: false
+        isOperator: !state.isOperator
       }))
     } else {
       this.setState(state => ({
@@ -93,7 +93,7 @@ export default class App extends React.Component {
 
       return {
         input: result,
-        isEquals: true
+        isEquals: !state.isEquals
       }
     })
   }
@@ -105,23 +105,23 @@ export default class App extends React.Component {
       this.setState(state => ({
         expression: state.input + operator,
         input: operator,
-        isEquals: false,
-        isOperator: true
+        isEquals: !state.isEquals,
+        isOperator: !state.isOperator
       }))
     } else if (isNegative) {
       this.setState(state => ({
         expression: state.expression.slice(0, -2) + operator,
         input: operator,
-        isOperator: true,
-        isNegative: false
+        isNegative: !state.isNegative,
+        isOperator: !state.isOperator
       }))
     } else if (isOperator) {
       if (operator === '-') {
         this.setState(state => ({
           expression: state.expression + operator,
           input: operator,
-          isOperator: false,
-          isNegative: true
+          isNegative: !state.isNegative,
+          isOperator: !state.isOperator
         }))
       } else {
         this.setState(state => ({
@@ -133,7 +133,7 @@ export default class App extends React.Component {
       this.setState(state => ({
         expression: state.expression + operator,
         input: operator,
-        isOperator: true
+        isOperator: !state.isOperator
       }))
     }
   }
@@ -159,22 +159,22 @@ export default class App extends React.Component {
     if (isMaxDigits && !isEquals) return
 
     if (isEquals) {
-      this.setState({
+      this.setState(state => ({
         expression: digit,
         input: digit,
-        isEquals: false
-      })
+        isEquals: !state.isEquals
+      }))
     } else if (isNegative) {
       this.setState(state => ({
         expression: state.expression + digit,
         input: state.input + digit,
-        isNegative: false
+        isNegative: !state.isNegative
       }))
     } else if (isOperator) {
       this.setState(state => ({
         expression: state.expression + digit,
         input: digit,
-        isOperator: false
+        isOperator: !state.isOperator
       }))
     } else if (input === '0') {
       this.setState(state => ({
