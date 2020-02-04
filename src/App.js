@@ -30,7 +30,7 @@ export default class App extends React.Component {
         this.handleDelete()
         break
       case '=':
-        this.handleEquals()
+        this.handleEquals(value)
         break
       case '+':
       case '-':
@@ -39,7 +39,7 @@ export default class App extends React.Component {
         this.handleOperator(value)
         break
       case '.':
-        this.handleDecimal()
+        this.handleDecimal(value)
         break
       default:
         this.handleDigit(value)
@@ -61,24 +61,24 @@ export default class App extends React.Component {
     }))
   }
 
-  handleEquals = () => {
+  handleEquals = (equals) => {
     const { isEquals, isNegative, isOperator } = this.state
 
     if (isEquals) return
 
     if (isNegative) {
       this.setState(state => ({
-        expression: state.expression.slice(0, -2) + '=',
+        expression: state.expression.slice(0, -2) + equals,
         isNegative: false
       }))
     } else if (isOperator) {
       this.setState(state => ({
-        expression: state.expression.slice(0, -1) + '=',
+        expression: state.expression.slice(0, -1) + equals,
         isOperator: false
       }))
     } else {
       this.setState(state => ({
-        expression: state.expression + '='
+        expression: state.expression + equals
       }))
     }
 
@@ -98,59 +98,59 @@ export default class App extends React.Component {
     })
   }
 
-  handleOperator = (value) => {
+  handleOperator = (operator) => {
     const { isEquals, isNegative, isOperator } = this.state
 
     if (isEquals) {
       this.setState(state => ({
-        expression: state.input + value,
-        input: value,
+        expression: state.input + operator,
+        input: operator,
         isEquals: false,
         isOperator: true
       }))
     } else if (isNegative) {
       this.setState(state => ({
-        expression: state.expression.slice(0, -2) + value,
-        input: value,
+        expression: state.expression.slice(0, -2) + operator,
+        input: operator,
         isOperator: true,
         isNegative: false
       }))
     } else if (isOperator) {
-      if (value === '-') {
+      if (operator === '-') {
         this.setState(state => ({
-          expression: state.expression + value,
-          input: value,
+          expression: state.expression + operator,
+          input: operator,
           isOperator: false,
           isNegative: true
         }))
       } else {
         this.setState(state => ({
-          expression: state.expression.slice(0, -1) + value,
-          input: value
+          expression: state.expression.slice(0, -1) + operator,
+          input: operator
         }))
       }
     } else {
       this.setState(state => ({
-        expression: state.expression + value,
-        input: value,
+        expression: state.expression + operator,
+        input: operator,
         isOperator: true
       }))
     }
   }
 
-  handleDecimal = () => {
+  handleDecimal = (decimal) => {
     const { input, isEquals, isNegative, isOperator } = this.state
 
-    if (input.includes('.') && !isEquals) return
+    if (input.includes(decimal) && !isEquals) return
 
     if (input === '0' || isEquals || isNegative || isOperator) {
-      this.handleDigit('0.')
+      this.handleDigit('0' + decimal)
     } else {
-      this.handleDigit('.')
+      this.handleDigit(decimal)
     }
   }
 
-  handleDigit = (value) => {
+  handleDigit = (digit) => {
     const { input, isEquals, isNegative, isOperator } = this.state
 
     const MAX_DIGITS = 10
@@ -160,31 +160,31 @@ export default class App extends React.Component {
 
     if (isEquals) {
       this.setState({
-        expression: value,
-        input: value,
+        expression: digit,
+        input: digit,
         isEquals: false
       })
     } else if (isNegative) {
       this.setState(state => ({
-        expression: state.expression + value,
-        input: value,
+        expression: state.expression + digit,
+        input: digit,
         isNegative: false
       }))
     } else if (isOperator) {
       this.setState(state => ({
-        expression: state.expression + value,
-        input: value,
+        expression: state.expression + digit,
+        input: digit,
         isOperator: false,
       }))
     } else if (input === '0') {
       this.setState(state => ({
-        expression: state.expression.slice(0, -1) + value,
-        input: value
+        expression: state.expression.slice(0, -1) + digit,
+        input: digit
       }))
     } else {
       this.setState(state => ({
-        expression: state.expression + value,
-        input: state.input + value
+        expression: state.expression + digit,
+        input: state.input + digit
       }))
     }
   }
