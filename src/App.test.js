@@ -64,7 +64,7 @@ describe('display on key click', () => {
       expectDisplayTextContent(/^0\+0$/, /^0$/)
 
       fireClickEvents([ADD, SUBTRACT, ONE, DELETE])
-      expectDisplayTextContent(/^0\+0\+-0$/, /^0$/)
+      expectDisplayTextContent(/^0\+0\+0$/, /^0$/)
     })
   })
 
@@ -162,7 +162,7 @@ describe('display on key click', () => {
       const { SUBTRACT, ADD, EQUALS, DECIMAL } = keyPad
 
       fireClickEvents([DECIMAL, ADD, DECIMAL, ADD, SUBTRACT, DECIMAL])
-      expectDisplayTextContent(/^0\.\+0\.\+-0\.$/, /^0\.$/)
+      expectDisplayTextContent(/^0\.\+0\.\+-0\.$/, /^-0\.$/)
 
       fireClickEvents([EQUALS, DECIMAL])
       expectDisplayTextContent(/^0\.$/, /^0\.$/)
@@ -195,7 +195,7 @@ describe('display on key click', () => {
       const { SUBTRACT, ADD, ONE } = keyPad
 
       fireClickEvents([ADD, SUBTRACT, ONE])
-      expectDisplayTextContent(/^0\+-1$/, /^1$/)
+      expectDisplayTextContent(/^0\+-1$/, /^-1$/)
     })
 
     test('appends to operator', () => {

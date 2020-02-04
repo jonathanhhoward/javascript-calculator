@@ -167,7 +167,7 @@ export default class App extends React.Component {
     } else if (isNegative) {
       this.setState(state => ({
         expression: state.expression + digit,
-        input: digit,
+        input: state.input + digit,
         isNegative: false
       }))
     } else if (isOperator) {
