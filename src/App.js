@@ -51,9 +51,9 @@ export default class App extends React.Component {
   }
 
   handleDelete = () => {
-    const { isEquals, isOperator } = this.state
+    const { isEquals, isNegative, isOperator } = this.state
 
-    if (isOperator || isEquals) return
+    if (isEquals || isNegative || isOperator) return
 
     this.setState(state => ({
       expression: state.expression.slice(0, -state.input.length) + '0',
@@ -99,7 +99,7 @@ export default class App extends React.Component {
   }
 
   handleOperator = (value) => {
-    const { isEquals, isOperator, isNegative } = this.state
+    const { isEquals, isNegative, isOperator } = this.state
 
     if (isEquals) {
       this.setState(state => ({
@@ -139,11 +139,11 @@ export default class App extends React.Component {
   }
 
   handleDecimal = () => {
-    const { input, isEquals, isOperator } = this.state
+    const { input, isEquals, isNegative, isOperator } = this.state
 
     if (input.includes('.') && !isEquals) return
 
-    if (input === '0' || isOperator || isEquals) {
+    if (input === '0' || isEquals || isNegative || isOperator) {
       this.handleDigit('0.')
     } else {
       this.handleDigit('.')
@@ -151,7 +151,7 @@ export default class App extends React.Component {
   }
 
   handleDigit = (value) => {
-    const { input, isEquals, isOperator } = this.state
+    const { input, isEquals, isNegative, isOperator } = this.state
 
     const MAX_DIGITS = 10
     const isMaxDigits = (input.replace('.', '').length === MAX_DIGITS)
@@ -164,7 +164,7 @@ export default class App extends React.Component {
         input: value,
         isEquals: false
       })
-    } else if (isOperator) {
+    } else if (isNegative || isOperator) {
       this.setState(state => ({
         expression: state.expression + value,
         input: value,
