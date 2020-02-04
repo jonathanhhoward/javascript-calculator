@@ -149,12 +149,12 @@ describe('display on key click', () => {
     })
 
     test('prepends decimal with zero', () => {
-      const { ADD, EQUALS, DECIMAL } = keyPad
+      const { ADD, SUBTRACT, EQUALS, DECIMAL } = keyPad
 
-      fireClickEvents([DECIMAL, ADD, DECIMAL, EQUALS])
-      expectDisplayTextContent(/^0\.\+0\.=$/, /^0$/)
+      fireClickEvents([DECIMAL, ADD, DECIMAL, ADD, SUBTRACT, DECIMAL])
+      expectDisplayTextContent(/^0\.\+0\.\+-0\.$/, /^0\.$/)
 
-      fireClickEvents([DECIMAL])
+      fireClickEvents([EQUALS, DECIMAL])
       expectDisplayTextContent(/^0\.$/, /^0\.$/)
     })
   })
@@ -182,10 +182,10 @@ describe('display on key click', () => {
     })
 
     test('appends to negative', () => {
-      const {ADD,SUBTRACT,ONE}=keyPad
+      const { ADD, SUBTRACT, ONE } = keyPad
 
-      fireClickEvents([ADD,SUBTRACT,ONE])
-      expectDisplayTextContent(/^0\+-1$/,/^1$/)
+      fireClickEvents([ADD, SUBTRACT, ONE])
+      expectDisplayTextContent(/^0\+-1$/, /^1$/)
     })
 
     test('appends to operator', () => {
