@@ -118,8 +118,8 @@ export default class App extends React.Component {
     } else if (isOperator) {
       if (value === '-') {
         this.setState(state => ({
-          expression: state.expression + '-',
-          input: '-',
+          expression: state.expression + value,
+          input: value,
           isOperator: false,
           isNegative: true
         }))
