@@ -154,7 +154,7 @@ export default class App extends React.Component {
     const { input, isEquals, isNegative, isOperator } = this.state
 
     const MAX_DIGITS = 10
-    const isMaxDigits = (input.replace('.', '').length === MAX_DIGITS)
+    const isMaxDigits = (input.replace(/[.-]/g, '').length === MAX_DIGITS)
 
     if (isMaxDigits && !isEquals) return
 

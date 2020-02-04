@@ -171,14 +171,20 @@ describe('display on key click', () => {
 
   describe('digits', () => {
     test('limited to 10', () => {
-      const { CLEAR, DECIMAL, ONE } = keyPad
+      const { CLEAR, SUBTRACT, ADD, DECIMAL, ONE } = keyPad
       const elevenOnes = new Array(11).fill(ONE)
 
       fireClickEvents(elevenOnes)
       expectDisplayTextContent(/^1111111111$/, /^1111111111$/)
 
+      fireClickEvents([CLEAR, ADD, SUBTRACT, ...elevenOnes])
+      expectDisplayTextContent(/^0\+-1111111111$/,/^-1111111111$/)
+
       fireClickEvents([CLEAR, DECIMAL, ...elevenOnes])
-      expectDisplayTextContent(/^0.111111111$/, /^0.111111111$/)
+      expectDisplayTextContent(/^0\.111111111$/, /^0\.111111111$/)
+
+      fireClickEvents([CLEAR, ADD, SUBTRACT, DECIMAL, ...elevenOnes])
+      expectDisplayTextContent(/^0\+-0\.111111111$/, /^-0\.111111111$/)
     })
 
     test('overwrites expression and result', () => {
