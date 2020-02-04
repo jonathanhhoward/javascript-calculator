@@ -181,6 +181,13 @@ describe('display on key click', () => {
       expectDisplayTextContent(/^1$/, /^1$/)
     })
 
+    test('appends to negative', () => {
+      const {ADD,SUBTRACT,ONE}=keyPad
+
+      fireClickEvents([ADD,SUBTRACT,ONE])
+      expectDisplayTextContent(/^0\+-1$/,/^1$/)
+    })
+
     test('appends to operator', () => {
       const { ADD, ONE } = keyPad
 
