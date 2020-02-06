@@ -36,6 +36,7 @@ export default class App extends React.Component {
         this.setState(state => this.handleDelete(state))
         break
       case '=':
+        if (this.state.isEquals) break
         this.setState(state => this.handleEquals(state, value))
         this.setState(state => Equals.result(state))
         break
@@ -66,9 +67,7 @@ export default class App extends React.Component {
   }
 
   handleEquals = (state, equals) => {
-    const { isEquals, isNegative, isOperator } = state
-
-    if (isEquals) return state
+    const { isNegative, isOperator } = state
 
     if (isNegative) {
       return Equals.replaceNegative(state, equals)
