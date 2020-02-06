@@ -57,7 +57,7 @@ export default class App extends React.Component {
 
     if (isEquals || isNegative || isOperator) return
 
-    this.setState(Delete.zeroInput)
+    this.setState(state => Delete.zeroInput(state))
   }
 
   handleEquals = (equals) => {
@@ -73,7 +73,7 @@ export default class App extends React.Component {
       this.setState(state => Equals.append(state, equals))
     }
 
-    this.setState(Equals.result)
+    this.setState(state => Equals.result(state))
   }
 
   handleOperator = (operator) => {
