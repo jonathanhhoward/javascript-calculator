@@ -24,6 +24,10 @@ export default class App extends React.Component {
   handleClick = (event) => {
     const value = event.target.value
 
+    this.selectHandler(value)
+  }
+
+  selectHandler = (value) => {
     switch (value) {
       case 'AC':
         this.handleClear()
