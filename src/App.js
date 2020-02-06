@@ -1,9 +1,8 @@
 import React from 'react'
 import Display from './components/Display'
 import KeyPad from './components/KeyPad'
-import * as del from './callbacks/delete'
-import calculate from './modules/calculate'
-import setPrecision10 from './modules/setPrecision10'
+import * as Delete from './callbacks/delete'
+import * as Equals from './callbacks/equals'
 import './App.css'
 
 export default class App extends React.Component {
@@ -56,7 +55,7 @@ export default class App extends React.Component {
 
     if (isEquals || isNegative || isOperator) return
 
-    this.setState(del.zeroInput)
+    this.setState(Delete.zeroInput)
   }
 
   handleEquals = (equals) => {
@@ -65,35 +64,14 @@ export default class App extends React.Component {
     if (isEquals) return
 
     if (isNegative) {
-      this.setState(state => ({
-        expression: state.expression.slice(0, -2) + equals,
-        isNegative: !state.isNegative
-      }))
+      this.setState(state => Equals.replaceNegative(state, equals))
     } else if (isOperator) {
-      this.setState(state => ({
-        expression: state.expression.slice(0, -1) + equals,
-        isOperator: !state.isOperator
-      }))
+      this.setState(state => Equals.replaceOperator(state, equals))
     } else {
-      this.setState(state => ({
-        expression: state.expression + equals
-      }))
+      this.setState(state => Equals.append(state, equals))
     }
 
-    this.setState(state => {
-      let result
-
-      try {
-        result = setPrecision10(calculate(state.expression))
-      } catch (error) {
-        result = error.message
-      }
-
-      return {
-        input: result,
-        isEquals: !state.isEquals
-      }
-    })
+    this.setState(Equals.result)
   }
 
   handleOperator = (operator) => {
