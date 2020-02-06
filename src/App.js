@@ -43,7 +43,7 @@ export default class App extends React.Component {
       case '-':
       case '*':
       case '/':
-        this.handleOperator(value)
+        this.setState(state => this.handleOperator(state, value))
         break
       case '.':
         this.handleDecimal(value)
@@ -73,28 +73,21 @@ export default class App extends React.Component {
     if (isNegative) {
       return Equals.replaceNegative(state, equals)
     } else if (isOperator) {
-      return  Equals.replaceOperator(state, equals)
+      return Equals.replaceOperator(state, equals)
     } else {
       return Equals.append(state, equals)
     }
   }
 
-  handleOperator = (operator) => {
-    const { isEquals, isNegative, isOperator } = this.state
+  handleOperator = (state, operator) => {
+    const { isEquals, isNegative, isOperator } = state
 
-    if (isEquals) {
-      this.setState(state => Operator.appendToResult(state, operator))
-    } else if (isNegative) {
-      this.setState(state => Operator.replaceNegative(state, operator))
-    } else if (isOperator) {
-      if (operator === '-') {
-        this.setState(state => Operator.appendNegative(state, operator))
-      } else {
-        this.setState(state => Operator.replaceOperator(state, operator))
-      }
-    } else {
-      this.setState(state => Operator.append(state, operator))
-    }
+    if (isEquals) return Operator.appendToResult(state, operator)
+    else if (isNegative) return Operator.replaceNegative(state, operator)
+    else if (isOperator) return (operator === '-')
+      ? Operator.appendNegative(state, operator)
+      : Operator.replaceOperator(state, operator)
+    else return Operator.append(state, operator)
   }
 
   handleDecimal = (decimal) => {
@@ -126,7 +119,7 @@ export default class App extends React.Component {
       this.setState(state => Digit.append(state, digit))
     }
 
-    function isMaxDigits(limit) {
+    function isMaxDigits (limit) {
       return input.replace(/[.-]/g, '').length === limit
     }
   }
