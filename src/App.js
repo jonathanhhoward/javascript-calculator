@@ -3,6 +3,7 @@ import Display from './components/Display'
 import KeyPad from './components/KeyPad'
 import * as Delete from './callbacks/delete'
 import * as Equals from './callbacks/equals'
+import * as Operator from './callbacks/operator'
 import './App.css'
 
 export default class App extends React.Component {
@@ -78,39 +79,17 @@ export default class App extends React.Component {
     const { isEquals, isNegative, isOperator } = this.state
 
     if (isEquals) {
-      this.setState(state => ({
-        expression: state.input + operator,
-        input: operator,
-        isEquals: !state.isEquals,
-        isOperator: !state.isOperator
-      }))
+      this.setState(state => Operator.appendToResult(state, operator))
     } else if (isNegative) {
-      this.setState(state => ({
-        expression: state.expression.slice(0, -2) + operator,
-        input: operator,
-        isNegative: !state.isNegative,
-        isOperator: !state.isOperator
-      }))
+      this.setState(state => Operator.replaceNegative(state, operator))
     } else if (isOperator) {
       if (operator === '-') {
-        this.setState(state => ({
-          expression: state.expression + operator,
-          input: operator,
-          isNegative: !state.isNegative,
-          isOperator: !state.isOperator
-        }))
+        this.setState(state => Operator.appendNegative(state, operator))
       } else {
-        this.setState(state => ({
-          expression: state.expression.slice(0, -1) + operator,
-          input: operator
-        }))
+        this.setState(state => Operator.replaceOperator(state, operator))
       }
     } else {
-      this.setState(state => ({
-        expression: state.expression + operator,
-        input: operator,
-        isOperator: !state.isOperator
-      }))
+      this.setState(state => Operator.append(state, operator))
     }
   }
 
