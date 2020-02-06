@@ -109,10 +109,7 @@ export default class App extends React.Component {
   handleDigit = (digit) => {
     const { input, isEquals, isNegative, isOperator } = this.state
 
-    const MAX_DIGITS = 10
-    const isMaxDigits = (input.replace(/[.-]/g, '').length === MAX_DIGITS)
-
-    if (isMaxDigits && !isEquals) return
+    if (isMaxDigits(10) && !isEquals) return
 
     if (isEquals) {
       this.setState(state => Digit.replaceResult(state, digit))
@@ -124,6 +121,10 @@ export default class App extends React.Component {
       this.setState(state => Digit.replaceZero(state, digit))
     } else {
       this.setState(state => Digit.append(state, digit))
+    }
+
+    function isMaxDigits(limit) {
+      return input.replace(/[.-]/g, '').length === limit
     }
   }
 
