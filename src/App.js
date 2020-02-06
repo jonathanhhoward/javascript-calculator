@@ -36,7 +36,8 @@ export default class App extends React.Component {
         this.setState(state => this.handleDelete(state))
         break
       case '=':
-        this.handleEquals(value)
+        this.setState(state => this.handleEquals(state, value))
+        this.setState(state => Equals.result(state))
         break
       case '+':
       case '-':
@@ -64,20 +65,18 @@ export default class App extends React.Component {
     return Delete.zeroInput(state)
   }
 
-  handleEquals = (equals) => {
-    const { isEquals, isNegative, isOperator } = this.state
+  handleEquals = (state, equals) => {
+    const { isEquals, isNegative, isOperator } = state
 
-    if (isEquals) return
+    if (isEquals) return state
 
     if (isNegative) {
-      this.setState(state => Equals.replaceNegative(state, equals))
+      return Equals.replaceNegative(state, equals)
     } else if (isOperator) {
-      this.setState(state => Equals.replaceOperator(state, equals))
+      return  Equals.replaceOperator(state, equals)
     } else {
-      this.setState(state => Equals.append(state, equals))
+      return Equals.append(state, equals)
     }
-
-    this.setState(state => Equals.result(state))
   }
 
   handleOperator = (operator) => {
