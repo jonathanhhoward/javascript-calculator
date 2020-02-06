@@ -4,6 +4,7 @@ import KeyPad from './components/KeyPad'
 import * as Delete from './callbacks/delete'
 import * as Equals from './callbacks/equals'
 import * as Operator from './callbacks/operator'
+import * as Digit from './callbacks/digit'
 import './App.css'
 
 export default class App extends React.Component {
@@ -114,33 +115,15 @@ export default class App extends React.Component {
     if (isMaxDigits && !isEquals) return
 
     if (isEquals) {
-      this.setState(state => ({
-        expression: digit,
-        input: digit,
-        isEquals: !state.isEquals
-      }))
+      this.setState(state => Digit.replaceResult(state, digit))
     } else if (isNegative) {
-      this.setState(state => ({
-        expression: state.expression + digit,
-        input: state.input + digit,
-        isNegative: !state.isNegative
-      }))
+      this.setState(state => Digit.appendToNegative(state, digit))
     } else if (isOperator) {
-      this.setState(state => ({
-        expression: state.expression + digit,
-        input: digit,
-        isOperator: !state.isOperator
-      }))
+      this.setState(state => Digit.appendToOperator(state, digit))
     } else if (input === '0') {
-      this.setState(state => ({
-        expression: state.expression.slice(0, -1) + digit,
-        input: digit
-      }))
+      this.setState(state => Digit.replaceZero(state, digit))
     } else {
-      this.setState(state => ({
-        expression: state.expression + digit,
-        input: state.input + digit
-      }))
+      this.setState(state => Digit.append(state, digit))
     }
   }
 
