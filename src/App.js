@@ -1,6 +1,7 @@
 import React from 'react'
 import Display from './components/Display'
 import KeyPad from './components/KeyPad'
+import * as del from './callbacks/delete'
 import calculate from './modules/calculate'
 import setPrecision10 from './modules/setPrecision10'
 import './App.css'
@@ -55,10 +56,7 @@ export default class App extends React.Component {
 
     if (isEquals || isNegative || isOperator) return
 
-    this.setState(state => ({
-      expression: state.expression.slice(0, -state.input.length) + '0',
-      input: '0'
-    }))
+    this.setState(del.zeroInput)
   }
 
   handleEquals = (equals) => {
