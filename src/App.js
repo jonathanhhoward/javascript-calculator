@@ -47,10 +47,10 @@ export default class App extends React.Component {
         this.setState(state => this.handleOperator(state, value))
         break
       case '.':
-        this.handleDecimal(value)
+        this.setState(state => this.handleDecimal(state, value))
         break
       default:
-        this.handleDigit(value)
+        this.setState(state => this.handleDigit(state, value))
     }
   }
 
@@ -94,36 +94,34 @@ export default class App extends React.Component {
     }
   }
 
-  handleDecimal = (decimal) => {
-    const { input, isEquals, isNegative, isOperator } = this.state
+  handleDecimal = (state, decimal) => {
+    const { input, isEquals, isNegative, isOperator } = state
 
     if (input.includes(decimal) && !isEquals) return
 
-    if (input === '0' || isEquals || isNegative || isOperator) {
-      this.handleDigit('0' + decimal)
-    } else {
-      this.handleDigit(decimal)
-    }
+    return (input === '0' || isEquals || isNegative || isOperator)
+      ? this.handleDigit(state, '0' + decimal)
+      : this.handleDigit(state, decimal)
   }
 
-  handleDigit = (digit) => {
-    const { input, isEquals, isNegative, isOperator } = this.state
+  handleDigit = (state, digit) => {
+    const { input, isEquals, isNegative, isOperator } = state
 
-    if (isMaxDigits(10) && !isEquals) return
+    if (isMaxDigits(input,10) && !isEquals) return
 
     if (isEquals) {
-      this.setState(state => Digit.replaceResult(state, digit))
+      return Digit.replaceResult(state, digit)
     } else if (isNegative) {
-      this.setState(state => Digit.appendToNegative(state, digit))
+      return Digit.appendToNegative(state, digit)
     } else if (isOperator) {
-      this.setState(state => Digit.appendToOperator(state, digit))
+      return Digit.appendToOperator(state, digit)
     } else if (input === '0') {
-      this.setState(state => Digit.replaceZero(state, digit))
+      return Digit.replaceZero(state, digit)
     } else {
-      this.setState(state => Digit.append(state, digit))
+      return Digit.append(state, digit)
     }
 
-    function isMaxDigits (limit) {
+    function isMaxDigits (input, limit) {
       return input.replace(/[.-]/g, '').length === limit
     }
   }
