@@ -1,6 +1,7 @@
 import React from 'react'
 import Display from './components/Display'
 import KeyPad from './components/KeyPad'
+import initialState from './modules/initial-state'
 import evaluateExpression from './modules/evaluate-expression'
 import handleDelete from './handlers/handle-delete'
 import handleEquals from './handlers/handle-equals'
@@ -10,18 +11,9 @@ import handleDigit from './handlers/handle-digit'
 import './App.css'
 
 export default class App extends React.Component {
-  initialState = {
-    expression: '0',
-    input: '0',
-    isResult: false,
-    isEquals: false,
-    isNegative: false,
-    isOperator: false
-  }
-
   constructor (props) {
     super(props)
-    this.state = this.initialState
+    this.state = initialState()
   }
 
   componentDidUpdate (prevProps, prevState, snapshot) {
@@ -39,7 +31,7 @@ export default class App extends React.Component {
   selectHandler = (state, value) => {
     switch (value) {
       case 'AC':
-        return this.initialState
+        return initialState()
       case 'C':
         return handleDelete(state)
       case '=':
