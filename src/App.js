@@ -5,6 +5,7 @@ import handleDelete from './handlers/handle-delete'
 import handleEquals from './handlers/handle-equals'
 import * as Equals from './callbacks/equals'
 import handleOperator from './handlers/handle-operator'
+import handleDecimal from './handlers/handle-decimal'
 import handleDigit from './handlers/handle-digit'
 import './App.css'
 
@@ -48,21 +49,11 @@ export default class App extends React.Component {
         this.setState(state => handleOperator(state, value))
         break
       case '.':
-        this.setState(state => this.handleDecimal(state, value))
+        this.setState(state => handleDecimal(state, value))
         break
       default:
         this.setState(state => handleDigit(state, value))
     }
-  }
-
-  handleDecimal = (state, decimal) => {
-    const { input, isEquals, isNegative, isOperator } = state
-
-    if (input.includes(decimal) && !isEquals) return
-
-    return (input === '0' || isEquals || isNegative || isOperator)
-      ? handleDigit(state, '0' + decimal)
-      : handleDigit(state, decimal)
   }
 
   render () {
