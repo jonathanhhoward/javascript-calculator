@@ -1,7 +1,7 @@
 export default function handleOperator (state, operator) {
-  const { isEquals, isNegative, isOperator } = state
+  const { isResult, isNegative, isOperator } = state
 
-  if (isEquals) {
+  if (isResult) {
     return appendToResult(state, operator)
   } else if (isNegative) {
     return replaceNegative(state, operator)
@@ -17,7 +17,7 @@ export default function handleOperator (state, operator) {
 const appendToResult = (state, operator) => ({
   expression: state.input + operator,
   input: operator,
-  isEquals: !state.isEquals,
+  isResult: !state.isResult,
   isOperator: !state.isOperator
 })
 
