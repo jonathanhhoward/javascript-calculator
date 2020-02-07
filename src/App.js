@@ -5,7 +5,7 @@ import handleDelete from './handlers/handle-delete'
 import handleEquals from './handlers/handle-equals'
 import * as Equals from './callbacks/equals'
 import handleOperator from './handlers/handle-operator'
-import * as Digit from './callbacks/digit'
+import handleDigit from './handlers/handle-digit'
 import './App.css'
 
 export default class App extends React.Component {
@@ -51,7 +51,7 @@ export default class App extends React.Component {
         this.setState(state => this.handleDecimal(state, value))
         break
       default:
-        this.setState(state => this.handleDigit(state, value))
+        this.setState(state => handleDigit(state, value))
     }
   }
 
@@ -61,30 +61,8 @@ export default class App extends React.Component {
     if (input.includes(decimal) && !isEquals) return
 
     return (input === '0' || isEquals || isNegative || isOperator)
-      ? this.handleDigit(state, '0' + decimal)
-      : this.handleDigit(state, decimal)
-  }
-
-  handleDigit = (state, digit) => {
-    const { input, isEquals, isNegative, isOperator } = state
-
-    if (isMaxDigits(input,10) && !isEquals) return
-
-    if (isEquals) {
-      return Digit.replaceResult(state, digit)
-    } else if (isNegative) {
-      return Digit.appendToNegative(state, digit)
-    } else if (isOperator) {
-      return Digit.appendToOperator(state, digit)
-    } else if (input === '0') {
-      return Digit.replaceZero(state, digit)
-    } else {
-      return Digit.append(state, digit)
-    }
-
-    function isMaxDigits (input, limit) {
-      return input.replace(/[.-]/g, '').length === limit
-    }
+      ? handleDigit(state, '0' + decimal)
+      : handleDigit(state, decimal)
   }
 
   render () {
