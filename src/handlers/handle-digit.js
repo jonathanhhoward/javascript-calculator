@@ -3,17 +3,15 @@ export default function handleDigit (state, digit) {
 
   if (isMaxDigits(input,10) && !isResult) return state
 
-  if (isResult) {
-    return replaceResult(state, digit)
-  } else if (isNegative) {
-    return appendToNegative(state, digit)
-  } else if (isOperator) {
-    return appendToOperator(state, digit)
-  } else if (input === '0') {
-    return replaceZero(state, digit)
-  } else {
-    return append(state, digit)
-  }
+  if (isResult) return replaceResult(state, digit)
+
+  if (isNegative) return appendToNegative(state, digit)
+
+  if (isOperator) return appendToOperator(state, digit)
+
+  if (input === '0') return replaceZero(state, digit)
+
+  return append(state, digit)
 
   function isMaxDigits (input, limit) {
     return input.replace(/[.-]/g, '').length === limit
