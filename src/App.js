@@ -4,7 +4,7 @@ import KeyPad from './components/KeyPad'
 import handleDelete from './handlers/handle-delete'
 import handleEquals from './handlers/handle-equals'
 import * as Equals from './callbacks/equals'
-import * as Operator from './callbacks/operator'
+import handleOperator from './handlers/handle-operator'
 import * as Digit from './callbacks/digit'
 import './App.css'
 
@@ -45,29 +45,13 @@ export default class App extends React.Component {
       case '-':
       case '*':
       case '/':
-        this.setState(state => this.handleOperator(state, value))
+        this.setState(state => handleOperator(state, value))
         break
       case '.':
         this.setState(state => this.handleDecimal(state, value))
         break
       default:
         this.setState(state => this.handleDigit(state, value))
-    }
-  }
-
-  handleOperator = (state, operator) => {
-    const { isEquals, isNegative, isOperator } = state
-
-    if (isEquals) {
-      return Operator.appendToResult(state, operator)
-    } else if (isNegative) {
-      return Operator.replaceNegative(state, operator)
-    } else if (isOperator) {
-      return (operator === '-')
-        ? Operator.appendNegative(state, operator)
-        : Operator.replaceOperator(state, operator)
-    } else {
-      return Operator.append(state, operator)
     }
   }
 
