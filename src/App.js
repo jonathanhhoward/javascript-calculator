@@ -1,9 +1,9 @@
 import React from 'react'
 import Display from './components/Display'
 import KeyPad from './components/KeyPad'
+import evaluateExpression from './modules/evaluate-expression'
 import handleDelete from './handlers/handle-delete'
 import handleEquals from './handlers/handle-equals'
-import * as Equals from './callbacks/equals'
 import handleOperator from './handlers/handle-operator'
 import handleDecimal from './handlers/handle-decimal'
 import handleDigit from './handlers/handle-digit'
@@ -13,6 +13,7 @@ export default class App extends React.Component {
   initialState = {
     expression: '0',
     input: '0',
+    isResult: false,
     isEquals: false,
     isNegative: false,
     isOperator: false
@@ -21,6 +22,12 @@ export default class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = this.initialState
+  }
+
+  componentDidUpdate (prevProps, prevState, snapshot) {
+    if (this.state.isEquals) {
+      this.setState(state => evaluateExpression(state))
+    }
   }
 
   handleClick = (event) => {
@@ -38,9 +45,7 @@ export default class App extends React.Component {
         this.setState(state => handleDelete(state))
         break
       case '=':
-        if (this.state.isEquals) break
         this.setState(state => handleEquals(state, value))
-        this.setState(state => Equals.result(state))
         break
       case '+':
       case '-':
