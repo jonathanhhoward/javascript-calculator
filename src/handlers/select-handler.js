@@ -1,4 +1,4 @@
-import initialState from '../modules/initial-state'
+import handleCLear from './handle-clear'
 import handleDelete from './handle-delete'
 import handleEquals from './handle-equals'
 import handleOperator from './handle-operator'
@@ -8,7 +8,7 @@ import handleDigit from './handle-digit'
 export default function selectHandler (state, value) {
   switch (value) {
     case 'AC':
-      return initialState()
+      return handleCLear()
     case 'C':
       return handleDelete(state)
     case '=':
