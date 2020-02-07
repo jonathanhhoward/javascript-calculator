@@ -2,6 +2,7 @@ import React from 'react'
 import Display from './components/Display'
 import KeyPad from './components/KeyPad'
 import handleDelete from './handlers/handle-delete'
+import handleEquals from './handlers/handle-equals'
 import * as Equals from './callbacks/equals'
 import * as Operator from './callbacks/operator'
 import * as Digit from './callbacks/digit'
@@ -37,7 +38,7 @@ export default class App extends React.Component {
         break
       case '=':
         if (this.state.isEquals) break
-        this.setState(state => this.handleEquals(state, value))
+        this.setState(state => handleEquals(state, value))
         this.setState(state => Equals.result(state))
         break
       case '+':
@@ -51,18 +52,6 @@ export default class App extends React.Component {
         break
       default:
         this.setState(state => this.handleDigit(state, value))
-    }
-  }
-
-  handleEquals = (state, equals) => {
-    const { isNegative, isOperator } = state
-
-    if (isNegative) {
-      return Equals.replaceNegative(state, equals)
-    } else if (isOperator) {
-      return Equals.replaceOperator(state, equals)
-    } else {
-      return Equals.append(state, equals)
     }
   }
 
