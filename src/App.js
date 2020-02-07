@@ -13,9 +13,7 @@ export default class App extends React.Component {
   }
 
   componentDidUpdate (prevProps, prevState, snapshot) {
-    if (this.state.isEquals) {
-      this.setState(state => getResult(state))
-    }
+    this.state.isEquals && this.setState(getResult)
   }
 
   handleClick = (event) => {
