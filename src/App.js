@@ -30,7 +30,7 @@ export default class App extends React.Component {
   selectHandler = (value) => {
     switch (value) {
       case 'AC':
-        this.setState(this.handleClear())
+        this.setState(this.initialState)
         break
       case 'C':
         this.setState(state => this.handleDelete(state))
@@ -52,10 +52,6 @@ export default class App extends React.Component {
       default:
         this.setState(state => this.handleDigit(state, value))
     }
-  }
-
-  handleClear = () => {
-    return this.initialState
   }
 
   handleDelete = (state) => {
