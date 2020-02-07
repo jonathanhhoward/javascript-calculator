@@ -1,23 +1,49 @@
-import * as Digit from '../callbacks/digit'
-
 export default function handleDigit (state, digit) {
   const { input, isEquals, isNegative, isOperator } = state
 
-  if (isMaxDigits(input,10) && !isEquals) return
+  if (isMaxDigits(input,10) && !isEquals) return state
 
   if (isEquals) {
-    return Digit.replaceResult(state, digit)
+    return replaceResult(state, digit)
   } else if (isNegative) {
-    return Digit.appendToNegative(state, digit)
+    return appendToNegative(state, digit)
   } else if (isOperator) {
-    return Digit.appendToOperator(state, digit)
+    return appendToOperator(state, digit)
   } else if (input === '0') {
-    return Digit.replaceZero(state, digit)
+    return replaceZero(state, digit)
   } else {
-    return Digit.append(state, digit)
+    return append(state, digit)
   }
 
   function isMaxDigits (input, limit) {
     return input.replace(/[.-]/g, '').length === limit
   }
 }
+
+const replaceResult = (state, digit) => ({
+  expression: digit,
+  input: digit,
+  isEquals: !state.isEquals
+})
+
+const appendToNegative = (state, digit) => ({
+  expression: state.expression + digit,
+  input: state.input + digit,
+  isNegative: !state.isNegative
+})
+
+const appendToOperator = (state, digit) => ({
+  expression: state.expression + digit,
+  input: digit,
+  isOperator: !state.isOperator
+})
+
+const replaceZero = (state, digit) => ({
+  expression: state.expression.slice(0, -1) + digit,
+  input: digit
+})
+
+const append = (state, digit) => ({
+  expression: state.expression + digit,
+  input: state.input + digit
+})
