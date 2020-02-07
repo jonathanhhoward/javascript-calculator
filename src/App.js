@@ -3,11 +3,7 @@ import Display from './components/Display'
 import KeyPad from './components/KeyPad'
 import initialState from './modules/initial-state'
 import evaluateExpression from './modules/evaluate-expression'
-import handleDelete from './handlers/handle-delete'
-import handleEquals from './handlers/handle-equals'
-import handleOperator from './handlers/handle-operator'
-import handleDecimal from './handlers/handle-decimal'
-import handleDigit from './handlers/handle-digit'
+import selectHandler from './handlers/select-handler'
 import './App.css'
 
 export default class App extends React.Component {
@@ -25,27 +21,7 @@ export default class App extends React.Component {
   handleClick = (event) => {
     const value = event.target.value
 
-    this.setState(state => this.selectHandler(state, value))
-  }
-
-  selectHandler = (state, value) => {
-    switch (value) {
-      case 'AC':
-        return initialState()
-      case 'C':
-        return handleDelete(state)
-      case '=':
-        return handleEquals(state, value)
-      case '+':
-      case '-':
-      case '*':
-      case '/':
-        return handleOperator(state, value)
-      case '.':
-        return handleDecimal(state, value)
-      default:
-        return handleDigit(state, value)
-    }
+    this.setState(state => selectHandler(state, value))
   }
 
   render () {
