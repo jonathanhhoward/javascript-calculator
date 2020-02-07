@@ -2,7 +2,7 @@ import React from 'react'
 import Display from './components/Display'
 import KeyPad from './components/KeyPad'
 import initialState from './modules/initial-state'
-import evaluateExpression from './modules/evaluate-expression'
+import getResult from './modules/get-result'
 import selectHandler from './handlers/select-handler'
 import './App.css'
 
@@ -14,7 +14,7 @@ export default class App extends React.Component {
 
   componentDidUpdate (prevProps, prevState, snapshot) {
     if (this.state.isEquals) {
-      this.setState(state => evaluateExpression(state))
+      this.setState(state => getResult(state))
     }
   }
 

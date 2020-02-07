@@ -1,7 +1,7 @@
 import setPrecision10 from './setPrecision10'
 import calculate from './calculate'
 
-export default function evaluateExpression (state) {
+export default function getResult (state) {
   let result
 
   try {
