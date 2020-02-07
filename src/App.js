@@ -33,31 +33,26 @@ export default class App extends React.Component {
   handleClick = (event) => {
     const value = event.target.value
 
-    this.selectHandler(value)
+    this.setState(state => this.selectHandler(state, value))
   }
 
-  selectHandler = (value) => {
+  selectHandler = (state, value) => {
     switch (value) {
       case 'AC':
-        this.setState(this.initialState)
-        break
+        return this.initialState
       case 'C':
-        this.setState(state => handleDelete(state))
-        break
+        return handleDelete(state)
       case '=':
-        this.setState(state => handleEquals(state, value))
-        break
+        return handleEquals(state, value)
       case '+':
       case '-':
       case '*':
       case '/':
-        this.setState(state => handleOperator(state, value))
-        break
+        return handleOperator(state, value)
       case '.':
-        this.setState(state => handleDecimal(state, value))
-        break
+        return handleDecimal(state, value)
       default:
-        this.setState(state => handleDigit(state, value))
+        return handleDigit(state, value)
     }
   }
 
