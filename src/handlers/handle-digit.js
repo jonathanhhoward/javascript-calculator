@@ -14,7 +14,7 @@ export default function handleDigit (state, digit) {
   return append(state, digit)
 
   function isMaxDigits (input, limit) {
-    return input.replace(/[.-]/g, '').length === limit
+    return (input.replace(/[.-]/g, '').length === limit)
   }
 }
 
