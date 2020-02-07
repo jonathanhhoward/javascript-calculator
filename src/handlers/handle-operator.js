@@ -1,17 +1,15 @@
 export default function handleOperator (state, operator) {
   const { isResult, isNegative, isOperator } = state
 
-  if (isResult) {
-    return appendToResult(state, operator)
-  } else if (isNegative) {
-    return replaceNegative(state, operator)
-  } else if (isOperator) {
-    return (operator === '-')
-      ? appendNegative(state, operator)
-      : replaceOperator(state, operator)
-  } else {
-    return append(state, operator)
-  }
+  if (isResult) return appendToResult(state, operator)
+
+  if (isNegative) return replaceNegative(state, operator)
+
+  if (isOperator) return (operator === '-')
+    ? appendNegative(state, operator)
+    : replaceOperator(state, operator)
+
+  return append(state, operator)
 }
 
 const appendToResult = (state, operator) => ({
