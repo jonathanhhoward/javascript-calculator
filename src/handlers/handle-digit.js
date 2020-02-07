@@ -1,9 +1,9 @@
 export default function handleDigit (state, digit) {
-  const { input, isEquals, isNegative, isOperator } = state
+  const { input, isResult, isNegative, isOperator } = state
 
-  if (isMaxDigits(input,10) && !isEquals) return state
+  if (isMaxDigits(input,10) && !isResult) return state
 
-  if (isEquals) {
+  if (isResult) {
     return replaceResult(state, digit)
   } else if (isNegative) {
     return appendToNegative(state, digit)
@@ -23,7 +23,7 @@ export default function handleDigit (state, digit) {
 const replaceResult = (state, digit) => ({
   expression: digit,
   input: digit,
-  isEquals: !state.isEquals
+  isResult: !state.isResult
 })
 
 const appendToNegative = (state, digit) => ({
