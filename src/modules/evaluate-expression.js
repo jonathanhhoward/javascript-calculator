@@ -1,7 +1,7 @@
-import setPrecision10 from '../modules/setPrecision10'
-import calculate from '../modules/calculate'
+import setPrecision10 from './setPrecision10'
+import calculate from './calculate'
 
-export const result = state => {
+export default function evaluateExpression (state) {
   let result
 
   try {
@@ -12,6 +12,7 @@ export const result = state => {
 
   return {
     input: result,
+    isResult: !state.isResult,
     isEquals: !state.isEquals
   }
 }
