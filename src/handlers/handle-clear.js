@@ -1,5 +1,5 @@
 import initialState from '../modules/initial-state'
 
-export default function handleCLear () {
+export default function handleClear () {
   return initialState()
 }
