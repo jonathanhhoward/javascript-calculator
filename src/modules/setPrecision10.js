@@ -12,9 +12,7 @@ export default function setPrecision10 (number) {
 
   const precision10 = Number(number).toPrecision(10)
 
-  if (absNumber < 1e-6 || 1e+10 <= absNumber) {
-    return Number(precision10).toExponential()
-  } else {
-    return Number(precision10).toString()
-  }
+  return (absNumber < 1e-6 || 1e+10 <= absNumber)
+    ? Number(precision10).toExponential()
+    : Number(precision10).toString()
 }
