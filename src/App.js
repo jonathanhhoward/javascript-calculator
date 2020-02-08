@@ -23,11 +23,9 @@ export default class App extends React.Component {
   }
 
   render () {
-    const { expression, input } = this.state
-
     return (
       <div className="App">
-        <Display expression={expression} input={input}/>
+        <Display expression={this.state.expression} input={this.state.input}/>
         <KeyPad onClick={this.handleClick}/>
       </div>
     )

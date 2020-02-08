@@ -1,17 +1,15 @@
 import React from 'react'
 
 export default function Key (props) {
-  const { obj, onClick } = props
-
   return (
     <button
-      className={'Key ' + obj.class}
-      id={obj.id}
-      onClick={onClick}
-      type="button"
-      value={obj.value}
+      className={'Key ' + props.keyData.class}
+      id={props.keyData.id}
+      onClick={props.onClick}
+      type={'button'}
+      value={props.keyData.value}
     >
-      {obj.value}
+      {props.keyData.value}
     </button>
   )
 }
