@@ -6,8 +6,8 @@ import './KeyPad.css'
 export default function KeyPad (props) {
   return (
     <div className="KeyPad">
-      {keys().map(obj => (
-        <Key key={obj.id} obj={obj} onClick={props.onClick}/>
+      {keys().map(data => (
+        <Key key={data.id} keyData={data} onClick={props.onClick}/>
       ))}
     </div>
   )
