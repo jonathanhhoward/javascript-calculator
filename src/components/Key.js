@@ -6,7 +6,7 @@ export default function Key (props) {
       className={'Key ' + props.keyData.class}
       id={props.keyData.id}
       onClick={props.onClick}
-      type={'button'}
+      type="button"
       value={props.keyData.value}
     >
       {props.keyData.value}
