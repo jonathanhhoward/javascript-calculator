@@ -4,21 +4,22 @@ import handleEquals from './handle-equals'
 import handleOperator from './handle-operator'
 import handleDecimal from './handle-decimal'
 import handleDigit from './handle-digit'
+import * as KEY from '../modules/key-constants'
 
 export default function selectHandler (state, value) {
   switch (value) {
-    case 'AC':
+    case KEY.CLEAR:
       return handleClear()
-    case 'C':
+    case KEY.DELETE:
       return handleDelete(state)
-    case '=':
+    case KEY.EQUALS:
       return handleEquals(state, value)
-    case '+':
-    case '-':
-    case '*':
-    case '/':
+    case KEY.ADD:
+    case KEY.SUBTRACT:
+    case KEY.MULTIPLY:
+    case KEY.DIVIDE:
       return handleOperator(state, value)
-    case '.':
+    case KEY.DECIMAL:
       return handleDecimal(state, value)
     default:
       return handleDigit(state, value)
