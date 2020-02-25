@@ -4,7 +4,6 @@ export default function initialState () {
     input: '0',
     isResult: false,
     isEquals: false,
-    isNegative: false,
     isOperator: false
   }
 }
