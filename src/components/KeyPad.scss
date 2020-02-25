@@ -6,7 +6,7 @@
           "sev eig nin del cle"
           "fou fiv six sub div"
           "one two thr add mul"
-          "zer zer dec equ equ";
+          "neg zer dec equ equ";
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: 24.2%;
   gap: 1%;
@@ -17,7 +17,7 @@
             "sev eig nin sub"
             "fou fiv six add"
             "one two thr equ"
-            "zer zer dec equ";
+            "neg zer dec equ";
     grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 19.2%;
   }
@@ -78,8 +78,8 @@
 }
 
 $keys: "clear", "delete", "divide", "multiply", "subtract", "add", "equals",
-"one", "two", "three", "four", "five", "six", "seven", "eight", "nine",
-"zero", "decimal";
+"negate", "decimal", "one", "two", "three", "four", "five", "six", "seven",
+"eight", "nine", "zero";
 
 @each $key in $keys {
   ##{$key} {

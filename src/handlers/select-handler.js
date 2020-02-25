@@ -2,6 +2,7 @@ import handleClear from './handle-clear'
 import handleDelete from './handle-delete'
 import handleEquals from './handle-equals'
 import handleOperator from './handle-operator'
+import handleNegate from './handle-negate'
 import handleDecimal from './handle-decimal'
 import handleDigit from './handle-digit'
 import * as KEY from '../modules/key-constants'
@@ -19,6 +20,8 @@ export default function selectHandler (state, value) {
     case KEY.MULTIPLY:
     case KEY.DIVIDE:
       return handleOperator(state, value)
+    case KEY.NEGATE:
+      return handleNegate(state, value)
     case KEY.DECIMAL:
       return handleDecimal(state, value)
     default:

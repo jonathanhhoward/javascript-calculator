@@ -11,6 +11,7 @@ const keysData = [
   { id: 'subtract', class: 'operator', value: KEY.SUBTRACT },
   { id: 'add', class: 'operator', value: KEY.ADD },
   { id: 'equals', class: 'equals', value: KEY.EQUALS },
+  { id: 'negate', class: 'digit', value: KEY.NEGATE },
   { id: 'decimal', class: 'digit', value: KEY.DECIMAL },
   { id: 'zero', class: 'digit', value: KEY.ZERO },
   { id: 'one', class: 'digit', value: KEY.ONE },
