@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
+import * as KEY from './modules/key-constants'
 import App from './App'
 
 test('renders without crashing', () => {
@@ -25,31 +26,32 @@ describe('display on key click', () => {
 
   beforeEach(() => {
     const { getByText, getAllByText } = render(<App/>)
-    const zeros = getAllByText('0')
+    const zeros = getAllByText(KEY.ZERO)
     const EXPRESSION = zeros[0]
     const INPUT = zeros[1]
-    const CLEAR = getByText('AC')
-    const DELETE = getByText('C')
-    const DIVIDE = getByText('/')
-    const MULTIPLY = getByText('*')
-    const SUBTRACT = getByText('-')
-    const ADD = getByText('+')
-    const EQUALS = getByText('=')
-    const DECIMAL = getByText('.')
+    const CLEAR = getByText(KEY.CLEAR)
+    const DELETE = getByText(KEY.DELETE)
+    const DIVIDE = getByText(KEY.DIVIDE)
+    const MULTIPLY = getByText(KEY.MULTIPLY)
+    const SUBTRACT = getByText(KEY.SUBTRACT)
+    const ADD = getByText(KEY.ADD)
+    const EQUALS = getByText(KEY.EQUALS)
+    const NEGATE = getByText(KEY.NEGATE)
+    const DECIMAL = getByText(KEY.DECIMAL)
     const ZERO = zeros[2]
-    const ONE = getByText('1')
-    const TWO = getByText('2')
-    const THREE = getByText('3')
-    const FOUR = getByText('4')
-    const FIVE = getByText('5')
-    const SIX = getByText('6')
-    const SEVEN = getByText('7')
-    const EIGHT = getByText('8')
-    const NINE = getByText('9')
+    const ONE = getByText(KEY.ONE)
+    const TWO = getByText(KEY.TWO)
+    const THREE = getByText(KEY.THREE)
+    const FOUR = getByText(KEY.FOUR)
+    const FIVE = getByText(KEY.FIVE)
+    const SIX = getByText(KEY.SIX)
+    const SEVEN = getByText(KEY.SEVEN)
+    const EIGHT = getByText(KEY.EIGHT)
+    const NINE = getByText(KEY.NINE)
 
     display = { EXPRESSION, INPUT }
     keyPad = {
-      CLEAR, DELETE, DIVIDE, MULTIPLY, SUBTRACT, ADD, EQUALS, DECIMAL,
+      CLEAR, DELETE, DIVIDE, MULTIPLY, SUBTRACT, ADD, EQUALS, NEGATE, DECIMAL,
       ZERO, ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE
     }
   })
