@@ -55,30 +55,24 @@ describe('display on key click', () => {
   })
 
   describe('delete', () => {
-    test('ignores equals, negative with operator, and operator', () => {
-      const { DELETE, SUBTRACT, ADD, EQUALS, ONE } = keyPad
+    test('ignores equals and operator', () => {
+      const { DELETE, ADD, EQUALS, ONE } = keyPad
 
       fireClickEvents([ONE, ADD, DELETE])
       expectDisplayTextContent(/^1\+$/, /^\+$/)
-
-      fireClickEvents([SUBTRACT, DELETE])
-      expectDisplayTextContent(/^1\+-$/, /^-$/)
 
       fireClickEvents([EQUALS, DELETE])
       expectDisplayTextContent(/^1=$/, /^1$/)
     })
 
     test('overwrites current number input with zero', () => {
-      const { DELETE, SUBTRACT, ADD, ONE } = keyPad
+      const { DELETE, ADD, ONE } = keyPad
 
       fireClickEvents([ONE, DELETE])
       expectDisplayTextContent(/^0$/, /^0$/)
 
       fireClickEvents([ADD, ONE, DELETE])
       expectDisplayTextContent(/^0\+0$/, /^0$/)
-
-      fireClickEvents([ADD, SUBTRACT, ONE, DELETE])
-      expectDisplayTextContent(/^0\+0\+0$/, /^0$/)
     })
   })
 
@@ -88,16 +82,6 @@ describe('display on key click', () => {
 
       fireClickEvents([ONE, ADD, ONE, EQUALS, EQUALS])
       expectDisplayTextContent(/^1\+1=$/, /^2$/)
-    })
-
-    test('overwrites operator and negative', () => {
-      const { SUBTRACT, ADD, EQUALS } = keyPad
-
-      fireClickEvents([ADD, SUBTRACT])
-      expectDisplayTextContent(/^0\+-$/, /^-$/)
-
-      fireClickEvents([EQUALS])
-      expectDisplayTextContent(/^0=$/, /^0$/)
     })
 
     test('overwrites operator', () => {
@@ -129,23 +113,6 @@ describe('display on key click', () => {
       expectDisplayTextContent(/^2\+$/, /^\+$/)
     })
 
-    test('overwrites operator and negative', () => {
-      const { MULTIPLY, SUBTRACT, ADD } = keyPad
-
-      fireClickEvents([MULTIPLY, SUBTRACT])
-      expectDisplayTextContent(/^0\*-$/, /^-$/)
-
-      fireClickEvents([ADD])
-      expectDisplayTextContent(/^0\+$/, /^\+$/)
-    })
-
-    test('appends negative', () => {
-      const { MULTIPLY, SUBTRACT } = keyPad
-
-      fireClickEvents([MULTIPLY, SUBTRACT])
-      expectDisplayTextContent(/^0\*-$/, /^-$/)
-    })
-
     test('overwrites operator', () => {
       const { MULTIPLY, ADD } = keyPad
 
@@ -173,10 +140,10 @@ describe('display on key click', () => {
     })
 
     test('prepends decimal with zero', () => {
-      const { SUBTRACT, ADD, EQUALS, DECIMAL } = keyPad
+      const { ADD, EQUALS, DECIMAL } = keyPad
 
-      fireClickEvents([DECIMAL, ADD, DECIMAL, ADD, SUBTRACT, DECIMAL])
-      expectDisplayTextContent(/^0\.\+0\.\+-0\.$/, /^-0\.$/)
+      fireClickEvents([DECIMAL, ADD, DECIMAL])
+      expectDisplayTextContent(/^0\.\+0\.$/, /^0\.$/)
 
       fireClickEvents([EQUALS, DECIMAL])
       expectDisplayTextContent(/^0\.$/, /^0\.$/)
@@ -191,14 +158,14 @@ describe('display on key click', () => {
       fireClickEvents(elevenOnes)
       expectDisplayTextContent(/^1111111111$/, /^1111111111$/)
 
-      fireClickEvents([CLEAR, ADD, SUBTRACT, ...elevenOnes])
-      expectDisplayTextContent(/^0\+-1111111111$/,/^-1111111111$/)
+      // fireClickEvents([CLEAR, ADD, SUBTRACT, ...elevenOnes])
+      // expectDisplayTextContent(/^0\+-1111111111$/,/^-1111111111$/)
 
       fireClickEvents([CLEAR, DECIMAL, ...elevenOnes])
       expectDisplayTextContent(/^0\.111111111$/, /^0\.111111111$/)
 
-      fireClickEvents([CLEAR, ADD, SUBTRACT, DECIMAL, ...elevenOnes])
-      expectDisplayTextContent(/^0\+-0\.111111111$/, /^-0\.111111111$/)
+      // fireClickEvents([CLEAR, ADD, SUBTRACT, DECIMAL, ...elevenOnes])
+      // expectDisplayTextContent(/^0\+-0\.111111111$/, /^-0\.111111111$/)
     })
 
     test('overwrites expression and result', () => {
@@ -209,13 +176,6 @@ describe('display on key click', () => {
 
       fireClickEvents([ONE])
       expectDisplayTextContent(/^1$/, /^1$/)
-    })
-
-    test('appends to negative', () => {
-      const { SUBTRACT, ADD, ONE } = keyPad
-
-      fireClickEvents([ADD, SUBTRACT, ONE])
-      expectDisplayTextContent(/^0\+-1$/, /^-1$/)
     })
 
     test('appends to operator', () => {
