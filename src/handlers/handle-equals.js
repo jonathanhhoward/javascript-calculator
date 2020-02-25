@@ -1,20 +1,12 @@
 export default function handleEquals (state, equals) {
-  const { isResult, isNegative, isOperator } = state
+  const { isResult, isOperator } = state
 
   if (isResult) return state
-
-  if (isNegative) return replaceNegative(state, equals)
 
   if (isOperator) return replaceOperator(state, equals)
 
   return append(state, equals)
 }
-
-export const replaceNegative = (state, equals) => ({
-  expression: state.expression.slice(0, -2) + equals,
-  isNegative: !state.isNegative,
-  isEquals: !state.isEquals
-})
 
 export const replaceOperator = (state, equals) => ({
   expression: state.expression.slice(0, -1) + equals,

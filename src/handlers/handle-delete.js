@@ -1,7 +1,7 @@
 export default function handleDelete (state) {
-  const { isResult, isNegative, isOperator } = state
+  const { isResult, isOperator } = state
 
-  if (isResult || isNegative || isOperator) return state
+  if (isResult || isOperator) return state
 
   return zeroInput(state)
 }
