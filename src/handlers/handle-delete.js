@@ -3,9 +3,5 @@ export default function handleDelete (state) {
 
   if (isResult || isOperator) return state
 
-  return zeroInput()
+  return { input: '0' }
 }
-
-const zeroInput = () => ({
-  input: '0'
-})
