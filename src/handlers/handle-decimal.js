@@ -3,9 +3,17 @@ import handleDigit from './handle-digit'
 export default function handleDecimal (state, decimal) {
   const { input, isResult, isOperator } = state
 
-  if (input.includes(decimal) && !isResult) return state
+  if (includesDecimal()) return state
 
-  return (input === '0' || isResult || isOperator)
+  return beginsWithZero()
     ? handleDigit(state, '0' + decimal)
     : handleDigit(state, decimal)
+
+  function beginsWithZero () {
+    return input === '0' || isOperator || isResult
+  }
+
+  function includesDecimal() {
+    return input.includes(decimal) && !isOperator && !isResult
+  }
 }
