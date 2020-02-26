@@ -25,10 +25,9 @@ describe('display on key click', () => {
   }
 
   beforeEach(() => {
-    const { getByText, getAllByText } = render(<App/>)
-    const zeros = getAllByText(KEY.ZERO)
-    const EXPRESSION = zeros[0]
-    const INPUT = zeros[1]
+    const { getByTestId, getByText, getAllByText } = render(<App/>)
+    const EXPRESSION = getByTestId('expression')
+    const INPUT = getByTestId('input')
     const CLEAR = getByText(KEY.CLEAR)
     const DELETE = getByText(KEY.DELETE)
     const DIVIDE = getByText(KEY.DIVIDE)
@@ -38,7 +37,7 @@ describe('display on key click', () => {
     const EQUALS = getByText(KEY.EQUALS)
     const NEGATE = getByText(KEY.NEGATE)
     const DECIMAL = getByText(KEY.DECIMAL)
-    const ZERO = zeros[2]
+    const ZERO = getAllByText(KEY.ZERO)[1]
     const ONE = getByText(KEY.ONE)
     const TWO = getByText(KEY.TWO)
     const THREE = getByText(KEY.THREE)
@@ -61,20 +60,26 @@ describe('display on key click', () => {
       const { DELETE, ADD, EQUALS, ONE } = keyPad
 
       fireClickEvents([ONE, ADD, DELETE])
-      expectDisplayTextContent(/^1\+$/, /^\+$/)
+      expectDisplayTextContent(/^1\+$/, /^1$/)
 
       fireClickEvents([EQUALS, DELETE])
       expectDisplayTextContent(/^1=$/, /^1$/)
     })
 
-    test('overwrites current number input with zero', () => {
+    test('overwrites input with zero', () => {
       const { DELETE, ADD, ONE } = keyPad
 
-      fireClickEvents([ONE, DELETE])
-      expectDisplayTextContent(/^0$/, /^0$/)
+      fireClickEvents([ONE])
+      expectDisplayTextContent(/^$/, /^1$/)
 
-      fireClickEvents([ADD, ONE, DELETE])
-      expectDisplayTextContent(/^0\+0$/, /^0$/)
+      fireClickEvents([DELETE])
+      expectDisplayTextContent(/^$/, /^0$/)
+
+      fireClickEvents([ADD, ONE])
+      expectDisplayTextContent(/^0\+$/, /^1$/)
+
+      fireClickEvents([DELETE])
+      expectDisplayTextContent(/^0\+$/, /^0$/)
     })
   })
 
@@ -90,7 +95,7 @@ describe('display on key click', () => {
       const { ADD, EQUALS } = keyPad
 
       fireClickEvents([ADD])
-      expectDisplayTextContent(/^0\+$/, /^\+$/)
+      expectDisplayTextContent(/^0\+$/, /^0$/)
 
       fireClickEvents([EQUALS])
       expectDisplayTextContent(/^0=$/, /^0$/)
@@ -112,24 +117,24 @@ describe('display on key click', () => {
       expectDisplayTextContent(/^1\+1=$/, /^2$/)
 
       fireClickEvents([ADD])
-      expectDisplayTextContent(/^2\+$/, /^\+$/)
+      expectDisplayTextContent(/^2\+$/, /^2$/)
     })
 
     test('overwrites operator', () => {
       const { MULTIPLY, ADD } = keyPad
 
       fireClickEvents([MULTIPLY])
-      expectDisplayTextContent(/^0\*$/, /^\*$/)
+      expectDisplayTextContent(/^0\*$/, /^0$/)
 
       fireClickEvents([ADD])
-      expectDisplayTextContent(/^0\+$/, /^\+$/)
+      expectDisplayTextContent(/^0\+$/, /^0$/)
     })
 
     test('appends to digits and decimal', () => {
       const { ADD, DECIMAL } = keyPad
 
       fireClickEvents([ADD, DECIMAL, ADD])
-      expectDisplayTextContent(/^0\+0\.\+$/, /^\+$/)
+      expectDisplayTextContent(/^0\+0\.\+$/, /^0.$/)
     })
   })
 
@@ -138,67 +143,75 @@ describe('display on key click', () => {
       const { DECIMAL } = keyPad
 
       fireClickEvents([DECIMAL, DECIMAL])
-      expectDisplayTextContent(/^0\.$/, /^0\.$/)
+      expectDisplayTextContent(/^$/, /^0\.$/)
     })
 
     test('prepends decimal with zero', () => {
-      const { ADD, EQUALS, DECIMAL } = keyPad
+      const { ADD, EQUALS, DECIMAL} = keyPad
 
-      fireClickEvents([DECIMAL, ADD, DECIMAL])
-      expectDisplayTextContent(/^0\.\+0\.$/, /^0\.$/)
+      fireClickEvents([DECIMAL])
+      expectDisplayTextContent(/^$/, /^0\.$/)
 
-      fireClickEvents([EQUALS, DECIMAL])
-      expectDisplayTextContent(/^0\.$/, /^0\.$/)
+      fireClickEvents([ADD, DECIMAL, EQUALS])
+      expectDisplayTextContent(/^0\.\+0\.=$/, /^0$/)
+
+      fireClickEvents([DECIMAL])
+      expectDisplayTextContent(/^$/, /^0\.$/)
     })
   })
 
   describe('digits', () => {
     test('limited to 10', () => {
-      const { CLEAR, SUBTRACT, ADD, DECIMAL, ONE } = keyPad
+      const { CLEAR, /*SUBTRACT, ADD,*/ DECIMAL, ONE } = keyPad
       const elevenOnes = new Array(11).fill(ONE)
 
       fireClickEvents(elevenOnes)
-      expectDisplayTextContent(/^1111111111$/, /^1111111111$/)
+      expectDisplayTextContent(/^$/, /^1111111111$/)
 
       // fireClickEvents([CLEAR, ADD, SUBTRACT, ...elevenOnes])
       // expectDisplayTextContent(/^0\+-1111111111$/,/^-1111111111$/)
 
       fireClickEvents([CLEAR, DECIMAL, ...elevenOnes])
-      expectDisplayTextContent(/^0\.111111111$/, /^0\.111111111$/)
+      expectDisplayTextContent(/^$/, /^0\.111111111$/)
 
       // fireClickEvents([CLEAR, ADD, SUBTRACT, DECIMAL, ...elevenOnes])
       // expectDisplayTextContent(/^0\+-0\.111111111$/, /^-0\.111111111$/)
     })
 
-    test('overwrites expression and result', () => {
+    test('overwrites result and clears expression', () => {
       const { EQUALS, ONE } = keyPad
 
       fireClickEvents([EQUALS])
       expectDisplayTextContent(/^0=$/, /^0$/)
 
       fireClickEvents([ONE])
-      expectDisplayTextContent(/^1$/, /^1$/)
+      expectDisplayTextContent(/^$/, /^1$/)
     })
 
-    test('appends to operator', () => {
-      const { ADD, ONE } = keyPad
+    test('overwrites after operator', () => {
+      const { ADD, ONE, TWO } = keyPad
 
-      fireClickEvents([ADD, ONE])
-      expectDisplayTextContent(/^0\+1$/, /^1$/)
+      fireClickEvents([ONE, ADD])
+      expectDisplayTextContent(/^1\+$/, /^1$/)
+
+      fireClickEvents([TWO])
+      expectDisplayTextContent(/^1\+$/, /^2$/)
     })
 
-    test('ignores leading zeros', () => {
-      const { ZERO, ONE } = keyPad
+    test('overwrites zero', () => {
+      const { ONE } = keyPad
 
-      fireClickEvents([ZERO, ONE])
-      expectDisplayTextContent(/^1$/, /^1$/)
+      expectDisplayTextContent(/^$/, /^0$/)
+
+      fireClickEvents([ONE])
+      expectDisplayTextContent(/^$/, /^1$/)
     })
 
-    test('appends to digits and decimal', () => {
-      const { DECIMAL, ONE } = keyPad
+    test('appends digits to input', () => {
+      const { ONE } = keyPad
 
-      fireClickEvents([DECIMAL, ONE, ONE])
-      expectDisplayTextContent(/^0\.11$/, /^0\.11$/)
+      fireClickEvents([ONE, ONE])
+      expectDisplayTextContent(/^$/, /^11$/)
     })
   })
 })
