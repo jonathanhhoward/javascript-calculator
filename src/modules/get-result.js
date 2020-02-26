@@ -10,9 +10,11 @@ export default function getResult (state) {
     result = error.message
   }
 
-  return {
-    input: result,
-    isResult: !state.isResult,
-    isEquals: !state.isEquals
-  }
+  return replaceInputWithResult(state, result)
 }
+
+const replaceInputWithResult = (state, result) => ({
+  input: result,
+  isResult: !state.isResult,
+  isEquals: !state.isEquals
+})
