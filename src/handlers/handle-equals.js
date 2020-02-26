@@ -5,16 +5,16 @@ export default function handleEquals (state, equals) {
 
   if (isOperator) return replaceOperator(state, equals)
 
-  return append(state, equals)
+  return appendWithInput(state, equals)
 }
 
-export const replaceOperator = (state, equals) => ({
+const replaceOperator = (state, equals) => ({
   expression: state.expression.slice(0, -1) + equals,
   isOperator: !state.isOperator,
   isEquals: !state.isEquals
 })
 
-export const append = (state, equals) => ({
-  expression: state.expression + equals,
+const appendWithInput = (state, equals) => ({
+  expression: state.expression + state.input + equals,
   isEquals: !state.isEquals
 })
