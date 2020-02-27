@@ -138,6 +138,35 @@ describe('display on key click', () => {
     })
   })
 
+  describe('negate', () => {
+    test('ignored when operator or result is present', () => {
+      const { ADD, EQUALS, NEGATE, ONE } = keyPad
+
+      fireClickEvents([ONE, ADD, NEGATE])
+      expectDisplayTextContent(/^1\+$/, /^1$/)
+
+      fireClickEvents([EQUALS, NEGATE])
+      expectDisplayTextContent(/^1=$/, /^1$/)
+    })
+
+    test('removes negative from digits', () => {
+      const { NEGATE, ONE } = keyPad
+
+      fireClickEvents([ONE, NEGATE])
+      expectDisplayTextContent(/^$/, /^-1$/)
+
+      fireClickEvents([NEGATE])
+      expectDisplayTextContent(/^$/, /^1$/)
+    })
+
+    test('prepends negative to digits', () => {
+      const { NEGATE, ONE } = keyPad
+
+      fireClickEvents([ONE, NEGATE])
+      expectDisplayTextContent(/^$/, /^-1$/)
+    })
+  })
+
   describe('decimal', () => {
     test('only one per number', () => {
       const { DECIMAL } = keyPad
@@ -162,20 +191,20 @@ describe('display on key click', () => {
 
   describe('digits', () => {
     test('limited to 10', () => {
-      const { CLEAR, /*SUBTRACT, ADD,*/ DECIMAL, ONE } = keyPad
+      const { CLEAR, NEGATE, DECIMAL, ONE } = keyPad
       const elevenOnes = new Array(11).fill(ONE)
 
       fireClickEvents(elevenOnes)
       expectDisplayTextContent(/^$/, /^1111111111$/)
 
-      // fireClickEvents([CLEAR, ADD, SUBTRACT, ...elevenOnes])
-      // expectDisplayTextContent(/^0\+-1111111111$/,/^-1111111111$/)
+      fireClickEvents([CLEAR, ONE, NEGATE, ...elevenOnes])
+      expectDisplayTextContent(/^$/,/^-1111111111$/)
 
       fireClickEvents([CLEAR, DECIMAL, ...elevenOnes])
       expectDisplayTextContent(/^$/, /^0\.111111111$/)
 
-      // fireClickEvents([CLEAR, ADD, SUBTRACT, DECIMAL, ...elevenOnes])
-      // expectDisplayTextContent(/^0\+-0\.111111111$/, /^-0\.111111111$/)
+      fireClickEvents([CLEAR, DECIMAL, ONE, NEGATE, ...elevenOnes])
+      expectDisplayTextContent(/^$/, /^-0\.111111111$/)
     })
 
     test('overwrites result and clears expression', () => {
