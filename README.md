@@ -1,2 +1,2 @@
 # javascript-calculator
-A project for freeCodeCamp.
+v2.0.0
