@@ -21,7 +21,7 @@ export default function selectHandler (state, value) {
     case KEY.DIVIDE:
       return handleOperator(state, value)
     case KEY.NEGATE:
-      return handleNegate(state, value)
+      return handleNegate(state)
     case KEY.DECIMAL:
       return handleDecimal(state, value)
     default:
