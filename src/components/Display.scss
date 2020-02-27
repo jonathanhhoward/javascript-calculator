@@ -17,6 +17,7 @@
   color: hsl(0, 0%, 30%);
 
   @media (orientation: landscape) {
+    line-height: 2;
     font-size: 5vh;
   }
 }
