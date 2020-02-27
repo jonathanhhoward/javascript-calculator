@@ -1,15 +1,15 @@
 .KeyPad {
   height: 80%;
-  background-color: hsl(0, 0%, 10%);
+  background-color: hsl(0, 0%, 90%);
   display: grid;
   grid-template-areas:
           "sev eig nin del cle"
-          "fou fiv six sub div"
-          "one two thr add mul"
+          "fou fiv six mul div"
+          "one two thr add sub"
           "neg zer dec equ equ";
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: 24.2%;
-  gap: 1%;
+  gap: .8vh;
 
   @media (orientation: portrait) {
     grid-template-areas:
@@ -27,21 +27,21 @@
 .Key {
   padding: 0;
   border: none;
-  border-radius: 10vh;
-  font-size: 8vh;
-  color: white;
+  border-radius: 1px;
+  font-size: 5vh;
+  color: black;
+  box-shadow: 0 .2vh .5vh hsl(0, 0%, 40%);
 
-  @media (orientation: portrait) {
-    font-size: 5vh;
+  @media (orientation: landscape) {
+    font-size: 7vh;
   }
 
   &:focus {
     outline: none;
-    border: 4px solid hsl(0, 0%, 10%);
   }
 
   &:hover {
-    color: black;
+    color: white;
   }
 }
 
@@ -49,32 +49,33 @@
   background-color: hsl($h, $s, $l);
 
   &:hover {
-    background-color: hsl($h, $s, $l + 30%);
+    background-color: hsl($h, $s, $l - 15%);
+    box-shadow: hsl(0, 0%, 35%);
   }
 
   &:active {
-    background-color: hsl($h, $s, $l + 15%);
+    box-shadow: none;
   }
 }
 
 .clear {
-  @include buttonStyle(10, 100%, 40%);
+  @include buttonStyle(10, 100%, 70%);
 }
 
 .delete {
-  @include buttonStyle(30, 100%, 40%);
+  @include buttonStyle(30, 100%, 70%);
 }
 
 .digit {
-  @include buttonStyle(0, 0%, 40%);
+  @include buttonStyle(0, 0%, 70%);
 }
 
 .equals {
-  @include buttonStyle(200, 100%, 40%);
+  @include buttonStyle(200, 100%, 70%);
 }
 
 .operator {
-  @include buttonStyle(150, 50%, 40%);
+  @include buttonStyle(150, 50%, 60%);
 }
 
 $keys: "clear", "delete", "divide", "multiply", "subtract", "add", "equals",
