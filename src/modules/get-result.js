@@ -1,14 +1,9 @@
 import setPrecision10 from './setPrecision10'
-import calculate from './calculate'
 
 export default function getResult (state) {
-  let result
+  const expression = state.expression.slice(0, -1)
 
-  try {
-    result = setPrecision10(calculate(state.expression))
-  } catch (error) {
-    result = error.message
-  }
+  const result = setPrecision10(eval(expression))
 
   return replaceInputWithResult(state, result)
 }
