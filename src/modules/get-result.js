@@ -1,12 +1,12 @@
 import setPrecision10 from './setPrecision10'
 
 export default function getResult (state) {
-  const expression = state.expression.slice(0, -1)
+  const expressionEqualsRemoved = state.expression.slice(0, -1)
 
-  const result = setPrecision10(eval(expression))
+  const result = eval(expressionEqualsRemoved)
 
   return {
-    input: result,
+    input: setPrecision10(result),
     isResult: !state.isResult,
     isEquals: !state.isEquals
   }
