@@ -5,11 +5,9 @@ export default function getResult (state) {
 
   const result = setPrecision10(eval(expression))
 
-  return replaceInputWithResult(state, result)
+  return {
+    input: result,
+    isResult: !state.isResult,
+    isEquals: !state.isEquals
+  }
 }
-
-const replaceInputWithResult = (state, result) => ({
-  input: result,
-  isResult: !state.isResult,
-  isEquals: !state.isEquals
-})
