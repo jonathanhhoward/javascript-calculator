@@ -17,16 +17,17 @@
   color: hsl(0, 0%, 40%);
 
   @media (orientation: landscape) {
-    line-height: 2;
-    font-size: 5vh;
+    line-height: 1.5;
+    font-size: 5.33vh;
   }
 }
 
 .Input {
-  line-height: 1.5;
+  line-height: 2;
   font-size: 5vh;
 
   @media (orientation: landscape) {
-    font-size: 7vh;
+    line-height: 1;
+    font-size: 8.89vh;
   }
 }
