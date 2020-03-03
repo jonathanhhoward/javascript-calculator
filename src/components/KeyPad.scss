@@ -1,25 +1,28 @@
 .KeyPad {
   height: 80%;
+  padding: 0 .8vh .8vh .8vh;
   background-color: hsl(0, 0%, 90%);
   display: grid;
   grid-template-areas:
-          "sev eig nin del cle"
-          "fou fiv six mul div"
-          "one two thr add sub"
-          "neg zer dec equ equ";
-  grid-template-columns: repeat(5, 1fr);
-  grid-auto-rows: 24.2%;
+          "cle del div mul"
+          "sev eig nin sub"
+          "fou fiv six add"
+          "one two thr equ"
+          "neg zer dec equ";
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 19.2%;
   gap: .8vh;
 
-  @media (orientation: portrait) {
+  @media (orientation: landscape) {
+    padding: 0 1.42vh 1.42vh 1.42vh;
     grid-template-areas:
-            "cle del div mul"
-            "sev eig nin sub"
-            "fou fiv six add"
-            "one two thr equ"
-            "neg zer dec equ";
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: 19.2%;
+            "sev eig nin del cle"
+            "fou fiv six mul div"
+            "one two thr add sub"
+            "neg zer dec equ equ";
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 23.67%;
+    gap: 1.42vh;
   }
 }
 
@@ -27,13 +30,15 @@
 .Key {
   padding: 0;
   border: none;
-  border-radius: 1px;
+  border-radius: .5vh;
   font-size: 5vh;
   color: black;
-  box-shadow: 0 .2vh .5vh hsl(0, 0%, 50%);
+  box-shadow: 0 .2vh .4vh hsl(0, 0%, 20%);
 
   @media (orientation: landscape) {
-    font-size: 7vh;
+    border-radius: .89vh;
+    font-size: 8.89vh;
+    box-shadow: 0 .36vh .72vh hsl(0, 0%, 20%);
   }
 
   &:focus {
@@ -50,7 +55,6 @@
 
   &:hover {
     background-color: hsl($h, $s, $l - 15%);
-    box-shadow: hsl(0, 0%, 35%);
   }
 
   &:active {
