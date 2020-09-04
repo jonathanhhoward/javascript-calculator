@@ -1,7 +1,7 @@
 import React from 'react'
 import Key from './Key'
 import * as KEY from '../modules/key-constants'
-import './KeyPad.css'
+import './KeyPad.scss'
 
 const keysData = [
   { id: 'clear', class: 'clear', value: KEY.CLEAR },

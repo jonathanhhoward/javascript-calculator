@@ -4,7 +4,7 @@ import KeyPad from './components/KeyPad'
 import initialState from './modules/initial-state'
 import getResult from './modules/get-result'
 import selectHandler from './handlers/select-handler'
-import './App.css'
+import './App.scss'
 
 export default class App extends React.Component {
   constructor (props) {
