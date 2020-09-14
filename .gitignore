@@ -23,9 +23,3 @@ yarn-debug.log*
 yarn-error.log*
 
 /.idea
-/src/App.css
-/src/App.css.map
-/src/components/Display.css
-/src/components/Display.css.map
-/src/components/KeyPad.css
-/src/components/KeyPad.css.map
