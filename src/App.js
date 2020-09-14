@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Display from './components/Display'
 import KeyPad from './components/KeyPad'
 import initialState from './modules/initial-state'
@@ -6,28 +6,31 @@ import getResult from './modules/get-result'
 import selectHandler from './handlers/select-handler'
 import './App.scss'
 
-export default class App extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = initialState()
-  }
+function App () {
+  const [state, setState] = useState(initialState())
 
-  componentDidUpdate (prevProps, prevState, snapshot) {
-    this.state.isEquals && this.setState(getResult)
-  }
+  useEffect(() => {
+    if (!state.isEquals) return
+    setState(prevState => ({
+      ...prevState,
+      ...getResult(prevState)
+    }))
+  }, [state.isEquals])
 
-  handleClick = (event) => {
+  function handleClick (event) {
     const value = event.target.value
-
-    this.setState(state => selectHandler(state, value))
+    setState(prevState => ({
+      ...prevState,
+      ...selectHandler(prevState, value)
+    }))
   }
 
-  render () {
-    return (
-      <div className="App">
-        <Display expression={this.state.expression} input={this.state.input}/>
-        <KeyPad onClick={this.handleClick}/>
-      </div>
-    )
-  }
+  return (
+    <div className="App">
+      <Display expression={state.expression} input={state.input}/>
+      <KeyPad onClick={handleClick}/>
+    </div>
+  )
 }
+
+export default App
