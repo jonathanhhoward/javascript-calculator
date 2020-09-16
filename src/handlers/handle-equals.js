@@ -1,28 +1,28 @@
-export default function handleEquals (state, equals) {
-  const { isResult, isNegative, isOperator } = state
+export default function handleEquals(state, equals) {
+  const { isResult, isNegative, isOperator } = state;
 
-  if (isResult) return state
+  if (isResult) return state;
 
-  if (isNegative) return replaceNegative(state, equals)
+  if (isNegative) return replaceNegative(state, equals);
 
-  if (isOperator) return replaceOperator(state, equals)
+  if (isOperator) return replaceOperator(state, equals);
 
-  return append(state, equals)
+  return append(state, equals);
 }
 
 const replaceNegative = (state, equals) => ({
   expression: state.expression.slice(0, -2) + equals,
   isNegative: !state.isNegative,
-  isEquals: !state.isEquals
-})
+  isEquals: !state.isEquals,
+});
 
 const replaceOperator = (state, equals) => ({
   expression: state.expression.slice(0, -1) + equals,
   isOperator: !state.isOperator,
-  isEquals: !state.isEquals
-})
+  isEquals: !state.isEquals,
+});
 
 const append = (state, equals) => ({
   expression: state.expression + equals,
-  isEquals: !state.isEquals
-})
+  isEquals: !state.isEquals,
+});
