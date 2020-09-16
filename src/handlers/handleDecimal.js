@@ -1,6 +1,6 @@
-import handleDigit from "./handle-digit";
+import handleDigit from "./handleDigit";
 
-export default function handleDecimal(state, decimal) {
+function handleDecimal(state, decimal) {
   const { input, isResult, isNegative, isOperator } = state;
 
   if (input.includes(decimal) && !isResult) return state;
@@ -9,3 +9,5 @@ export default function handleDecimal(state, decimal) {
     ? handleDigit(state, "0" + decimal)
     : handleDigit(state, decimal);
 }
+
+export default handleDecimal;

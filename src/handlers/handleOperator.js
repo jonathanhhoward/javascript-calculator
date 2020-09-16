@@ -1,4 +1,4 @@
-export default function handleOperator(state, operator) {
+function handleOperator(state, operator) {
   const { isResult, isNegative, isOperator } = state;
 
   if (isResult) return appendToResult(state, operator);
@@ -44,3 +44,5 @@ const append = (state, operator) => ({
   input: operator,
   isOperator: !state.isOperator,
 });
+
+export default handleOperator;

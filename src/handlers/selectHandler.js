@@ -1,12 +1,12 @@
-import handleClear from "./handle-clear";
-import handleDelete from "./handle-delete";
-import handleEquals from "./handle-equals";
-import handleOperator from "./handle-operator";
-import handleDecimal from "./handle-decimal";
-import handleDigit from "./handle-digit";
+import handleClear from "./handleClear";
+import handleDelete from "./handleDelete";
+import handleEquals from "./handleEquals";
+import handleOperator from "./handleOperator";
+import handleDecimal from "./handleDecimal";
+import handleDigit from "./handleDigit";
 import * as KEY from "../modules/key-constants";
 
-export default function selectHandler(state, value) {
+function selectHandler(state, value) {
   switch (value) {
     case KEY.CLEAR:
       return handleClear();
@@ -25,3 +25,5 @@ export default function selectHandler(state, value) {
       return handleDigit(state, value);
   }
 }
+
+export default selectHandler;

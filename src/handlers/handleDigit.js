@@ -1,4 +1,4 @@
-export default function handleDigit(state, digit) {
+function handleDigit(state, digit) {
   const { input, isResult, isNegative, isOperator } = state;
 
   if (isMaxDigits(input, 10) && !isResult) return state;
@@ -45,3 +45,5 @@ const append = (state, digit) => ({
   expression: state.expression + digit,
   input: state.input + digit,
 });
+
+export default handleDigit;

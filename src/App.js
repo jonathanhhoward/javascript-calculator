@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Display from "./components/Display";
 import KeyPad from "./components/KeyPad";
-import initialState from "./modules/initial-state";
-import getResult from "./modules/get-result";
-import selectHandler from "./handlers/select-handler";
+import initialState from "./modules/initialState";
+import getResult from "./modules/getResult";
+import selectHandler from "./handlers/selectHandler";
 import "./App.scss";
 
 function App() {

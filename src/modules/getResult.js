@@ -1,7 +1,7 @@
 import setPrecision10 from "./setPrecision10";
 import calculate from "./calculate";
 
-export default function getResult(state) {
+function getResult(state) {
   let result;
 
   try {
@@ -16,3 +16,5 @@ export default function getResult(state) {
     isEquals: !state.isEquals,
   };
 }
+
+export default getResult;

@@ -1,4 +1,4 @@
-export default function handleEquals(state, equals) {
+function handleEquals(state, equals) {
   const { isResult, isNegative, isOperator } = state;
 
   if (isResult) return state;
@@ -26,3 +26,5 @@ const append = (state, equals) => ({
   expression: state.expression + equals,
   isEquals: !state.isEquals,
 });
+
+export default handleEquals;

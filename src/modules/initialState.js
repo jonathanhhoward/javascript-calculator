@@ -1,4 +1,4 @@
-export default function initialState() {
+function initialState() {
   return {
     expression: "0",
     input: "0",
@@ -8,3 +8,5 @@ export default function initialState() {
     isOperator: false,
   };
 }
+
+export default initialState;
