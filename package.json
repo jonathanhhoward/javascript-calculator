@@ -11,6 +11,9 @@
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.3"
   },
+  "devDependencies": {
+    "prettier": "2.1.2"
+  },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
