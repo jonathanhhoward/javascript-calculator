@@ -1,5 +1,5 @@
-import React from "react";
-import "./Display.scss";
+import React from 'react';
+import './Display.scss';
 
 export default function Display(props) {
   return (

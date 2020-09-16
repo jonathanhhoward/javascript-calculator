@@ -6,7 +6,7 @@ function handleOperator(state, operator) {
   if (isNegative) return replaceNegative(state, operator);
 
   if (isOperator)
-    return operator === "-"
+    return operator === '-'
       ? appendNegative(state, operator)
       : replaceOperator(state, operator);
 

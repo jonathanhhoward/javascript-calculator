@@ -1,5 +1,5 @@
-import setPrecision10 from "./setPrecision10";
-import calculate from "./calculate";
+import setPrecision10 from './setPrecision10';
+import calculate from './calculate';
 
 function getResult(state) {
   let result;

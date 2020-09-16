@@ -1,7 +1,7 @@
 export default function setPrecision10(number) {
   if (Number.isNaN(number)) return NaN.toString();
 
-  if (number === 0) return "0";
+  if (number === 0) return '0';
 
   const absNumber = Math.abs(number);
 

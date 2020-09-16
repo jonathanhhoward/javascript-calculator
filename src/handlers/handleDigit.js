@@ -9,12 +9,12 @@ function handleDigit(state, digit) {
 
   if (isOperator) return appendToOperator(state, digit);
 
-  if (input === "0") return replaceZero(state, digit);
+  if (input === '0') return replaceZero(state, digit);
 
   return append(state, digit);
 
   function isMaxDigits(input, limit) {
-    return input.replace(/[.-]/g, "").length === limit;
+    return input.replace(/[.-]/g, '').length === limit;
   }
 }
 

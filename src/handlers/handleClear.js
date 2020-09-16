@@ -1,4 +1,4 @@
-import initialState from "../modules/initialState";
+import initialState from '../modules/initialState';
 
 function handleClear() {
   return initialState();

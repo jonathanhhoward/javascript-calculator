@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
-import Display from "./components/Display";
-import KeyPad from "./components/KeyPad";
-import initialState from "./modules/initialState";
-import getResult from "./modules/getResult";
-import selectHandler from "./handlers/selectHandler";
-import "./App.scss";
+import React, { useState, useEffect } from 'react';
+import Display from './components/Display';
+import KeyPad from './components/KeyPad';
+import initialState from './modules/initialState';
+import getResult from './modules/getResult';
+import selectHandler from './handlers/selectHandler';
+import './App.scss';
 
 function App() {
   const [state, setState] = useState(initialState());

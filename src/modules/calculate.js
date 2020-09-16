@@ -16,18 +16,18 @@ export default function calculate(expressionString) {
 
     while (true) {
       switch (token) {
-        case "+":
+        case '+':
           left += term();
           token = tokenArray.shift();
           break;
-        case "-":
+        case '-':
           left -= term();
           token = tokenArray.shift();
           break;
-        case "=":
+        case '=':
           return left;
         default:
-          throw new Error("expression error");
+          throw new Error('expression error');
       }
     }
   }
@@ -38,13 +38,13 @@ export default function calculate(expressionString) {
 
     while (true) {
       switch (token) {
-        case "*":
+        case '*':
           left *= primary();
           token = tokenArray.shift();
           break;
-        case "/":
+        case '/':
           const d = primary();
-          if (d === 0) throw new Error("divide by zero");
+          if (d === 0) throw new Error('divide by zero');
           left /= d;
           token = tokenArray.shift();
           break;
@@ -57,10 +57,10 @@ export default function calculate(expressionString) {
 
   function primary() {
     const token = tokenArray.shift();
-    if (token === "-") return -primary();
+    if (token === '-') return -primary();
 
     const result = Number(token);
-    if (Number.isNaN(result)) throw new Error("primary expected");
+    if (Number.isNaN(result)) throw new Error('primary expected');
 
     return result;
   }
