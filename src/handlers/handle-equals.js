@@ -10,19 +10,19 @@ export default function handleEquals (state, equals) {
   return append(state, equals)
 }
 
-export const replaceNegative = (state, equals) => ({
+const replaceNegative = (state, equals) => ({
   expression: state.expression.slice(0, -2) + equals,
   isNegative: !state.isNegative,
   isEquals: !state.isEquals
 })
 
-export const replaceOperator = (state, equals) => ({
+const replaceOperator = (state, equals) => ({
   expression: state.expression.slice(0, -1) + equals,
   isOperator: !state.isOperator,
   isEquals: !state.isEquals
 })
 
-export const append = (state, equals) => ({
+const append = (state, equals) => ({
   expression: state.expression + equals,
   isEquals: !state.isEquals
 })
