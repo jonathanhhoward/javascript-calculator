@@ -1,7 +1,7 @@
 function handleDelete(state) {
-  const { isOperator } = state;
   const isResult = state.status === 'RESULT';
   const isNegative = state.status === 'NEGATIVE';
+  const isOperator = state.status === 'OPERATOR';
 
   if (isResult || isNegative || isOperator) return state;
 

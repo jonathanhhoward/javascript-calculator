@@ -1,7 +1,7 @@
 function handleEquals(state, equals) {
-  const { isOperator } = state;
   const isResult = state.status === 'RESULT';
   const isNegative = state.status === 'NEGATIVE';
+  const isOperator = state.status === 'OPERATOR';
 
   if (isResult) return state;
 
@@ -19,7 +19,6 @@ const replaceNegative = (state, equals) => ({
 
 const replaceOperator = (state, equals) => ({
   expression: state.expression.slice(0, -1) + equals,
-  isOperator: !state.isOperator,
   status: 'EQUALS',
 });
 

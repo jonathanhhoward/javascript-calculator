@@ -1,7 +1,7 @@
 function handleOperator(state, operator) {
-  const { isOperator } = state;
   const isResult = state.status === 'RESULT';
   const isNegative = state.status === 'NEGATIVE';
+  const isOperator = state.status === 'OPERATOR';
 
   if (isResult) return appendToResult(state, operator);
 
@@ -18,21 +18,18 @@ function handleOperator(state, operator) {
 const appendToResult = (state, operator) => ({
   expression: state.input + operator,
   input: operator,
-  isOperator: !state.isOperator,
-  status: '',
+  status: 'OPERATOR',
 });
 
 const replaceNegative = (state, operator) => ({
   expression: state.expression.slice(0, -2) + operator,
   input: operator,
-  isOperator: !state.isOperator,
-  status: '',
+  status: 'OPERATOR',
 });
 
 const appendNegative = (state, operator) => ({
   expression: state.expression + operator,
   input: operator,
-  isOperator: !state.isOperator,
   status: 'NEGATIVE',
 });
 
@@ -44,7 +41,7 @@ const replaceOperator = (state, operator) => ({
 const append = (state, operator) => ({
   expression: state.expression + operator,
   input: operator,
-  isOperator: !state.isOperator,
+  status: 'OPERATOR',
 });
 
 export default handleOperator;
