@@ -1,18 +1,16 @@
 function handleOperator(state, operator) {
-  const isResult = state.status === 'RESULT';
-  const isNegative = state.status === 'NEGATIVE';
-  const isOperator = state.status === 'OPERATOR';
-
-  if (isResult) return appendToResult(state, operator);
-
-  if (isNegative) return replaceNegative(state, operator);
-
-  if (isOperator)
-    return operator === '-'
-      ? appendNegative(state, operator)
-      : replaceOperator(state, operator);
-
-  return append(state, operator);
+  switch (state.status) {
+    case 'RESULT':
+      return appendToResult(state, operator);
+    case 'NEGATIVE':
+      return replaceNegative(state, operator);
+    case 'OPERATOR':
+      return operator === '-'
+        ? appendNegative(state, operator)
+        : replaceOperator(state, operator);
+    default:
+      return append(state, operator);
+  }
 }
 
 const appendToResult = (state, operator) => ({

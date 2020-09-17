@@ -1,15 +1,14 @@
 function handleEquals(state, equals) {
-  const isResult = state.status === 'RESULT';
-  const isNegative = state.status === 'NEGATIVE';
-  const isOperator = state.status === 'OPERATOR';
-
-  if (isResult) return state;
-
-  if (isNegative) return replaceNegative(state, equals);
-
-  if (isOperator) return replaceOperator(state, equals);
-
-  return append(state, equals);
+  switch (state.status) {
+    case 'RESULT':
+      return state;
+    case 'NEGATIVE':
+      return replaceNegative(state, equals);
+    case 'OPERATOR':
+      return replaceOperator(state, equals);
+    default:
+      return append(state, equals);
+  }
 }
 
 const replaceNegative = (state, equals) => ({

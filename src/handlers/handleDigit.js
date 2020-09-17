@@ -1,20 +1,21 @@
 function handleDigit(state, digit) {
   const { input } = state;
   const isResult = state.status === 'RESULT';
-  const isNegative = state.status === 'NEGATIVE';
-  const isOperator = state.status === 'OPERATOR';
 
   if (isMaxDigits(input, 10) && !isResult) return state;
 
-  if (isResult) return replaceResult(state, digit);
-
-  if (isNegative) return appendToNegative(state, digit);
-
-  if (isOperator) return appendToOperator(state, digit);
-
-  if (input === '0') return replaceZero(state, digit);
-
-  return append(state, digit);
+  switch (state.status) {
+    case 'RESULT':
+      return replaceResult(state, digit);
+    case 'NEGATIVE':
+      return appendToNegative(state, digit);
+    case 'OPERATOR':
+      return appendToOperator(state, digit);
+    default: {
+      if (input === '0') return replaceZero(state, digit);
+      return append(state, digit);
+    }
+  }
 
   function isMaxDigits(input, limit) {
     return input.replace(/[.-]/g, '').length === limit;
