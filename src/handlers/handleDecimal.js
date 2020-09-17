@@ -1,8 +1,9 @@
 import handleDigit from './handleDigit';
 
 function handleDecimal(state, decimal) {
-  const { input, isNegative, isOperator } = state;
+  const { input, isOperator } = state;
   const isResult = state.status === 'RESULT';
+  const isNegative = state.status === 'NEGATIVE';
 
   if (input.includes(decimal) && !isResult) return state;
 
