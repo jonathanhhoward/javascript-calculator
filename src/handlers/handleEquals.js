@@ -1,5 +1,6 @@
 function handleEquals(state, equals) {
-  const { isResult, isNegative, isOperator } = state;
+  const { isNegative, isOperator } = state;
+  const isResult = state.status === 'RESULT';
 
   if (isResult) return state;
 

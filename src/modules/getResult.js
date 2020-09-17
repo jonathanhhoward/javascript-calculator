@@ -12,8 +12,8 @@ function getResult(state) {
 
   return {
     input: result,
-    isResult: !state.isResult,
     isEquals: !state.isEquals,
+    status: 'RESULT',
   };
 }
 
