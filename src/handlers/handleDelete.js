@@ -3,9 +3,7 @@ function handleDelete(state) {
   const isNegative = state.status === 'NEGATIVE';
   const isOperator = state.status === 'OPERATOR';
 
-  if (isResult || isNegative || isOperator) return state;
-
-  return zeroInput(state);
+  return isResult || isNegative || isOperator ? state : zeroInput(state);
 }
 
 const zeroInput = (state) => ({
