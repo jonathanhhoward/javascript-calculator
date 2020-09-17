@@ -14,18 +14,18 @@ function handleEquals(state, equals) {
 const replaceNegative = (state, equals) => ({
   expression: state.expression.slice(0, -2) + equals,
   isNegative: !state.isNegative,
-  isEquals: !state.isEquals,
+  status: 'EQUALS',
 });
 
 const replaceOperator = (state, equals) => ({
   expression: state.expression.slice(0, -1) + equals,
   isOperator: !state.isOperator,
-  isEquals: !state.isEquals,
+  status: 'EQUALS',
 });
 
 const append = (state, equals) => ({
   expression: state.expression + equals,
-  isEquals: !state.isEquals,
+  status: 'EQUALS',
 });
 
 export default handleEquals;

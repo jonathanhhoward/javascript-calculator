@@ -10,12 +10,12 @@ function App() {
   const [state, setState] = useState(initialState());
 
   useEffect(() => {
-    if (!state.isEquals) return;
+    if (state.status !== 'EQUALS') return;
     setState((prevState) => ({
       ...prevState,
       ...getResult(prevState),
     }));
-  }, [state.isEquals]);
+  }, [state.status]);
 
   function handleClick(event) {
     const value = event.target.value;
