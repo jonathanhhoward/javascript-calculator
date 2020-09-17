@@ -11,10 +11,8 @@ function handleDigit(state, digit) {
       return appendToNegative(state, digit);
     case 'OPERATOR':
       return appendToOperator(state, digit);
-    default: {
-      if (input === '0') return replaceZero(state, digit);
-      return append(state, digit);
-    }
+    default:
+      return input === '0' ? replaceZero(state, digit) : append(state, digit);
   }
 
   function isMaxDigits(input, limit) {
