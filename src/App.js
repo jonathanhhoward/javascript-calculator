@@ -1,28 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import Display from './components/Display';
-import KeyPad from './components/KeyPad';
-import initialState from './modules/initialState';
-import getResult from './modules/getResult';
-import selectHandler from './handlers/selectHandler';
+import { Display, KeyPad } from './components';
+import { getResult, initialState } from './utils';
+import { selectHandler } from './handlers';
 import './App.scss';
 
-function App() {
-  const [state, setState] = useState(initialState());
+export function App() {
+  const [state, setState] = useState(initialState);
 
   useEffect(() => {
     if (state.status !== 'EQUALS') return;
-    setState((prevState) => ({
-      ...prevState,
-      ...getResult(prevState),
-    }));
+    setState((prevState) => getResult(prevState));
   }, [state.status]);
 
   function handleClick(event) {
     const value = event.target.value;
-    setState((prevState) => ({
-      ...prevState,
-      ...selectHandler(prevState, value),
-    }));
+    setState((prevState) => selectHandler(prevState, value));
   }
 
   return (
@@ -32,5 +24,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

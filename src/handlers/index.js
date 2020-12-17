@@ -4,26 +4,29 @@ import handleEquals from './handleEquals';
 import handleOperator from './handleOperator';
 import handleDecimal from './handleDecimal';
 import handleDigit from './handleDigit';
-import * as KEY from '../modules/key-constants';
+import { key } from '../utils';
 
-function selectHandler(state, value) {
+/**
+ * @param {{expression: string, input: string, status: string}} state
+ * @param {string} value
+ * @returns {{expression: string, input: string, status: string}}
+ */
+export function selectHandler(state, value) {
   switch (value) {
-    case KEY.CLEAR:
+    case key.CLEAR:
       return handleClear();
-    case KEY.DELETE:
+    case key.DELETE:
       return handleDelete(state);
-    case KEY.EQUALS:
+    case key.EQUALS:
       return handleEquals(state, value);
-    case KEY.ADD:
-    case KEY.SUBTRACT:
-    case KEY.MULTIPLY:
-    case KEY.DIVIDE:
+    case key.ADD:
+    case key.SUBTRACT:
+    case key.MULTIPLY:
+    case key.DIVIDE:
       return handleOperator(state, value);
-    case KEY.DECIMAL:
+    case key.DECIMAL:
       return handleDecimal(state, value);
     default:
       return handleDigit(state, value);
   }
 }
-
-export default selectHandler;

@@ -1,29 +1,29 @@
-function handleEquals(state, equals) {
+/**
+ * @param {{expression: string, input: string, status: string}} state
+ * @param {string} equals
+ * @returns {{expression: string, input: string, status: string}}
+ */
+export default function (state, equals) {
   switch (state.status) {
     case 'RESULT':
       return state;
     case 'NEGATIVE':
-      return replaceNegative(state, equals);
+      return {
+        ...state,
+        expression: state.expression.slice(0, -2) + equals,
+        status: 'EQUALS',
+      };
     case 'OPERATOR':
-      return replaceOperator(state, equals);
+      return {
+        ...state,
+        expression: state.expression.slice(0, -1) + equals,
+        status: 'EQUALS',
+      };
     default:
-      return append(state, equals);
+      return {
+        ...state,
+        expression: state.expression + equals,
+        status: 'EQUALS',
+      };
   }
 }
-
-const replaceNegative = (state, equals) => ({
-  expression: state.expression.slice(0, -2) + equals,
-  status: 'EQUALS',
-});
-
-const replaceOperator = (state, equals) => ({
-  expression: state.expression.slice(0, -1) + equals,
-  status: 'EQUALS',
-});
-
-const append = (state, equals) => ({
-  expression: state.expression + equals,
-  status: 'EQUALS',
-});
-
-export default handleEquals;

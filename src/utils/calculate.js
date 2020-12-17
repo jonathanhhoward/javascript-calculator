@@ -1,14 +1,12 @@
-export default function calculate(expressionString) {
+/**
+ * @param {string} expressionString
+ * @return {number}
+ */
+export function calculate(expressionString) {
   const reNumberOrOperator = /(?:\d+(?:\.\d*)?(?:e[-+]\d+)?)|[-+*/=]/g;
   const tokenArray = expressionString.match(reNumberOrOperator);
 
   return expression();
-
-  /*
-  The following code has been adapted for JavaScript from:
-      Bjarne Stroustrup, "Programming: Principles and Practice Using C++"
-      Second Edition (Pearson Education, Inc., 2014).
-   */
 
   function expression() {
     let left = term();

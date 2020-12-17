@@ -1,14 +1,16 @@
 import handleDigit from './handleDigit';
 
-function handleDecimal(state, decimal) {
-  const { input } = state;
+/**
+ * @param {{expression: string, input: string, status: string}} state
+ * @param {string} decimal
+ * @returns {{expression: string, input: string, status: string}}
+ */
+export default function (state, decimal) {
   const isResult = state.status === 'RESULT';
 
-  if (input.includes(decimal) && !isResult) return state;
+  if (state.input.includes(decimal) && !isResult) return state;
 
-  return input === '0' || state.status
+  return state.input === '0' || state.status
     ? handleDigit(state, '0' + decimal)
     : handleDigit(state, decimal);
 }
-
-export default handleDecimal;

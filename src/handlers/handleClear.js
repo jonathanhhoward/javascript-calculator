@@ -1,7 +1,8 @@
-import initialState from '../modules/initialState';
+import { initialState } from '../utils';
 
-function handleClear() {
-  return initialState();
+/**
+ * @returns {{expression: string, input: string, status: string}}
+ */
+export default function () {
+  return initialState;
 }
-
-export default handleClear;
