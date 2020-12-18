@@ -30,13 +30,13 @@ const keys = [
   { id: 'nine', class: 'digit', symbol: key.NINE, click: handleDigit },
 ];
 
-export function KeyPad({ setState }) {
+export function KeyPad({ state, dispatch }) {
   const keyPad = keys.map((key) => (
     <button
       key={key.id}
       className={`Key ${key.class}`}
       id={key.id}
-      onClick={() => setState((state) => key.click(state, key.symbol))}
+      onClick={() => key.click(state, dispatch, key.symbol)}
     >
       {key.symbol}
     </button>

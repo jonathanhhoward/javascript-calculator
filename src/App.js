@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { Display, KeyPad } from './components';
-import { getResult, initialState } from './utils';
+import { reducer } from './reducers';
+import { initialState } from './utils';
 import './App.scss';
 
 export function App() {
-  const [state, setState] = useState(initialState);
+  const [state, dispatch] = useReducer(reducer, initialState, undefined);
 
   useEffect(() => {
     if (state.status !== 'EQUALS') return;
-    setState((prevState) => getResult(prevState));
+    dispatch({ type: 'get-result' });
   }, [state.status]);
 
   return (
     <div className="App">
       <Display expression={state.expression} input={state.input} />
-      <KeyPad setState={setState} />
+      <KeyPad state={state} dispatch={dispatch} />
     </div>
   );
 }

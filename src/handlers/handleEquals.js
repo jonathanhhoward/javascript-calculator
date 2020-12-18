@@ -1,29 +1,18 @@
 /**
- * @param {{expression: string, input: string, status: string}} state
- * @param {string} equals
- * @returns {{expression: string, input: string, status: string}}
+ * @param {{ expression: string, input: string, status: string }} state
+ * @param {function({ type: string, payload: string }): void} dispatch
+ * @param {string} symbol
+ * @returns void
  */
-export default function (state, equals) {
+export default function (state, dispatch, symbol) {
   switch (state.status) {
     case 'RESULT':
-      return state;
+      return;
     case 'NEGATIVE':
-      return {
-        ...state,
-        expression: state.expression.slice(0, -2) + equals,
-        status: 'EQUALS',
-      };
+      return dispatch({ type: 'equals-negative', payload: symbol });
     case 'OPERATOR':
-      return {
-        ...state,
-        expression: state.expression.slice(0, -1) + equals,
-        status: 'EQUALS',
-      };
+      return dispatch({ type: 'equals-operator', payload: symbol });
     default:
-      return {
-        ...state,
-        expression: state.expression + equals,
-        status: 'EQUALS',
-      };
+      return dispatch({ type: 'equals-default', payload: symbol });
   }
 }
