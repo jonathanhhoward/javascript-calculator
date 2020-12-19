@@ -64,7 +64,7 @@ export function getResult(state) {
   }
 
   return {
-    ...state,
+    expression: state.expression,
     input: result,
     status: 'RESULT',
   };
