@@ -14,7 +14,7 @@ export const initialState = {
   status: STATUS.INPUT,
 };
 
-export const key = {
+export const KEY = Object.freeze({
   CLEAR: 'AC',
   DELETE: 'C',
   DIVIDE: '/',
@@ -33,7 +33,7 @@ export const key = {
   SEVEN: '7',
   EIGHT: '8',
   NINE: '9',
-};
+});
 
 /**
  * @param {number} number

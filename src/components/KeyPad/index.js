@@ -5,29 +5,29 @@ import handleOperator from "../../handlers/handleOperator";
 import handleEquals from "../../handlers/handleEquals";
 import handleDecimal from "../../handlers/handleDecimal";
 import handleDigit from "../../handlers/handleDigit";
-import { key } from '../../utils';
+import { KEY } from '../../utils';
 import './style.scss';
 
 // prettier-ignore
 const keys = [
-  { id: 'clear', class: 'clear', symbol: key.CLEAR, click: handleClear },
-  { id: 'delete', class: 'delete', symbol: key.DELETE, click: handleDelete },
-  { id: 'divide', class: 'operator', symbol: key.DIVIDE, click: handleOperator },
-  { id: 'multiply', class: 'operator', symbol: key.MULTIPLY, click: handleOperator },
-  { id: 'subtract', class: 'operator', symbol: key.SUBTRACT, click: handleOperator },
-  { id: 'add', class: 'operator', symbol: key.ADD, click: handleOperator },
-  { id: 'equals', class: 'equals', symbol: key.EQUALS, click: handleEquals },
-  { id: 'decimal', class: 'digit', symbol: key.DECIMAL, click: handleDecimal },
-  { id: 'zero', class: 'digit', symbol: key.ZERO, click: handleDigit },
-  { id: 'one', class: 'digit', symbol: key.ONE, click: handleDigit },
-  { id: 'two', class: 'digit', symbol: key.TWO, click: handleDigit },
-  { id: 'three', class: 'digit', symbol: key.THREE, click: handleDigit },
-  { id: 'four', class: 'digit', symbol: key.FOUR, click: handleDigit },
-  { id: 'five', class: 'digit', symbol: key.FIVE, click: handleDigit },
-  { id: 'six', class: 'digit', symbol: key.SIX, click: handleDigit },
-  { id: 'seven', class: 'digit', symbol: key.SEVEN, click: handleDigit },
-  { id: 'eight', class: 'digit', symbol: key.EIGHT, click: handleDigit },
-  { id: 'nine', class: 'digit', symbol: key.NINE, click: handleDigit },
+  { id: 'clear', class: 'clear', symbol: KEY.CLEAR, click: handleClear },
+  { id: 'delete', class: 'delete', symbol: KEY.DELETE, click: handleDelete },
+  { id: 'divide', class: 'operator', symbol: KEY.DIVIDE, click: handleOperator },
+  { id: 'multiply', class: 'operator', symbol: KEY.MULTIPLY, click: handleOperator },
+  { id: 'subtract', class: 'operator', symbol: KEY.SUBTRACT, click: handleOperator },
+  { id: 'add', class: 'operator', symbol: KEY.ADD, click: handleOperator },
+  { id: 'equals', class: 'equals', symbol: KEY.EQUALS, click: handleEquals },
+  { id: 'decimal', class: 'digit', symbol: KEY.DECIMAL, click: handleDecimal },
+  { id: 'zero', class: 'digit', symbol: KEY.ZERO, click: handleDigit },
+  { id: 'one', class: 'digit', symbol: KEY.ONE, click: handleDigit },
+  { id: 'two', class: 'digit', symbol: KEY.TWO, click: handleDigit },
+  { id: 'three', class: 'digit', symbol: KEY.THREE, click: handleDigit },
+  { id: 'four', class: 'digit', symbol: KEY.FOUR, click: handleDigit },
+  { id: 'five', class: 'digit', symbol: KEY.FIVE, click: handleDigit },
+  { id: 'six', class: 'digit', symbol: KEY.SIX, click: handleDigit },
+  { id: 'seven', class: 'digit', symbol: KEY.SEVEN, click: handleDigit },
+  { id: 'eight', class: 'digit', symbol: KEY.EIGHT, click: handleDigit },
+  { id: 'nine', class: 'digit', symbol: KEY.NINE, click: handleDigit },
 ];
 
 export function KeyPad({ state, dispatch }) {
