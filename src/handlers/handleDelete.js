@@ -10,5 +10,6 @@ export default function (state, dispatch, _symbol) {
   switch (state.status) {
     case STATUS.INPUT:
       return dispatch({ type: 'delete', payload: '0' });
+    default:
   }
 }

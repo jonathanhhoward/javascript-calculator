@@ -18,5 +18,6 @@ export default function (state, dispatch, symbol) {
         : dispatch({ type: 'operator-operator', payload: symbol });
     case STATUS.INPUT:
       return dispatch({ type: 'operator-input', payload: symbol });
+    default:
   }
 }

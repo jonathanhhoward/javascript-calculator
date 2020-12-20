@@ -23,5 +23,6 @@ export default function (state, dispatch, symbol) {
       return state.input === '0'
         ? dispatch({ type: 'digit-input-zero', payload: symbol })
         : dispatch({ type: 'digit-input', payload: symbol });
+    default:
   }
 }

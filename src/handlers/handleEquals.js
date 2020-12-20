@@ -14,5 +14,6 @@ export default function (state, dispatch, symbol) {
       return dispatch({ type: 'equals-operator', payload: symbol });
     case STATUS.INPUT:
       return dispatch({ type: 'equals-input', payload: symbol });
+    default:
   }
 }
