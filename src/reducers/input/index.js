@@ -9,14 +9,14 @@ export function inputReducer(input, action) {
     case 'operator-negative':
     case 'operator-operator-negate':
     case 'operator-operator':
-    case 'operator-default':
+    case 'operator-input':
     case 'digit-result':
     case 'digit-operator':
-    case 'digit-default-zero':
+    case 'digit-input-zero':
     case 'delete':
       return action.payload;
     case 'digit-negative':
-    case 'digit-default':
+    case 'digit-input':
       return input + action.payload;
     default:
       return input;

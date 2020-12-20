@@ -14,7 +14,7 @@ export default function (state, dispatch, symbol) {
       return symbol === '-'
         ? dispatch({ type: 'operator-operator-negate', payload: symbol })
         : dispatch({ type: 'operator-operator', payload: symbol });
-    default:
-      return dispatch({ type: 'operator-default', payload: symbol });
+    case 'INPUT':
+      return dispatch({ type: 'operator-input', payload: symbol });
   }
 }

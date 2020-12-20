@@ -17,9 +17,9 @@ export default function (state, dispatch, symbol) {
       return dispatch({ type: 'digit-negative', payload: symbol });
     case 'OPERATOR':
       return dispatch({ type: 'digit-operator', payload: symbol });
-    default:
+    case 'INPUT':
       return state.input === '0'
-        ? dispatch({ type: 'digit-default-zero', payload: symbol })
-        : dispatch({ type: 'digit-default', payload: symbol });
+        ? dispatch({ type: 'digit-input-zero', payload: symbol })
+        : dispatch({ type: 'digit-input', payload: symbol });
   }
 }

@@ -8,20 +8,20 @@ export function statusReducer(status, action) {
     case 'operator-result':
     case 'operator-negative':
     case 'operator-operator':
-    case 'operator-default':
+    case 'operator-input':
       return 'OPERATOR';
     case 'operator-operator-negate':
       return 'NEGATIVE';
     case 'equals-negative':
     case 'equals-operator':
-    case 'equals-default':
+    case 'equals-input':
       return 'EQUALS';
     case 'digit-result':
     case 'digit-negative':
     case 'digit-operator':
-    case 'digit-default-zero':
-    case 'digit-default':
-      return '';
+    case 'digit-input-zero':
+    case 'digit-input':
+      return 'INPUT';
     default:
       return status;
   }

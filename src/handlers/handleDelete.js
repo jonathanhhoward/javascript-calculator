@@ -10,7 +10,7 @@ export default function (state, dispatch, _symbol) {
     case 'NEGATIVE':
     case 'OPERATOR':
       return;
-    default:
+    case 'INPUT':
       return dispatch({ type: 'delete', payload: '0' });
   }
 }

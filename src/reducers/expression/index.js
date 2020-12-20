@@ -8,18 +8,18 @@ export function expressionReducer(state, action) {
 
   switch (action.type) {
     case 'operator-operator-negate':
-    case 'operator-default':
-    case 'equals-default':
+    case 'operator-input':
+    case 'equals-input':
     case 'digit-negative':
     case 'digit-operator':
-    case 'digit-default':
+    case 'digit-input':
       return expression + action.payload;
     case 'operator-negative':
     case 'equals-negative':
       return expression.slice(0, -2) + action.payload;
     case 'operator-operator':
     case 'equals-operator':
-    case 'digit-default-zero':
+    case 'digit-input-zero':
       return expression.slice(0, -1) + action.payload;
     case 'delete':
       return expression.slice(0, -input.length) + action.payload;

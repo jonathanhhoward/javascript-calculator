@@ -3,7 +3,7 @@ import { calculate } from './calculate';
 export const initialState = {
   expression: '0',
   input: '0',
-  status: '',
+  status: 'INPUT',
 };
 
 export const key = {

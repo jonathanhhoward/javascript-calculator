@@ -12,7 +12,7 @@ export default function (state, dispatch, symbol) {
       return dispatch({ type: 'equals-negative', payload: symbol });
     case 'OPERATOR':
       return dispatch({ type: 'equals-operator', payload: symbol });
-    default:
-      return dispatch({ type: 'equals-default', payload: symbol });
+    case 'INPUT':
+      return dispatch({ type: 'equals-input', payload: symbol });
   }
 }
