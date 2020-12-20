@@ -6,8 +6,6 @@
  */
 export default function (state, dispatch, symbol) {
   switch (state.status) {
-    case 'RESULT':
-      return;
     case 'NEGATIVE':
       return dispatch({ type: 'equals-negative', payload: symbol });
     case 'OPERATOR':
