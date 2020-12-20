@@ -1,3 +1,5 @@
+import {STATUS} from '../utils';
+
 /**
  * @param {{ expression: string, input: string, status: string }} state
  * @param {function({ type: string, payload: string }): void} dispatch
@@ -6,18 +8,18 @@
  */
 export default function (state, dispatch, symbol) {
   const isMaxDigits = state.input.replace(/[.-]/g, '').length === 10;
-  const isResult = state.status === 'RESULT';
+  const isResult = state.status === STATUS.RESULT;
 
   if (isMaxDigits && !isResult) return;
 
   switch (state.status) {
-    case 'RESULT':
+    case STATUS.RESULT:
       return dispatch({ type: 'digit-result', payload: symbol });
-    case 'NEGATIVE':
+    case STATUS.NEGATIVE:
       return dispatch({ type: 'digit-negative', payload: symbol });
-    case 'OPERATOR':
+    case STATUS.OPERATOR:
       return dispatch({ type: 'digit-operator', payload: symbol });
-    case 'INPUT':
+    case STATUS.INPUT:
       return state.input === '0'
         ? dispatch({ type: 'digit-input-zero', payload: symbol })
         : dispatch({ type: 'digit-input', payload: symbol });

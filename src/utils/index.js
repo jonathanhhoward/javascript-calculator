@@ -1,9 +1,17 @@
 import { calculate } from './calculate';
 
+export const STATUS = Object.freeze({
+  EQUALS: 'EQUALS',
+  INPUT: 'INPUT',
+  NEGATIVE: 'NEGATIVE',
+  OPERATOR: 'OPERATOR',
+  RESULT: 'RESULT',
+});
+
 export const initialState = {
   expression: '0',
   input: '0',
-  status: 'INPUT',
+  status: STATUS.INPUT,
 };
 
 export const key = {
@@ -66,6 +74,6 @@ export function getResult(state) {
   return {
     expression: state.expression,
     input: result,
-    status: 'RESULT',
+    status: STATUS.RESULT,
   };
 }

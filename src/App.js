@@ -1,14 +1,14 @@
 import React, { useReducer, useEffect } from 'react';
 import { Display, KeyPad } from './components';
 import { reducer } from './reducers';
-import { initialState } from './utils';
+import { initialState, STATUS } from './utils';
 import './App.scss';
 
 export function App() {
   const [state, dispatch] = useReducer(reducer, initialState, undefined);
 
   useEffect(() => {
-    if (state.status !== 'EQUALS') return;
+    if (state.status !== STATUS.EQUALS) return;
     dispatch({ type: 'get-result' });
   }, [state.status]);
 

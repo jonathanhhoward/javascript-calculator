@@ -1,3 +1,5 @@
+import { STATUS } from '../utils';
+
 /**
  * @param {{ expression: string, input: string, status: string }} state
  * @param {function({ type: string, payload: string }): void} dispatch
@@ -6,11 +8,11 @@
  */
 export default function (state, dispatch, symbol) {
   switch (state.status) {
-    case 'NEGATIVE':
+    case STATUS.NEGATIVE:
       return dispatch({ type: 'equals-negative', payload: symbol });
-    case 'OPERATOR':
+    case STATUS.OPERATOR:
       return dispatch({ type: 'equals-operator', payload: symbol });
-    case 'INPUT':
+    case STATUS.INPUT:
       return dispatch({ type: 'equals-input', payload: symbol });
   }
 }

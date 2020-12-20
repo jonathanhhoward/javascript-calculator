@@ -1,3 +1,5 @@
+import { STATUS } from '../../utils';
+
 /**
  * @param {string} status
  * @param {{ type: string, payload: string }} action
@@ -9,19 +11,19 @@ export function statusReducer(status, action) {
     case 'operator-negative':
     case 'operator-operator':
     case 'operator-input':
-      return 'OPERATOR';
+      return STATUS.OPERATOR;
     case 'operator-operator-negate':
-      return 'NEGATIVE';
+      return STATUS.NEGATIVE;
     case 'equals-negative':
     case 'equals-operator':
     case 'equals-input':
-      return 'EQUALS';
+      return STATUS.EQUALS;
     case 'digit-result':
     case 'digit-negative':
     case 'digit-operator':
     case 'digit-input-zero':
     case 'digit-input':
-      return 'INPUT';
+      return STATUS.INPUT;
     default:
       return status;
   }

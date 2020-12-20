@@ -1,3 +1,4 @@
+import { STATUS } from '../utils';
 import handleDigit from './handleDigit';
 
 /**
@@ -7,7 +8,7 @@ import handleDigit from './handleDigit';
  * @returns void
  */
 export default function (state, dispatch, symbol) {
-  const isResult = state.status === 'RESULT';
+  const isResult = state.status === STATUS.RESULT;
 
   if (state.input.includes(symbol) && !isResult) return;
 
