@@ -1,4 +1,4 @@
-import {STATUS} from '../utils';
+import { STATUS } from '../utils';
 
 /**
  * @param {{ expression: string, input: string, status: string }} state
@@ -8,9 +8,8 @@ import {STATUS} from '../utils';
  */
 export default function (state, dispatch, symbol) {
   const isMaxDigits = state.input.replace(/[.-]/g, '').length === 10;
-  const isResult = state.status === STATUS.RESULT;
 
-  if (isMaxDigits && !isResult) return;
+  if (isMaxDigits && state.status !== STATUS.RESULT) return;
 
   switch (state.status) {
     case STATUS.RESULT:
