@@ -5,7 +5,7 @@ import { initialState, STATUS } from './utils';
 import './App.scss';
 
 export function App() {
-  const [state, dispatch] = useReducer(reducer, initialState, undefined);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     if (state.status !== STATUS.EQUALS) return;
