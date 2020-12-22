@@ -26,48 +26,30 @@ describe('display on key click', () => {
   beforeEach(() => {
     const { getByText, getAllByText } = render(<App />);
     const zeros = getAllByText('0');
-    const EXPRESSION = zeros[0];
-    const INPUT = zeros[1];
-    const CLEAR = getByText('AC');
-    const DELETE = getByText('C');
-    const DIVIDE = getByText('/');
-    const MULTIPLY = getByText('*');
-    const SUBTRACT = getByText('-');
-    const ADD = getByText('+');
-    const EQUALS = getByText('=');
-    const DECIMAL = getByText('.');
-    const ZERO = zeros[2];
-    const ONE = getByText('1');
-    const TWO = getByText('2');
-    const THREE = getByText('3');
-    const FOUR = getByText('4');
-    const FIVE = getByText('5');
-    const SIX = getByText('6');
-    const SEVEN = getByText('7');
-    const EIGHT = getByText('8');
-    const NINE = getByText('9');
-
-    display = { EXPRESSION, INPUT };
-    keyPad = {
-      CLEAR,
-      DELETE,
-      DIVIDE,
-      MULTIPLY,
-      SUBTRACT,
-      ADD,
-      EQUALS,
-      DECIMAL,
-      ZERO,
-      ONE,
-      TWO,
-      THREE,
-      FOUR,
-      FIVE,
-      SIX,
-      SEVEN,
-      EIGHT,
-      NINE,
-    };
+    display = Object.freeze({
+      EXPRESSION: zeros[0],
+      INPUT: zeros[1],
+    });
+    keyPad = Object.freeze({
+      CLEAR: getByText('AC'),
+      DELETE: getByText('C'),
+      DIVIDE: getByText('/'),
+      MULTIPLY: getByText('*'),
+      SUBTRACT: getByText('-'),
+      ADD: getByText('+'),
+      EQUALS: getByText('='),
+      DECIMAL: getByText('.'),
+      ZERO: zeros[2],
+      ONE: getByText('1'),
+      TWO: getByText('2'),
+      THREE: getByText('3'),
+      FOUR: getByText('4'),
+      FIVE: getByText('5'),
+      SIX: getByText('6'),
+      SEVEN: getByText('7'),
+      EIGHT: getByText('8'),
+      NINE: getByText('9'),
+    });
   });
 
   describe('delete', () => {
