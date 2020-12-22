@@ -182,10 +182,10 @@ describe('display on key click', () => {
 
   describe('decimal', () => {
     test('only one per number', () => {
-      const { DECIMAL } = keyPad;
+      const { DECIMAL, ONE } = keyPad;
 
-      fireClickEvents([DECIMAL, DECIMAL]);
-      expectDisplayTextContent(/^0\.$/, /^0\.$/);
+      fireClickEvents([ONE, DECIMAL, DECIMAL]);
+      expectDisplayTextContent(/^1\.$/, /^1\.$/);
     });
 
     test('prepends decimal with zero', () => {

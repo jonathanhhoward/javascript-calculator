@@ -12,7 +12,7 @@ export default function (state, dispatch, symbol) {
 
   if (state.input.includes(symbol) && !isResult) return;
 
-  return state.input === '0' || state.status
+  return state.input === '0' || state.status !== STATUS.INPUT
     ? handleDigit(state, dispatch, '0' + symbol)
     : handleDigit(state, dispatch, symbol);
 }
