@@ -3,8 +3,12 @@
  * @return {number}
  */
 export function calculate(expressionString) {
-  const reNumberOrOperator = /(?:\d+(?:\.\d*)?(?:e[-+]\d+)?)|[-+*/=]/g;
-  const tokenArray = expressionString.match(reNumberOrOperator);
+  const mantissa = '\\d+(?:\\.\\d*)?';
+  const exponent = 'e[-+]\\d+';
+  const number = `${mantissa}(?:${exponent})?`;
+  const operator = '[-+*/=]';
+  const numberOrOperator = new RegExp(`${number}|${operator}`, 'g');
+  const tokenArray = expressionString.match(numberOrOperator);
 
   return expression();
 
