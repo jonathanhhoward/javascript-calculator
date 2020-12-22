@@ -8,9 +8,7 @@ import handleDigit from './handleDigit';
  * @returns void
  */
 export default function (state, dispatch, symbol) {
-  const isResult = state.status === STATUS.RESULT;
-
-  if (state.input.includes(symbol) && !isResult) return;
+  if (state.input.includes(symbol) && state.status !== STATUS.RESULT) return;
 
   return state.input === '0' || state.status !== STATUS.INPUT
     ? handleDigit(state, dispatch, '0' + symbol)
