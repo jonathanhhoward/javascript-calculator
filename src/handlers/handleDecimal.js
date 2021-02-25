@@ -1,5 +1,5 @@
-import { STATUS } from '../utils';
-import handleDigit from './handleDigit';
+import { STATUS } from "../utils";
+import { handleDigit } from "./handleDigit";
 
 /**
  * @param {{ expression: string, input: string, status: string }} state
@@ -7,10 +7,10 @@ import handleDigit from './handleDigit';
  * @param {string} symbol
  * @returns void
  */
-export default function (state, dispatch, symbol) {
+export function handleDecimal(state, dispatch, symbol) {
   if (state.input.includes(symbol) && state.status !== STATUS.RESULT) return;
 
-  return state.input === '0' || state.status !== STATUS.INPUT
-    ? handleDigit(state, dispatch, '0' + symbol)
+  return state.input === "0" || state.status !== STATUS.INPUT
+    ? handleDigit(state, dispatch, "0" + symbol)
     : handleDigit(state, dispatch, symbol);
 }

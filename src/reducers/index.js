@@ -1,7 +1,7 @@
-import { getResult, initialState } from '../utils';
-import { expressionReducer } from './expression';
-import { inputReducer } from './input';
-import { statusReducer } from './status';
+import { getResult, initialState } from "../utils";
+import { expressionReducer } from "./expression";
+import { inputReducer } from "./input";
+import { statusReducer } from "./status";
 
 /**
  * @param {{expression: string, input: string, status: string}} state
@@ -10,9 +10,9 @@ import { statusReducer } from './status';
  */
 export function reducer(state, action) {
   switch (action.type) {
-    case 'clear':
+    case "clear":
       return initialState;
-    case 'get-result':
+    case "get-result":
       return getResult(state);
     default:
       return {

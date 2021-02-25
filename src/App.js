@@ -1,15 +1,15 @@
-import React, { useReducer, useEffect } from 'react';
-import { Display, KeyPad } from './components';
-import { reducer } from './reducers';
-import { initialState, STATUS } from './utils';
-import './App.scss';
+import { useReducer, useEffect } from "react";
+import { Display, KeyPad } from "./components";
+import { reducer } from "./reducers";
+import { initialState, STATUS } from "./utils";
+import "./App.scss";
 
 export function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     if (state.status !== STATUS.EQUALS) return;
-    dispatch({ type: 'get-result' });
+    dispatch({ type: "get-result" });
   }, [state.status]);
 
   return (

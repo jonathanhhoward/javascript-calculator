@@ -1,16 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { fireEvent, render } from '@testing-library/react';
-import '@testing-library/jest-dom/extend-expect';
-import { App } from './App';
+import ReactDOM from "react-dom";
+import { fireEvent, render } from "@testing-library/react";
+import "@testing-library/jest-dom/extend-expect";
+import { App } from "./App";
 
-test('renders without crashing', () => {
-  const div = document.createElement('div');
+test("renders without crashing", () => {
+  const div = document.createElement("div");
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
 
-describe('display on key click', () => {
+describe("display on key click", () => {
   let display;
   let keyPad;
 
@@ -25,35 +24,35 @@ describe('display on key click', () => {
 
   beforeEach(() => {
     const { getByText, getAllByText } = render(<App />);
-    const zeros = getAllByText('0');
+    const zeros = getAllByText("0");
     display = Object.freeze({
       EXPRESSION: zeros[0],
       INPUT: zeros[1],
     });
     keyPad = Object.freeze({
-      CLEAR: getByText('AC'),
-      DELETE: getByText('C'),
-      DIVIDE: getByText('/'),
-      MULTIPLY: getByText('*'),
-      SUBTRACT: getByText('-'),
-      ADD: getByText('+'),
-      EQUALS: getByText('='),
-      DECIMAL: getByText('.'),
+      CLEAR: getByText("AC"),
+      DELETE: getByText("C"),
+      DIVIDE: getByText("/"),
+      MULTIPLY: getByText("*"),
+      SUBTRACT: getByText("-"),
+      ADD: getByText("+"),
+      EQUALS: getByText("="),
+      DECIMAL: getByText("."),
       ZERO: zeros[2],
-      ONE: getByText('1'),
-      TWO: getByText('2'),
-      THREE: getByText('3'),
-      FOUR: getByText('4'),
-      FIVE: getByText('5'),
-      SIX: getByText('6'),
-      SEVEN: getByText('7'),
-      EIGHT: getByText('8'),
-      NINE: getByText('9'),
+      ONE: getByText("1"),
+      TWO: getByText("2"),
+      THREE: getByText("3"),
+      FOUR: getByText("4"),
+      FIVE: getByText("5"),
+      SIX: getByText("6"),
+      SEVEN: getByText("7"),
+      EIGHT: getByText("8"),
+      NINE: getByText("9"),
     });
   });
 
-  describe('delete', () => {
-    test('ignores equals, negative with operator, and operator', () => {
+  describe("delete", () => {
+    test("ignores equals, negative with operator, and operator", () => {
       const { DELETE, SUBTRACT, ADD, EQUALS, ONE } = keyPad;
 
       fireClickEvents([ONE, ADD, DELETE]);
@@ -66,7 +65,7 @@ describe('display on key click', () => {
       expectDisplayTextContent(/^1=$/, /^1$/);
     });
 
-    test('overwrites current number input with zero', () => {
+    test("overwrites current number input with zero", () => {
       const { DELETE, SUBTRACT, ADD, ONE } = keyPad;
 
       fireClickEvents([ONE, DELETE]);
@@ -80,15 +79,15 @@ describe('display on key click', () => {
     });
   });
 
-  describe('equals', () => {
-    test('ignored while result displayed', () => {
+  describe("equals", () => {
+    test("ignored while result displayed", () => {
       const { ADD, EQUALS, ONE } = keyPad;
 
       fireClickEvents([ONE, ADD, ONE, EQUALS, EQUALS]);
       expectDisplayTextContent(/^1\+1=$/, /^2$/);
     });
 
-    test('overwrites operator and negative', () => {
+    test("overwrites operator and negative", () => {
       const { SUBTRACT, ADD, EQUALS } = keyPad;
 
       fireClickEvents([ADD, SUBTRACT]);
@@ -98,7 +97,7 @@ describe('display on key click', () => {
       expectDisplayTextContent(/^0=$/, /^0$/);
     });
 
-    test('overwrites operator', () => {
+    test("overwrites operator", () => {
       const { ADD, EQUALS } = keyPad;
 
       fireClickEvents([ADD]);
@@ -108,7 +107,7 @@ describe('display on key click', () => {
       expectDisplayTextContent(/^0=$/, /^0$/);
     });
 
-    test('appends to expression and displays result', () => {
+    test("appends to expression and displays result", () => {
       const { ADD, EQUALS, ONE } = keyPad;
 
       fireClickEvents([ONE, ADD, ONE, EQUALS]);
@@ -116,8 +115,8 @@ describe('display on key click', () => {
     });
   });
 
-  describe('operators', () => {
-    test('overwrites expression and appends to result', () => {
+  describe("operators", () => {
+    test("overwrites expression and appends to result", () => {
       const { ADD, EQUALS, ONE } = keyPad;
 
       fireClickEvents([ONE, ADD, ONE, EQUALS]);
@@ -127,7 +126,7 @@ describe('display on key click', () => {
       expectDisplayTextContent(/^2\+$/, /^\+$/);
     });
 
-    test('overwrites operator and negative', () => {
+    test("overwrites operator and negative", () => {
       const { MULTIPLY, SUBTRACT, ADD } = keyPad;
 
       fireClickEvents([MULTIPLY, SUBTRACT]);
@@ -137,14 +136,14 @@ describe('display on key click', () => {
       expectDisplayTextContent(/^0\+$/, /^\+$/);
     });
 
-    test('appends negative', () => {
+    test("appends negative", () => {
       const { MULTIPLY, SUBTRACT } = keyPad;
 
       fireClickEvents([MULTIPLY, SUBTRACT]);
       expectDisplayTextContent(/^0\*-$/, /^-$/);
     });
 
-    test('overwrites operator', () => {
+    test("overwrites operator", () => {
       const { MULTIPLY, ADD } = keyPad;
 
       fireClickEvents([MULTIPLY]);
@@ -154,7 +153,7 @@ describe('display on key click', () => {
       expectDisplayTextContent(/^0\+$/, /^\+$/);
     });
 
-    test('appends to digits and decimal', () => {
+    test("appends to digits and decimal", () => {
       const { ADD, DECIMAL } = keyPad;
 
       fireClickEvents([ADD, DECIMAL, ADD]);
@@ -162,15 +161,15 @@ describe('display on key click', () => {
     });
   });
 
-  describe('decimal', () => {
-    test('only one per number', () => {
+  describe("decimal", () => {
+    test("only one per number", () => {
       const { DECIMAL, ONE } = keyPad;
 
       fireClickEvents([ONE, DECIMAL, DECIMAL]);
       expectDisplayTextContent(/^1\.$/, /^1\.$/);
     });
 
-    test('prepends decimal with zero', () => {
+    test("prepends decimal with zero", () => {
       const { SUBTRACT, ADD, EQUALS, DECIMAL } = keyPad;
 
       fireClickEvents([DECIMAL, ADD, DECIMAL, ADD, SUBTRACT, DECIMAL]);
@@ -181,8 +180,8 @@ describe('display on key click', () => {
     });
   });
 
-  describe('digits', () => {
-    test('limited to 10', () => {
+  describe("digits", () => {
+    test("limited to 10", () => {
       const { CLEAR, SUBTRACT, ADD, EQUALS, DECIMAL, ONE } = keyPad;
       const elevenOnes = new Array(11).fill(ONE);
 
@@ -202,7 +201,7 @@ describe('display on key click', () => {
       expectDisplayTextContent(/^1$/, /^1$/);
     });
 
-    test('overwrites expression and result', () => {
+    test("overwrites expression and result", () => {
       const { EQUALS, ONE } = keyPad;
 
       fireClickEvents([EQUALS]);
@@ -212,28 +211,28 @@ describe('display on key click', () => {
       expectDisplayTextContent(/^1$/, /^1$/);
     });
 
-    test('appends to negative', () => {
+    test("appends to negative", () => {
       const { SUBTRACT, ADD, ONE } = keyPad;
 
       fireClickEvents([ADD, SUBTRACT, ONE]);
       expectDisplayTextContent(/^0\+-1$/, /^-1$/);
     });
 
-    test('appends to operator', () => {
+    test("appends to operator", () => {
       const { ADD, ONE } = keyPad;
 
       fireClickEvents([ADD, ONE]);
       expectDisplayTextContent(/^0\+1$/, /^1$/);
     });
 
-    test('ignores leading zeros', () => {
+    test("ignores leading zeros", () => {
       const { ZERO, ONE } = keyPad;
 
       fireClickEvents([ZERO, ONE]);
       expectDisplayTextContent(/^1$/, /^1$/);
     });
 
-    test('appends to digits and decimal', () => {
+    test("appends to digits and decimal", () => {
       const { DECIMAL, ONE } = keyPad;
 
       fireClickEvents([DECIMAL, ONE, ONE]);

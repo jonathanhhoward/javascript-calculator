@@ -1,38 +1,38 @@
-import { calculate } from './calculate';
+import { calculate } from "./calculate";
 
 export const STATUS = Object.freeze({
-  EQUALS: 'EQUALS',
-  INPUT: 'INPUT',
-  NEGATIVE: 'NEGATIVE',
-  OPERATOR: 'OPERATOR',
-  RESULT: 'RESULT',
+  EQUALS: "EQUALS",
+  INPUT: "INPUT",
+  NEGATIVE: "NEGATIVE",
+  OPERATOR: "OPERATOR",
+  RESULT: "RESULT",
 });
 
 export const initialState = {
-  expression: '0',
-  input: '0',
+  expression: "0",
+  input: "0",
   status: STATUS.INPUT,
 };
 
 export const KEY = Object.freeze({
-  CLEAR: 'AC',
-  DELETE: 'C',
-  DIVIDE: '/',
-  MULTIPLY: '*',
-  SUBTRACT: '-',
-  ADD: '+',
-  EQUALS: '=',
-  DECIMAL: '.',
-  ZERO: '0',
-  ONE: '1',
-  TWO: '2',
-  THREE: '3',
-  FOUR: '4',
-  FIVE: '5',
-  SIX: '6',
-  SEVEN: '7',
-  EIGHT: '8',
-  NINE: '9',
+  CLEAR: "AC",
+  DELETE: "C",
+  DIVIDE: "/",
+  MULTIPLY: "*",
+  SUBTRACT: "-",
+  ADD: "+",
+  EQUALS: "=",
+  DECIMAL: ".",
+  ZERO: "0",
+  ONE: "1",
+  TWO: "2",
+  THREE: "3",
+  FOUR: "4",
+  FIVE: "5",
+  SIX: "6",
+  SEVEN: "7",
+  EIGHT: "8",
+  NINE: "9",
 });
 
 /**
@@ -42,7 +42,7 @@ export const KEY = Object.freeze({
 function setPrecision10(number) {
   if (Number.isNaN(number)) return NaN.toString();
 
-  if (number === 0) return '0';
+  if (number === 0) return "0";
 
   const absNumber = Math.abs(number);
 

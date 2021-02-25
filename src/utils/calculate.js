@@ -3,11 +3,11 @@
  * @return {number}
  */
 export function calculate(expressionString) {
-  const mantissa = '\\d+(?:\\.\\d*)?';
-  const exponent = 'e[-+]\\d+';
+  const mantissa = "\\d+(?:\\.\\d*)?";
+  const exponent = "e[-+]\\d+";
   const number = `${mantissa}(?:${exponent})?`;
-  const operator = '[-+*/=]';
-  const numberOrOperator = new RegExp(`${number}|${operator}`, 'g');
+  const operator = "[-+*/=]";
+  const numberOrOperator = new RegExp(`${number}|${operator}`, "g");
   const tokenArray = expressionString.match(numberOrOperator);
 
   return expression();
@@ -18,18 +18,18 @@ export function calculate(expressionString) {
 
     while (true) {
       switch (token) {
-        case '+':
+        case "+":
           left += term();
           token = tokenArray.shift();
           break;
-        case '-':
+        case "-":
           left -= term();
           token = tokenArray.shift();
           break;
-        case '=':
+        case "=":
           return left;
         default:
-          throw new Error('expression error');
+          throw new Error("expression error");
       }
     }
   }
@@ -40,13 +40,13 @@ export function calculate(expressionString) {
 
     while (true) {
       switch (token) {
-        case '*':
+        case "*":
           left *= primary();
           token = tokenArray.shift();
           break;
-        case '/':
+        case "/":
           const d = primary();
-          if (d === 0) throw new Error('divide by zero');
+          if (d === 0) throw new Error("divide by zero");
           left /= d;
           token = tokenArray.shift();
           break;
@@ -59,10 +59,10 @@ export function calculate(expressionString) {
 
   function primary() {
     const token = tokenArray.shift();
-    if (token === '-') return -primary();
+    if (token === "-") return -primary();
 
     const result = Number(token);
-    if (Number.isNaN(result)) throw new Error('primary expected');
+    if (Number.isNaN(result)) throw new Error("primary expected");
 
     return result;
   }

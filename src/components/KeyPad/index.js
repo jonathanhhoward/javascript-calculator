@@ -1,12 +1,11 @@
-import React from 'react';
-import handleClear from "../../handlers/handleClear";
-import handleDelete from "../../handlers/handleDelete";
-import handleOperator from "../../handlers/handleOperator";
-import handleEquals from "../../handlers/handleEquals";
-import handleDecimal from "../../handlers/handleDecimal";
-import handleDigit from "../../handlers/handleDigit";
-import { KEY } from '../../utils';
-import './style.scss';
+import { handleClear } from "../../handlers/handleClear";
+import { handleDelete } from "../../handlers/handleDelete";
+import { handleOperator } from "../../handlers/handleOperator";
+import { handleEquals } from "../../handlers/handleEquals";
+import { handleDecimal } from "../../handlers/handleDecimal";
+import { handleDigit } from "../../handlers/handleDigit";
+import { KEY } from "../../utils";
+import "./style.scss";
 
 // prettier-ignore
 const keys = [

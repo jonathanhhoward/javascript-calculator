@@ -7,25 +7,25 @@ export function expressionReducer(state, action) {
   const { expression, input } = state;
 
   switch (action.type) {
-    case 'operator-operator-negate':
-    case 'operator-input':
-    case 'equals-input':
-    case 'digit-negative':
-    case 'digit-operator':
-    case 'digit-input':
+    case "operator-operator-negate":
+    case "operator-input":
+    case "equals-input":
+    case "digit-negative":
+    case "digit-operator":
+    case "digit-input":
       return expression + action.payload;
-    case 'operator-negative':
-    case 'equals-negative':
+    case "operator-negative":
+    case "equals-negative":
       return expression.slice(0, -2) + action.payload;
-    case 'operator-operator':
-    case 'equals-operator':
-    case 'digit-input-zero':
+    case "operator-operator":
+    case "equals-operator":
+    case "digit-input-zero":
       return expression.slice(0, -1) + action.payload;
-    case 'delete':
+    case "delete":
       return expression.slice(0, -input.length) + action.payload;
-    case 'operator-result':
+    case "operator-result":
       return input + action.payload;
-    case 'digit-result':
+    case "digit-result":
       return action.payload;
     default:
       return expression;

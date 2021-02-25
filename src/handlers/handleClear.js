@@ -4,6 +4,6 @@
  * @param {string} symbol
  * @returns void
  */
-export default function (_state, dispatch, symbol) {
-  dispatch({ type: 'clear', payload: symbol });
+export function handleClear(_state, dispatch, symbol) {
+  dispatch({ type: "clear", payload: symbol });
 }
