@@ -1,4 +1,4 @@
-import { STATUS } from "../utils";
+import { STATUS } from "utils";
 import { handleDigit } from "./handleDigit";
 
 /**

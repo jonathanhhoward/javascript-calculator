@@ -1,4 +1,4 @@
-import { STATUS } from "../utils";
+import { STATUS } from "utils";
 
 /**
  * @param {{ expression: string, input: string, status: string }} state

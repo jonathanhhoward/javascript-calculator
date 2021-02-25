@@ -1,4 +1,4 @@
-import { getResult, initialState } from "../utils";
+import { getResult, initialState } from "utils";
 import { expressionReducer } from "./expression";
 import { inputReducer } from "./input";
 import { statusReducer } from "./status";
