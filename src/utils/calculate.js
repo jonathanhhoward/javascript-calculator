@@ -12,6 +12,16 @@ export function calculate(expressionString) {
 
   return expression();
 
+  /**
+   * The following code is taken from:
+   *
+   *     Stroustrup, Bjarne. "Programming: Principles and Practice Using
+   *     C++." 2nd ed., Addison-Wesley Professional, 2014.
+   *
+   * It was translated into Javascript, modified to use an Array<Token>
+   * instead of a Token_stream, and removed unused features.
+   */
+
   function expression() {
     let left = term();
     let token = tokenArray.shift();
