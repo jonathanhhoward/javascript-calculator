@@ -1,4 +1,4 @@
-import { calculate } from "./calculate";
+import { calculate } from "./index";
 
 test("returns a positive number", () => {
   expect(calculate("1=")).toEqual(1);
