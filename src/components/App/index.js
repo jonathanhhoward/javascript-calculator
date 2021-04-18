@@ -2,7 +2,7 @@ import { useReducer, useEffect } from "react";
 import { Display, KeyPad } from "components";
 import { reducer } from "reducers";
 import { initialState, STATUS } from "utils";
-import "App.scss";
+import "./style.scss";
 
 export function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
