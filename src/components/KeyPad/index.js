@@ -6,7 +6,7 @@ import {
   handleEquals,
   handleOperator,
 } from "handlers";
-import { KEY } from "../../utils";
+import { KEY } from "utils";
 import "./style.scss";
 
 // prettier-ignore
